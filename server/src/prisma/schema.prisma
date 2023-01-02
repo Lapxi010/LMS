@@ -8,25 +8,15 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  name  String?
-  email String  @unique
-  posts Post[]
+  id       Int     @id @default(autoincrement())
+  name     String? @unique
+  password String
+  email    String  @unique
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-}
 
 model Book {
-  id Int @id @default(autoincrement())
-  title String
+  id     Int    @id @default(autoincrement())
+  title  String
   author String
 }
