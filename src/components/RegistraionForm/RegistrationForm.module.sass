@@ -1,0 +1,136 @@
+.root
+  width: 50vw
+  height: 100vh
+  background: white
+
+.wrapper
+  display: flex
+  flex-direction: column
+  margin: 0 auto
+  justify-content: center
+  width: 360px
+  height: 100vh
+
+.form
+  display: flex
+  flex-direction: column
+  width: 360px
+  &__block
+    margin-top: 17px
+    &__label
+      font-family: 'Lato', sans-serif
+      font-style: normal
+      font-weight: 400
+      font-size: 14px
+      line-height: 17px
+      color: #000000
+      margin-left: 4px
+    &__input
+      width: 100%
+      padding: 7px 15px
+      border: 1px solid #C6C6C6
+      border-radius: 12px
+      font-family: 'Lato', sans-serif
+      font-style: normal
+      font-weight: 400
+      font-size: 14px
+      line-height: 17px
+      color: #000000
+      outline: none
+      margin-top: 9px
+  &__checkbox
+    display: flex
+    flex-direction: row
+    margin-top: 17px
+    justify-content: space-between
+    font-family: 'Lato', sans-serif
+    font-style: normal
+    font-weight: 400
+    font-size: 12px
+    line-height: 14px
+    color: #353535
+    align-items: center
+    margin-bottom: 24px
+    &__block
+      display: flex
+      align-items: center
+      margin-left: 4px
+      &__square
+        width: 19px
+        height: 19px
+        border: 1px solid #C6C6C6
+        cursor: pointer
+    &__description
+      margin-left: 12px
+    &__link
+      text-decoration: none
+      color: #353535
+
+.title
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 32px
+  line-height: 38px
+  color: #000000
+
+.description
+  font-family: 'Lato',sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 12px
+  line-height: 14px
+  color: #353535
+  margin-top: 9px
+
+.btn
+  width: 100%
+  outline: none
+  padding: 8px 0
+  cursor: pointer
+  background: #53CDF3
+  border: none
+  border-radius: 15px
+  text-align: center
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 16px
+  line-height: 19px
+  color: rgba(1, 1, 1, 0.9)
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.25)
+  margin-bottom: 9px
+  &_google
+    background: #FFFFFF
+    border: 1px solid #CFCFCF
+    box-shadow: none
+    display: flex
+    align-items: center
+    justify-content: center
+    &__icon
+      margin-left: 5px
+
+.changer
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 16px
+  line-height: 19px
+  color: #000000
+  margin: 5px auto
+
+.license
+  position: absolute
+  bottom: 15px
+  left: 21px
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 12px
+  line-height: 14px
+  color: rgba(0, 0, 0, 0.5)
+
+
+@media (max-width: 768px)
+  .root
+    width: 100vw
