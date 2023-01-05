@@ -1,11 +1,18 @@
-html
-  min-height: 100%
-  font-family: "Neue Machina", sans-serif
-  height: 100%
+body
+  transition: color, background-color
+  transition: color, background-color, background
+  transition-duration: 400ms
+*
+  font-family: "Lato", Arial, Helvetica, sans-serif
+  transition: background-color
+  transition: background
+  transition-duration: 400ms
+  text-decoration-skip-ink: none
 
 body
-  font-family: inherit
-  background: white
+  --c-text: black
+  --c-bg-reg: white
 
-.title
-  font-family: "Neue Machina", sans-serif
+:global(body.darkTheme)
+  --c-text: white
+  --c-bg-reg: black

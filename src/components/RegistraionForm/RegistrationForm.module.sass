@@ -1,7 +1,12 @@
 .root
   width: 50vw
   height: 100vh
-  background: white
+  background: var(--c-bg-reg)
+
+.themeSwitcher
+  position: absolute
+  top: 13px
+  left: 21px
 
 .wrapper
   display: flex
@@ -17,13 +22,14 @@
   width: 360px
   &__block
     margin-top: 17px
+    position: relative
     &__label
       font-family: 'Lato', sans-serif
       font-style: normal
       font-weight: 400
       font-size: 14px
       line-height: 17px
-      color: #000000
+      color: var(--c-text)
       margin-left: 4px
     &__input
       width: 100%
@@ -35,9 +41,11 @@
       font-weight: 400
       font-size: 14px
       line-height: 17px
-      color: #000000
+      color: var(--c-text)
+      background: var(--c-bg-reg)
       outline: none
       margin-top: 9px
+      transition: 0.3s all ease-in-out
   &__checkbox
     display: flex
     flex-direction: row
@@ -48,23 +56,36 @@
     font-weight: 400
     font-size: 12px
     line-height: 14px
-    color: #353535
+    color: var(--c-text)
     align-items: center
     margin-bottom: 24px
     &__block
       display: flex
       align-items: center
       margin-left: 4px
+      &__iconActive
+        transform: scale(1)
+        transition-duration: 0.3s
+      &__icon
+        transform: scale(0)
+        transition-duration: 0.3s
       &__square
+        display: flex
+        align-items: center
+        justify-content: center
         width: 19px
         height: 19px
         border: 1px solid #C6C6C6
         cursor: pointer
     &__description
       margin-left: 12px
+      cursor: pointer
     &__link
       text-decoration: none
-      color: #353535
+      color: var(--c-text)
+      transition: 0.3s ease-in-out
+      &:hover
+        text-decoration: underline
 
 .title
   font-family: 'Lato', sans-serif
@@ -72,7 +93,7 @@
   font-weight: 400
   font-size: 32px
   line-height: 38px
-  color: #000000
+  color: var(--c-text)
 
 .description
   font-family: 'Lato',sans-serif
@@ -80,8 +101,9 @@
   font-weight: 400
   font-size: 12px
   line-height: 14px
-  color: #353535
+  color: var(--c-text)
   margin-top: 9px
+  opacity: 0.7
 
 .btn
   width: 100%
@@ -97,11 +119,11 @@
   font-weight: 400
   font-size: 16px
   line-height: 19px
-  color: rgba(1, 1, 1, 0.9)
+  color: var(--c-text)
   box-shadow: 0 5px 4px rgba(0, 0, 0, 0.25)
   margin-bottom: 9px
   &_google
-    background: #FFFFFF
+    background: var(--c-bg-reg)
     border: 1px solid #CFCFCF
     box-shadow: none
     display: flex
@@ -116,7 +138,7 @@
   font-weight: 400
   font-size: 16px
   line-height: 19px
-  color: #000000
+  color: var(--c-text)
   margin: 5px auto
 
 .license
@@ -128,8 +150,18 @@
   font-weight: 400
   font-size: 12px
   line-height: 14px
-  color: rgba(0, 0, 0, 0.5)
+  color: var(--c-text)
+  opacity: 0.5
 
+.error
+  color: red
+  position: absolute
+  right: 0
+  top: 5px
+  font-size: 12px
+  transition: 0.3s all ease-in-out
+  &__input
+    border: 1px solid red
 
 @media (max-width: 768px)
   .root
