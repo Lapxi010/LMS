@@ -3,11 +3,6 @@
   height: 100vh
   background: var(--c-bg-reg)
 
-.themeSwitcher
-  position: absolute
-  top: 13px
-  left: 21px
-
 .wrapper
   display: flex
   flex-direction: column
@@ -20,72 +15,45 @@
   display: flex
   flex-direction: column
   width: 360px
-  &__block
-    margin-top: 17px
-    position: relative
-    &__label
-      font-family: 'Lato', sans-serif
-      font-style: normal
-      font-weight: 400
-      font-size: 14px
-      line-height: 17px
-      color: var(--c-text)
-      margin-left: 4px
-    &__input
-      width: 100%
-      padding: 7px 15px
-      border: 1px solid #C6C6C6
-      border-radius: 12px
-      font-family: 'Lato', sans-serif
-      font-style: normal
-      font-weight: 400
-      font-size: 14px
-      line-height: 17px
-      color: var(--c-text)
-      background: var(--c-bg-reg)
-      outline: none
-      margin-top: 9px
-      transition: 0.3s all ease-in-out
-  &__checkbox
-    display: flex
-    flex-direction: row
-    margin-top: 17px
-    justify-content: space-between
+  &__blockSex
     font-family: 'Lato', sans-serif
     font-style: normal
     font-weight: 400
-    font-size: 12px
-    line-height: 14px
+    font-size: 14px
+    line-height: 17px
     color: var(--c-text)
-    align-items: center
-    margin-bottom: 24px
-    &__block
+    margin-top: 17px
+    margin-left: 4px
+    &__blocks
       display: flex
-      align-items: center
-      margin-left: 4px
-      &__iconActive
-        transform: scale(1)
-        transition-duration: 0.3s
-      &__icon
-        transform: scale(0)
-        transition-duration: 0.3s
-      &__square
+      justify-content: space-between
+      margin-top: 15px
+      &__btn
+        background: #FFFFFF
+        border: 1px solid rgba(0, 0, 0, 0.3)
+        border-radius: 12px
+        padding: 3px 10px
         display: flex
         align-items: center
         justify-content: center
-        width: 19px
-        height: 19px
-        border: 1px solid #C6C6C6
         cursor: pointer
-    &__description
-      margin-left: 12px
-      cursor: pointer
-    &__link
-      text-decoration: none
-      color: var(--c-text)
-      transition: 0.3s ease-in-out
-      &:hover
+        outline: none
+        background: var(--c-bg-reg)
+      &__btnActive
+        border: 1px solid var(--c-text)
+      &__text
+        cursor: pointer
+        margin: 15px 0
+      &__textActive
         text-decoration: underline
+  &__link
+    text-decoration: none
+    color: var(--c-text)
+    transition: 0.3s ease-in-out
+    &:hover
+      text-decoration: underline
+
+
 
 .title
   font-family: 'Lato', sans-serif
@@ -122,13 +90,15 @@
   color: var(--c-text)
   box-shadow: 0 5px 4px rgba(0, 0, 0, 0.25)
   margin-bottom: 9px
-  &_google
+  margin-top: 17px
+  &__back
     background: var(--c-bg-reg)
     border: 1px solid #CFCFCF
     box-shadow: none
     display: flex
     align-items: center
     justify-content: center
+    margin-bottom: -5px
     &__icon
       margin-left: 5px
 
@@ -141,17 +111,8 @@
   color: var(--c-text)
   margin: 5px auto
 
-.license
-  position: absolute
-  bottom: 15px
-  left: 21px
-  font-family: 'Lato', sans-serif
-  font-style: normal
-  font-weight: 400
-  font-size: 12px
-  line-height: 14px
-  color: var(--c-text)
-  opacity: 0.5
+.active
+  display: block
 
 .error
   color: red
