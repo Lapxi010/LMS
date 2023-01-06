@@ -1,1 +1,0 @@
-import {pubSub} from '../pubsub';

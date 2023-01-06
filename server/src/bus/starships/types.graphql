@@ -1,8 +1,0 @@
-type Starship {
-    name: String,
-    model: String,
-    passengers: Int,
-    MGLT: String,
-    crew: Int,
-    manufacturer: String
-}
