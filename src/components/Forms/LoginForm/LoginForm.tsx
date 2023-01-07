@@ -8,7 +8,8 @@ import {CheckIcon} from '@components/Forms/LoginForm/LoginFormIcons';
 import {GoogleIcon} from '@components/Forms/LoginForm/LoginFormIcons';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {Link, Navigate} from 'react-router-dom';
-import {selectIsAuth, login} from '@store/slices/auth';
+import {selectIsAuth} from '@store/slices/auth';
+import {fetchLogin} from "@store/slices/auth/AsyncThunks";
 
 export const LoginForm: FC = () => {
 	const {
@@ -25,8 +26,8 @@ export const LoginForm: FC = () => {
 		return <Navigate to='/'/>;
 	}
 
-	const onSubmit = (data) => {
-		dispatch(login(data));
+	const onSubmit = async (data) => {
+		await dispatch(fetchLogin(data));
 		reset();
 	};
 

@@ -3,10 +3,13 @@ import styles from './RegistrationForm.module.sass';
 import {useForm} from 'react-hook-form';
 import {CommonBlockLAI} from '@components/Forms/CommonBlockLAI/CommonBlockLAI';
 import {Button} from '@components/Button/Button';
-import {Link} from 'react-router-dom';
+import {Link,Navigate} from 'react-router-dom';
 import Female from './Female.svg';
 import Male from './Male.svg';
 import {classNames} from '@utils/classNames';
+import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
+import { selectIsAuth} from "@store/slices/auth";
+import {fetchRegister} from "@store/slices/auth/AsyncThunks";
 
 export const RegistrationForm: FC = () => {
 	const {
@@ -19,13 +22,19 @@ export const RegistrationForm: FC = () => {
 	const [step, setStep] = useState<'first' | 'second'>('first');
 	const [sex, setSex] = useState<'male' | 'female'>(null);
 	const [activity, setActivity] = useState<'children' | 'teacher'>(null);
+	const dispatch = useAppDispatch();
+	const isAuth = useAppSelector(selectIsAuth);
 
-	const onSubmit = (data) => {
-		alert(JSON.stringify({...data, sex, activity}));
+	const onSubmit = async (data) => {
+		await dispatch(fetchRegister({role: activity,sex, ...data}));
 		setSex(null);
 		setActivity(null);
 		reset();
 	};
+
+	if (isAuth === 'success') {
+		return <Navigate to='/'/>;
+	}
 
 	return (
 		<div className={styles.root}>
@@ -36,7 +45,7 @@ export const RegistrationForm: FC = () => {
 					<div style={{display: step === 'first' ? 'block' : 'none'}}>
 						<CommonBlockLAI
 							register={{
-								...register('FIO', {
+								...register('fio', {
 									required: 'Поле обязательно для заполнения',
 									pattern: {
 										value: /^[a-zа-яё]+\s+[a-zа-яё]+\s+[a-zа-яё]/i,
@@ -45,7 +54,7 @@ export const RegistrationForm: FC = () => {
 								})
 							}}
 							placeholder={'Введите своё ФИО'}
-							errorsMessage={errors?.FIO?.message as string}
+							errorsMessage={errors?.fio?.message as string}
 							label={'ФИО'}
 						/>
 						<CommonBlockLAI
@@ -103,7 +112,7 @@ export const RegistrationForm: FC = () => {
 					<div style={{display: step === 'second' ? 'block' : 'none'}}>
 						<CommonBlockLAI
 							register={{
-								...register('Phone', {
+								...register('phone', {
 									required: 'Поле обязательно для заполнения',
 									pattern: {
 										value: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/,
@@ -112,7 +121,7 @@ export const RegistrationForm: FC = () => {
 								})
 							}}
 							placeholder={'Введите свой телефон'}
-							errorsMessage={errors?.Phone?.message as string}
+							errorsMessage={errors?.phone?.message as string}
 							label={'Телефон'}
 						/>
 						<div className={styles.form__blockSex}>

@@ -4,19 +4,19 @@ import {PrismaClient} from '@prisma/client';
 
 const db = new PrismaClient();
 
-const generateToken = ({id, email, password, role}) => {
-	return jwt.sign({id, email, password, role}, process.env.JWT_SECRET, {expiresIn: '1d'});
+const generateToken = ({id, email, password, role}, token) => {
+	return jwt.sign({id, email, password, role}, token, {expiresIn: '1d'});
 };
 
 export const register = async (req, res) => {
 	try {
 		const {fio, email, password, sex, role, phone} = req.body;
-
-		if (!fio || !email || !password || !sex || !role || !phone) {
-			return res.status(404).json({
-				message: 'Все поля должны быть заполнены'
-			});
-		}
+		// console.log(fio, email, password, sex, role, phone)
+		// if (!(fio || email || password || sex || role || phone)) {
+		// 	return res.status(404).json({
+		// 		message: 'Все поля должны быть заполнены'
+		// 	});
+		// }
 
 		const candidate = await db.user.findUnique({
 			where: {
@@ -42,7 +42,7 @@ export const register = async (req, res) => {
 				password: hashPassword,
 			}
 		});
-		const token = await generateToken({id: user.id, email, password, role});
+		const token = await generateToken({id: user.id, email, password, role}, process.env.JWT_SECRET);
 		res.cookie('token', token);
 		res.status(200).json({
 			user: {
@@ -77,14 +77,14 @@ export const login = async (req, res) => {
 		}
 
 		const candidate = await bcrypt.compare(password, user.password);
-
+		console.log(candidate)
 		if (!candidate) {
 			return res.status(404).json({
 				message: 'Пароль не верный'
 			});
 		}
 		const id = user.id;
-		const token = generateToken({id, email, password, role: user.role});
+		const token = generateToken({id, email, password, role: user.role}, process.env.JWT_SECRET);
 
 		res.cookie('token', token);
 		res.status(200).json({

@@ -6,7 +6,6 @@ import { RegistrationPage } from '@pages/RegistrationPage/RegistrationPage';
 import './App.module.sass';
 
 export const App: FC = () => {
-
 	return (
 		<>
 			<Routes>
