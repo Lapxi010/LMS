@@ -9,7 +9,7 @@ export const App: FC = () => {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<HomePage/>}/>
+				<Route index element={<HomePage/>}/>
 				<Route path="/login" element={<LoginPage/>}/>
 				<Route path="/register" element={<RegistrationPage/>}/>
 			</Routes>

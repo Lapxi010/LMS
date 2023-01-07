@@ -1,15 +1,12 @@
 import React, {FC} from 'react';
 import styles from './RegistrationPage.module.sass';
-import {ThemeSwitcherBtn} from '@components/ThemeSwitcherBtn/ThemeSwitcherBtn';
 import {RegistrationForm} from '@components/Forms/RegistrationForm/RegistrationForm';
+import {AuthLayout} from "@components/Layouts/AuthLayout/AuthLayout";
 
 export const RegistrationPage: FC = () => {
 	return (
-		<div className={styles.root}>
-			<ThemeSwitcherBtn className={styles.themeSwitcher}/>
+		<AuthLayout>
 			<RegistrationForm/>
-			<div className={styles.rightBlock}></div>
-			<span className={styles.license}>© 2023-2024 LapxiLMS</span>
-		</div>
+		</AuthLayout>
 	);
 };
