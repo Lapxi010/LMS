@@ -6,7 +6,9 @@ import {useForm} from 'react-hook-form';
 import {CommonBlockLAI} from '@components/Forms/CommonBlockLAI/CommonBlockLAI';
 import {CheckIcon} from '@components/Forms/LoginForm/LoginFormIcons';
 import {GoogleIcon} from '@components/Forms/LoginForm/LoginFormIcons';
-import {Link} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
+import {Link, Navigate} from 'react-router-dom';
+import {selectIsAuth, login} from '@store/slices/auth';
 
 export const LoginForm: FC = () => {
 	const {
@@ -16,9 +18,15 @@ export const LoginForm: FC = () => {
 		reset
 	} = useForm({mode: 'onChange'});
 	const [checkbox, setCheckbox] = useState(false);
+	const dispatch = useAppDispatch();
+	const isAuth = useAppSelector(selectIsAuth);
+
+	if (isAuth === 'success') {
+		return <Navigate to='/'/>;
+	}
 
 	const onSubmit = (data) => {
-		alert(JSON.stringify(data));
+		dispatch(login(data));
 		reset();
 	};
 
