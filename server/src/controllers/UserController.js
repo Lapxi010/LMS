@@ -77,7 +77,6 @@ export const login = async (req, res) => {
 		}
 
 		const candidate = await bcrypt.compare(password, user.password);
-		console.log(candidate)
 		if (!candidate) {
 			return res.status(404).json({
 				message: 'Пароль не верный'

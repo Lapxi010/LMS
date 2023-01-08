@@ -6,6 +6,7 @@ import {Navigate} from 'react-router-dom';
 import {useAppDispatch} from '@hooks/HookRedux';
 import {fetchAuthMe} from '@store/slices/auth/AsyncThunks';
 import {Spinner} from "@components/PreLoaders/Spinner/Spinner";
+import {MainLayout} from "@components/Layouts/MainLayout/MainLayout";
 
 export const HomePage: FC = () => {
     const isAuth = useAppSelector(selectIsAuth);
@@ -20,7 +21,9 @@ export const HomePage: FC = () => {
     }
 
     return (<>
-            <h1>Home</h1>
+            <MainLayout>
+                <h1>Home</h1>
+            </MainLayout>
             {isAuth === 'loading' && <Spinner className={styles.spinner}/>}
         </>
     );

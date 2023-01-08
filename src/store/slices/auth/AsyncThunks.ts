@@ -49,7 +49,7 @@ export const fetchRegister = createAsyncThunk<any, any, any>(
         }
     });
 
-export const fetchAuthMe = createAsyncThunk<any, any, any>(
+export const fetchAuthMe = createAsyncThunk<any, undefined, any>(
     'auth/fetchAuthMe',
     async ( _,{rejectWithValue}) => {
         try {
