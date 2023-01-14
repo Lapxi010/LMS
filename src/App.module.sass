@@ -1,0 +1,36 @@
+body
+  transition: color, background-color
+  transition: color, background-color, background
+  transition-duration: 400ms
+*
+  font-family: "Lato", Arial, Helvetica, sans-serif
+  transition: background-color
+  transition: background
+  transition-duration: 400ms
+  text-decoration-skip-ink: none
+
+body
+  --c-text: black
+  --c-bg-reg: white
+
+
+  --main-bg: #e5e5e5
+  --main-left-bg: #d3d3d3
+  --main-left-path: #0a0e04
+  --main-card-bg: #e0e0e0
+  --main-card-text: #000000
+  --main-title: #131313
+  --main-btn-bg: #d3d3d3
+
+:global(body.darkTheme)
+  --c-text: white
+  --c-bg-reg: black
+
+
+  --main-bg: #1A1A1A
+  --main-left-bg: #2C2C2C
+  --main-left-path: #F5F1FB
+  --main-card-bg: #1F1F1F
+  --main-card-text: #FFFFFF
+  --main-title: #ECECEC
+  --main-btn-bg: #2C2C2C

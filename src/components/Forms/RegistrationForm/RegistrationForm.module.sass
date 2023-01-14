@@ -1,0 +1,129 @@
+.root
+  width: 50vw
+  height: 100vh
+  background: var(--c-bg-reg)
+
+.wrapper
+  display: flex
+  flex-direction: column
+  margin: 0 auto
+  justify-content: center
+  width: 360px
+  height: 100vh
+
+.form
+  display: flex
+  flex-direction: column
+  width: 360px
+  &__blockSex
+    font-family: 'Lato', sans-serif
+    font-style: normal
+    font-weight: 400
+    font-size: 14px
+    line-height: 17px
+    color: var(--c-text)
+    margin-top: 17px
+    margin-left: 4px
+    &__blocks
+      display: flex
+      justify-content: space-between
+      margin-top: 15px
+      &__btn
+        background: #FFFFFF
+        border: 1px solid rgba(0, 0, 0, 0.3)
+        border-radius: 12px
+        padding: 3px 10px
+        display: flex
+        align-items: center
+        justify-content: center
+        cursor: pointer
+        outline: none
+        background: var(--c-bg-reg)
+      &__btnActive
+        border: 1px solid var(--c-text)
+      &__text
+        cursor: pointer
+        margin: 15px 0
+      &__textActive
+        text-decoration: underline
+  &__link
+    text-decoration: none
+    color: var(--c-text)
+    transition: 0.3s ease-in-out
+    &:hover
+      text-decoration: underline
+
+
+
+.title
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 32px
+  line-height: 38px
+  color: var(--c-text)
+
+.description
+  font-family: 'Lato',sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 12px
+  line-height: 14px
+  color: var(--c-text)
+  margin-top: 9px
+  opacity: 0.7
+
+.btn
+  width: 100%
+  outline: none
+  padding: 8px 0
+  cursor: pointer
+  background: #53CDF3
+  border: none
+  border-radius: 15px
+  text-align: center
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 16px
+  line-height: 19px
+  color: var(--c-text)
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.25)
+  margin-bottom: 9px
+  margin-top: 17px
+  &__back
+    background: var(--c-bg-reg)
+    border: 1px solid #CFCFCF
+    box-shadow: none
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-bottom: -5px
+    &__icon
+      margin-left: 5px
+
+.changer
+  font-family: 'Lato', sans-serif
+  font-style: normal
+  font-weight: 400
+  font-size: 16px
+  line-height: 19px
+  color: var(--c-text)
+  margin: 5px auto
+
+.active
+  display: block
+
+.error
+  color: red
+  position: absolute
+  right: 0
+  top: 5px
+  font-size: 12px
+  transition: 0.3s all ease-in-out
+  &__input
+    border: 1px solid red
+
+@media (max-width: 768px)
+  .root
+    width: 100vw

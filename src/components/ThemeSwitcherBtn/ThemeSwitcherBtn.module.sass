@@ -1,0 +1,53 @@
+.auth
+  position: relative
+  width: 42px
+  height: 36px
+  border-radius: 15%
+  border: none
+  outline: none
+  background: var(--c-bg-reg)
+  cursor: pointer
+
+.main
+  position: relative
+  width: 100%
+  height: 100%
+  border-radius: 100%
+  border: none
+  outline: none
+  background: var(--c-bg-reg)
+  cursor: pointer
+.sun,
+.moon
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 65%
+  height: 65%
+  transform: translate(-50%, -50%)
+  transition: transform
+  transition-duration: 300ms
+
+.sun__main,
+.moon__main
+  position: absolute
+  top: 50%
+  left: 50%
+  width: 50%
+  height: 50%
+  transform: translate(-50%, -50%)
+  transition: transform
+  transition-duration: 300ms
+
+.sun
+  transform: translate(-50%, -50%) scale(0) rotate(180deg)
+
+.moon
+  transform: translate(-50%, -50%) scale(1) rotate(0deg)
+
+
+:global(.darkTheme) .sun
+  transform: translate(-50%, -50%) scale(1) rotate(0deg)
+
+:global(.darkTheme) .moon
+  transform: translate(-50%, -50%) scale(0) rotate(180deg)
