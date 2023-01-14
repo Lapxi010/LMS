@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchRegister, fetchLogin, fetchAuthMe} from "@store/slices/auth/AsyncThunks";
+import { createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {fetchRegister, fetchLogin, fetchAuthMe} from './AsyncThunks';
 
 interface IauthState {
     data: any;
@@ -18,7 +18,12 @@ const isError = (action) => {
 }
 
 const authSlice = createSlice({
-    reducers: undefined,
+    reducers: {
+        logout: (state) => {
+            state.data = null;
+            state.status = 'idle';
+        }
+    },
     name: 'auth',
     initialState,
     extraReducers: (builder) =>{
@@ -53,6 +58,8 @@ const authSlice = createSlice({
             });
     }
 });
+
+export const {logout} = authSlice.actions;
 
 export const selectIsAuth = (state) => state.auth.status;
 export default authSlice.reducer;

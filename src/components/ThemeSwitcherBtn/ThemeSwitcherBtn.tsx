@@ -3,8 +3,9 @@ import styles from './ThemeSwitcherBtn.module.sass';
 import Sun from './Sun.svg';
 import Moon from './Moon.svg';
 import {Button} from '@components/Button/Button';
+import {classNames} from '@utils/classNames';
 
-export const ThemeSwitcherBtn: FC<{className: string}> = ({className}) => {
+export const ThemeSwitcherBtnAuth: FC<{className: string}> = ({className}) => {
 	return (
 		<div className={className}>
 			<Button
@@ -13,11 +14,27 @@ export const ThemeSwitcherBtn: FC<{className: string}> = ({className}) => {
 					document.body.classList.toggle('darkTheme');
 					localStorage.setItem('darkTheme', document.body.classList.contains('darkTheme'));
 				}}
-				className={styles.root}
+				className={styles.auth}
 			>
 				<img src={Sun} alt="Sun" className={styles.sun} />
 				<img src={Moon} alt="Moon" className={styles.moon} />
 			</Button>
 		</div>
+	);
+};
+
+export const ThemeSwitcherBtnMain: FC = () => {
+	return (
+			<Button
+				onClick={() =>
+				{
+					document.body.classList.toggle('darkTheme');
+					localStorage.setItem('darkTheme', document.body.classList.contains('darkTheme'));
+				}}
+				className={styles.main}
+			>
+				<img src={Sun} alt="Sun" className={classNames(styles.sun, styles.sun__main)}  />
+				<img src={Moon} alt="Moon" className={classNames(styles.moon, styles.moon__main)} />
+			</Button>
 	);
 };

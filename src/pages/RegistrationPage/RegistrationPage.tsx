@@ -1,7 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import styles from './RegistrationPage.module.sass';
 import {RegistrationForm} from '@components/Forms/RegistrationForm/RegistrationForm';
-import {AuthLayout} from '@components/Layouts/AuthLayout/AuthLayout';
 import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
 import {selectIsAuth} from "@store/slices/auth";
 import {fetchAuthMe} from "@store/slices/auth/AsyncThunks";
@@ -19,8 +18,8 @@ export const RegistrationPage: FC = () => {
 		return <Navigate to="/"/>
 	}
 	return (
-		<AuthLayout>
+		<>
 			<RegistrationForm/>
-		</AuthLayout>
+		</>
 	);
 };

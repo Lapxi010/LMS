@@ -80,7 +80,7 @@ export const LoginForm: FC = () => {
 					<Button type="button" className={classNames(styles.btn, styles.btn_google)}>Войти с помощью
 						<GoogleIcon/>
 					</Button>
-					<p className={styles.changer}>Нет акаунта? <Link to={'/register'} className={styles.form__checkbox__link}>Зарегистрироваться</Link></p>
+					<p className={styles.changer}>Нет акаунта? <Link to={'/auth/register'} className={styles.form__checkbox__link}>Зарегистрироваться</Link></p>
 				</form>
 			</div>
 		</div>

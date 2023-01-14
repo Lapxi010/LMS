@@ -1,7 +1,15 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import AppFetch from "@api/index";
+import {logout} from "./index";
 
-export const fetchLogin = createAsyncThunk<any, any, any>(
+export const fetchLogout = (dispatch, getState) =>
+{
+    document.cookie = `token=dadsa; expires=${new Date().toUTCString()}; path=/`;
+    dispatch(logout());
+    dispatch(fetchAuthMe());
+}
+
+export const fetchLogin = createAsyncThunk(
     'auth/fetchLogin',
     async (data, {rejectWithValue}) => {
     try {
@@ -14,19 +22,17 @@ export const fetchLogin = createAsyncThunk<any, any, any>(
         });
 
         const value = await response.json();
-
         if (!(response.status === 200)) {
             throw new Error(`Error: ${value.message}`);
         }
-
-        return await response.json();
+        return value;
 
     } catch (e) {
         return rejectWithValue(e.message);
     }
 });
 
-export const fetchRegister = createAsyncThunk<any, any, any>(
+export const fetchRegister = createAsyncThunk(
     'auth/fetchRegister',
     async (data, {rejectWithValue}) => {
         try {
@@ -42,14 +48,14 @@ export const fetchRegister = createAsyncThunk<any, any, any>(
                 throw new Error(`Error: ${value.message}`);
             }
 
-            return await response.json();
+            return value;
 
         } catch (e) {
             return rejectWithValue(e.message);
         }
     });
 
-export const fetchAuthMe = createAsyncThunk<any, undefined, any>(
+export const fetchAuthMe = createAsyncThunk(
     'auth/fetchAuthMe',
     async ( _,{rejectWithValue}) => {
         try {
@@ -59,8 +65,7 @@ export const fetchAuthMe = createAsyncThunk<any, undefined, any>(
                 throw new Error(`Error: ${value.message}`);
             }
 
-
-            return await response.json();
+            return value;
         } catch (e) {
             return rejectWithValue(e.message);
         }

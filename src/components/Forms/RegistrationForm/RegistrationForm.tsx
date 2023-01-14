@@ -164,7 +164,7 @@ export const RegistrationForm: FC = () => {
 							type="submit"
 						>Зарегистрироваться</Button>
 					</div>
-					<p className={styles.changer}>Нет акаунта? <Link to={'/login'} className={styles.form__link}>Войти</Link></p>
+					<p className={styles.changer}>Нет акаунта? <Link to={'/auth'} className={styles.form__link}>Войти</Link></p>
 				</form>
 			</div>
 		</div>
