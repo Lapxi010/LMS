@@ -9,7 +9,9 @@ import {fetchLogout} from "@store/slices/auth/AsyncThunks";
 
 export const LeftSidebar: FC = () => {
     const dispatch = useAppDispatch();
-
+    const logout = async () => {
+        await dispatch(fetchLogout());
+    };
     return (
         <div className={styles.root}>
             <div className={styles.wrapper}>
@@ -48,7 +50,7 @@ export const LeftSidebar: FC = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <button className={styles.btn__logout} onClick={()=>{dispatch(fetchLogout)}}><LogoutIcon/></button>
+                <button className={styles.btn__logout} onClick={logout}><LogoutIcon/></button>
             </div>
         </div>
     )
