@@ -4,10 +4,11 @@ export default (req, res, next) => {
 	if(req.method === 'OPTIONS') {
 		next();
 	}
-	const token = req.cookies.token;
-	if (token) {
+	const authorizationHeaderr = req.headers.authorization;
+	if (authorizationHeaderr) {
 		try {
-			const decoded = jwt.verify(token, process.env.JWT_SECRET);
+			const accessToken = authorizationHeaderr.split(' ')[1];
+			const decoded = jwt.verify(accessToken, process.env.JWT_ACCESS_TOKEN);
 			req.userId = decoded.id;
 
 			next();

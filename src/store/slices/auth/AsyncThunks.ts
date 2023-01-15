@@ -13,15 +13,9 @@ export const fetchLogin = createAsyncThunk(
     'auth/fetchLogin',
     async (data, {rejectWithValue}) => {
     try {
-        const response = await AppFetch('users/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+        const {response} = await AppFetch.post('users/login', data);
 
-        const value = await response.json();
+        const value = await response;
         if (!(response.status === 200)) {
             throw new Error(`Error: ${value.message}`);
         }

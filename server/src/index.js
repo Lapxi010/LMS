@@ -56,6 +56,12 @@ app.post('/upload', (req, res) => {
 
 });
 
+
+app.get('/download', (req, res) => {
+    const file = `${__dirname}/source/1673780302118-ÐÐ°ÐºÐ¸Ðµ Ð·Ð°Ð´Ð°Ð½Ð¸Ñ Ð±ÑÐ´ÑÑ Ð½Ð° ÐÐÐ­ Ð¿Ð¾ ÑÐ¸Ð·Ð¸ÐºÐµ 2023 .mp4`;
+    res.sendFile(file);
+});
+
 app.use('/api/v1', expressRateLimit);
 
 app.use('/api/v1', router);

@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-
+import axios from 'axios';
 
 export const UploadFile: FC = () => {
     const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
     const [uploaded, setUploaded] = React.useState();
-
+    const [file, setFile] = React.useState<any>();
 
     const handleFileInput =  async () => {
         if(!selectedFile) {
@@ -13,11 +13,11 @@ export const UploadFile: FC = () => {
         }
         const formData = new FormData();
         formData.append('file', selectedFile);
-        const res = await fetch('http://localhost:6789/upload', {
-            method: 'POST',
-            body: formData
+        const {data} = await axios.post('http://localhost:6789/upload',formData,{
+            onUploadProgress: (progressEvent) => {
+                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%');
+            }
         })
-        const data =await res.json()
         setUploaded(data)
     }
 
@@ -25,7 +25,9 @@ export const UploadFile: FC = () => {
         console.log(event.target.files);
         setSelectedFile(event.target.files[0]);
     }
-
+    const donload = async () => {
+        const {data} = await axios.get('http://localhost:6789/download');
+    }
     return (
         <>
             <input type="file" onChange={handleUploadFileInput} />
@@ -41,8 +43,9 @@ export const UploadFile: FC = () => {
                     )
             }
             <div>
-                <button><a href={'http://localhost:6789/getPdf'} download={'http://localhost:6789/getPdf'}>скачать</a></button>
+                <button onClick={donload}>скачать</button>
             </div>
+           <video  src={'https://www.youtube.com/watch?v=imPN4cJPn9Y'} controls></video>
         </>
     )
 }

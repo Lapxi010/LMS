@@ -1,10 +1,14 @@
-type IAppFetch = (url: string, options?: RequestInit) => Promise<Response>
+import axios from "axios";
 
-const AppFetch: IAppFetch = async (url, options = {}) => {
-	return await fetch(`http://localhost:6789/api/v1/${url}`, {
-		...options,
-		credentials: 'include',
-	});
-};
 
-export default AppFetch;
+export const Api = axios.create({
+	withCredentials: true,
+	baseURL: 'http://localhost:6789/api/v1/',
+})
+
+Api.interceptors.request.use((config) => {
+	config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+	return config;
+});
+
+export default Api;

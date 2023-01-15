@@ -8,14 +8,22 @@ generator client {
 }
 
 model User {
-  id        String      @id @default(uuid())
-  email     String      @unique
-  fio       String      @unique
-  password  String
-  phone     String      @unique
-  role      String
-  sex       String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  id             String   @id @default(uuid())
+  email          String   @unique
+  isActivated    Boolean  @default(false)
+  activationLink String? @unique
+  fio            String   @unique
+  password       String
+  phone          String   @unique
+  role           String
+  sex            String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  Token          Token[]
 }
 
+model Token {
+  userId       String @id
+  user         User   @relation(fields: [userId], references: [id])
+  refreshToken String @unique
+}
