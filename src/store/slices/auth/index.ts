@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchRegister, fetchLogin, fetchAuthMe} from './AsyncThunks';
+import {fetchRegister, fetchLogin, fetchAuthMe, fetchLogout} from './AsyncThunks';
 
 interface IauthState {
     data: any;
@@ -18,12 +18,7 @@ const isError = (action) => {
 }
 
 const authSlice = createSlice({
-    reducers: {
-        logout: (state) => {
-            state.data = null;
-            state.status = 'idle';
-        }
-    },
+    reducers: undefined,
     name: 'auth',
     initialState,
     extraReducers: (builder) =>{
@@ -34,7 +29,8 @@ const authSlice = createSlice({
             })
             .addCase(fetchLogin.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.data = action.payload;
+                state.data = action.payload.user;
+                localStorage.setItem('token', action.payload.accessToken);
             })
             .addCase(fetchRegister.pending, (state) => {
                 state.status = 'loading';
@@ -42,7 +38,8 @@ const authSlice = createSlice({
             })
             .addCase(fetchRegister.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.data = action.payload;
+                state.data = action.payload.user;
+                localStorage.setItem('token', action.payload.accessToken);
             })
             .addCase(fetchAuthMe.pending, (state) => {
                 state.status = 'loading';
@@ -50,7 +47,18 @@ const authSlice = createSlice({
             })
             .addCase(fetchAuthMe.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.data = action.payload;
+                state.data = action.payload.user;
+                localStorage.setItem('token', action.payload.accessToken);
+            })
+            .addCase(fetchLogout.pending, (state) => {
+                state.status = 'loading';
+                state.data = null;
+            })
+            .addCase(fetchLogout.fulfilled, (state, action) => {
+                state.status = 'success';
+                state.data = null;
+                localStorage.removeItem('token');
+
             })
             .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.error = action.payload;
@@ -58,8 +66,6 @@ const authSlice = createSlice({
             });
     }
 });
-
-export const {logout} = authSlice.actions;
 
 export const selectIsAuth = (state) => state.auth.status;
 export default authSlice.reducer;

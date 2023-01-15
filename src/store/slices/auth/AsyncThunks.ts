@@ -1,48 +1,33 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import AppFetch from "@api/index";
-import {logout} from "./index";
-
-export const fetchLogout = (dispatch, getState) =>
-{
-    document.cookie = `token=dadsa; expires=${new Date().toUTCString()}; path=/`;
-    dispatch(logout());
-    dispatch(fetchAuthMe());
-}
+import Api from "@api/index";
+import {IAuthResponse} from "@store/slices/auth/IUser";
 
 export const fetchLogin = createAsyncThunk(
     'auth/fetchLogin',
     async (data, {rejectWithValue}) => {
-    try {
-        const {response} = await AppFetch.post('users/login', data);
+        try {
+            const response = await Api.post<IAuthResponse>('users/login', data);
 
-        const value = await response;
-        if (!(response.status === 200)) {
-            throw new Error(`Error: ${value.message}`);
+            if (!(response.status === 200)) {
+                throw new Error(`Error: ${response.data.message}`);
+            }
+            return response.data;
+
+        } catch (e) {
+            return rejectWithValue(e.message);
         }
-        return value;
-
-    } catch (e) {
-        return rejectWithValue(e.message);
-    }
-});
+    });
 
 export const fetchRegister = createAsyncThunk(
     'auth/fetchRegister',
     async (data, {rejectWithValue}) => {
         try {
-            const response = await AppFetch('users/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
-            const value = await response.json();
+            const response = await Api.post<IAuthResponse>('users/register', data);
             if (!(response.status === 200)) {
-                throw new Error(`Error: ${value.message}`);
+                throw new Error(`Error: ${response.data.message}`);
             }
 
-            return value;
+            return response.data;
 
         } catch (e) {
             return rejectWithValue(e.message);
@@ -51,15 +36,30 @@ export const fetchRegister = createAsyncThunk(
 
 export const fetchAuthMe = createAsyncThunk(
     'auth/fetchAuthMe',
-    async ( _,{rejectWithValue}) => {
+    async (_, {rejectWithValue}) => {
         try {
-            const response = await AppFetch('users/authMe');
-            const value = await response.json();
+            const response = await Api.get<IAuthResponse>('users/refresh');
             if (!(response.status === 200)) {
-                throw new Error(`Error: ${value.message}`);
+                throw new Error(`Error: ${response.data.message}`);
             }
 
-            return value;
+            return response.data;
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    });
+
+export const fetchLogout = createAsyncThunk(
+    'auth/logout',
+    async (data, {rejectWithValue}) => {
+        try {
+            const response = await Api.post<IAuthResponse>('users/logout');
+
+            if (!(response.status === 200)) {
+                throw new Error(`Error: ${response.data.message}`);
+            }
+            return response.data;
+
         } catch (e) {
             return rejectWithValue(e.message);
         }
