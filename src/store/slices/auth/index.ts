@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchRegister, fetchLogin, fetchAuthMe, fetchLogout} from './AsyncThunks';
+import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout} from './AsyncThunks';
 
 interface IauthState {
     data: any;
     status: 'idle' | 'loading' | 'failed' | 'success';
+    isAuth: boolean;
     error: string | null;
 }
 
 const initialState: IauthState = {
     data: null,
     status: 'idle',
+    isAuth: false,
     error: null
 };
 
@@ -30,6 +32,7 @@ const authSlice = createSlice({
             .addCase(fetchLogin.fulfilled, (state, action) => {
                 state.status = 'success';
                 state.data = action.payload.user;
+                state.isAuth = true;
                 localStorage.setItem('token', action.payload.accessToken);
             })
             .addCase(fetchRegister.pending, (state) => {
@@ -39,15 +42,17 @@ const authSlice = createSlice({
             .addCase(fetchRegister.fulfilled, (state, action) => {
                 state.status = 'success';
                 state.data = action.payload.user;
+                state.isAuth = true;
                 localStorage.setItem('token', action.payload.accessToken);
             })
-            .addCase(fetchAuthMe.pending, (state) => {
+            .addCase(fetchRefresh.pending, (state) => {
                 state.status = 'loading';
                 state.data = null;
             })
-            .addCase(fetchAuthMe.fulfilled, (state, action) => {
+            .addCase(fetchRefresh.fulfilled, (state, action) => {
                 state.status = 'success';
                 state.data = action.payload.user;
+                state.isAuth = true;
                 localStorage.setItem('token', action.payload.accessToken);
             })
             .addCase(fetchLogout.pending, (state) => {
@@ -57,15 +62,18 @@ const authSlice = createSlice({
             .addCase(fetchLogout.fulfilled, (state, action) => {
                 state.status = 'success';
                 state.data = null;
+                state.isAuth = false;
                 localStorage.removeItem('token');
 
             })
             .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.error = action.payload;
                 state.status = 'failed';
+                state.isAuth = false;
             });
     }
 });
 
-export const selectIsAuth = (state) => state.auth.status;
+export const selectStatus = (state) => state.auth.status;
+export const selectIsAuth = (state) => state.auth.isAuth;
 export default authSlice.reducer;
