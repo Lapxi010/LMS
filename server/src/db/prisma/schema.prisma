@@ -8,22 +8,99 @@ generator client {
 }
 
 model User {
-  id             String   @id @default(uuid())
-  email          String   @unique
-  isActivated    Boolean  @default(false)
-  activationLink String? @unique
-  fio            String   @unique
+  id             String    @id @default(uuid())
+  email          String    @unique
+  isActivated    Boolean   @default(false)
+  activationLink String?   @unique
+  fio            String    @unique
   password       String
-  phone          String   @unique
+  phone          String    @unique
   role           String
   sex            String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
   Token          Token[]
+  Course         Course[]
+  Lesson         Lesson[]
+  Comment        Comment[]
 }
 
 model Token {
-  userId       String @id
-  user         User   @relation(fields: [userId], references: [id])
-  refreshToken String @unique
+  userId       String   @id
+  user         User     @relation(fields: [userId], references: [id])
+  refreshToken String   @unique
+  createdAt    DateTime @default(now())
+}
+
+model Course {
+  id          String      @id @default(uuid())
+  title       String      @unique
+  description String
+  shorDesc    String
+  titleImg    String
+  shorImgs    ShortImgs[]
+  userId      String
+  author      User        @relation(fields: [userId], references: [id])
+  lessons     Lesson[]
+  tags        Tag[]
+  createdAt   DateTime    @default(now())
+}
+
+model Lesson {
+  id          String      @id @default(uuid())
+  title       String      @unique
+  description String
+  shorDesc    String
+  titleImg    String
+  shorImgs    ShortImgs[]
+  userId      String
+  author      User        @relation(fields: [userId], references: [id])
+  courseId    String
+  course      Course      @relation(fields: [courseId], references: [id])
+  comments    Comment[]
+  srcVideo    String
+  srcDoc      Doc[]
+  rating      String
+  tags        Tag[]
+  createdAt   DateTime    @default(now())
+}
+
+model Tag {
+  id       String  @id @default(uuid())
+  title    String  @unique
+  Course   Course? @relation(fields: [courseId], references: [id])
+  courseId String?
+  Lesson   Lesson? @relation(fields: [lessonId], references: [id])
+  lessonId String?
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  text      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  lessonId  String
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  rating    String
+  createdAt DateTime @default(now())
+}
+
+model ShortImgs {
+  id        String   @id @default(uuid())
+  title     String   @unique
+  src       String
+  createdAt DateTime @default(now())
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  courseId  String?
+  Lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  lessonId  String?
+}
+
+model Doc {
+  id        String   @id @default(uuid())
+  title     String   @unique
+  src       String
+  createdAt DateTime @default(now())
+  Lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+  lessonId  String?
 }
