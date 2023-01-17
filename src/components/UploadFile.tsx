@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import axios from 'axios';
+import VideoPlayer from "@components/VIdeoPlayer/VideoPlayer";
 
 export const UploadFile: FC = () => {
     const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
@@ -45,7 +46,7 @@ export const UploadFile: FC = () => {
             <div>
                 <button onClick={donload}>скачать</button>
             </div>
-           <video  muted src={'http://localhost:6789/api/v1/courses/video/12'} controls></video>
+           <VideoPlayer videoSource={'http://localhost:6789/api/v1/courses/video/12'}/>
         </>
     )
 }
