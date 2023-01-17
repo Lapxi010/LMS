@@ -45,7 +45,7 @@ export const UploadFile: FC = () => {
             <div>
                 <button onClick={donload}>скачать</button>
             </div>
-           <video  src={'https://www.youtube.com/watch?v=imPN4cJPn9Y'} controls></video>
+           <video  muted src={'http://localhost:6789/api/v1/courses/video/12'} controls></video>
         </>
     )
 }
