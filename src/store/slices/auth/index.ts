@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout} from './AsyncThunks';
 
-interface IauthState {
+interface IAuthState {
     data: any;
     status: 'idle' | 'loading' | 'failed' | 'success';
     isAuth: boolean;
     error: string | null;
 }
 
-const initialState: IauthState = {
+const initialState: IAuthState = {
     data: null,
     status: 'idle',
     isAuth: false,

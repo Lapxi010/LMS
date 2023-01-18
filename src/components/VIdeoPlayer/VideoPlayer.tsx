@@ -14,9 +14,11 @@ const VideoPlayer: FC<IVideoPlayer> = ({ videoSource,}) => {
     const { actions, videoRef, video } = useVideo()
 
     return (
-        <div>
+        <div className={styles.wrapper}>
                 <>
                     <video
+                        width={'800px'}
+                        height={'450px'}
                         ref={videoRef}
                         className={styles.video}
                         src={`${videoSource}#t=8`}
