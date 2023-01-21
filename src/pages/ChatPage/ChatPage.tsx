@@ -6,7 +6,7 @@ export const ChatPage: FC = () => {
     return (
         <div className={styles.chat}>
             <Header>Чат</Header>
-            <h1>Chat</h1>
+			<h1>Chat</h1>
         </div>
     );
 };
