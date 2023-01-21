@@ -37,7 +37,7 @@ model Course {
   title       String      @unique
   description String
   shorDesc    String
-  titleImg    String
+  titleImg    String?
   shorImgs    ShortImgs[]
   userId      String
   author      User        @relation(fields: [userId], references: [id])

@@ -76,4 +76,10 @@ const authSlice = createSlice({
 
 export const selectStatus = (state) => state.auth.status;
 export const selectIsAuth = (state) => state.auth.isAuth;
+export const selectRole = (state) => {
+    if(state.auth.data != null) {
+        return state.auth.data.role
+    }
+    return 'ch'
+};
 export default authSlice.reducer;

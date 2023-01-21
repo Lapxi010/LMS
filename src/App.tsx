@@ -8,6 +8,7 @@ import {DashboardPage} from "@pages/DashboardPage/DashboardPage";
 import {ChatPage} from "@pages/ChatPage/ChatPage";
 import {CoursesPage} from "@pages/CoursesPage/CoursesPage";
 import {SettingsPage} from "@pages/SettingsPage/SettingsPage";
+import {CoursePage} from "@pages/CoursePage/CoursePage";
 import {AuthLayout} from "@components/Layouts/AuthLayout/AuthLayout";
 import {MePage} from "@pages/MePage/MePage";
 import './App.module.sass';
@@ -19,6 +20,7 @@ export const App: FC = () => {
                 <Route path='/' element={<MainLayout/>}>
                         <Route index element={<DashboardPage/>}/>
                         <Route path='courses' element={<CoursesPage/>}/>
+                        <Route path='course/:id' element={<CoursePage/>}/>
                         <Route path='chat' element={<ChatPage/>}/>
                         <Route path='settings' element={<SettingsPage/>}/>
                         <Route path='me' element={<MePage/>}/>

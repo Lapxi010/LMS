@@ -6,11 +6,10 @@ import {Spinner} from "@components/PreLoaders/Spinner/Spinner";
 import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
 import {selectIsAuth, selectStatus} from "@store/slices/auth";
 import {fetchRefresh} from "@store/slices/auth/AsyncThunks";
-import {useSelector} from "react-redux";
 
 export const MainLayout: FC = () => {
     const isAuth = useAppSelector(selectIsAuth);
-    const status = useSelector(selectStatus);
+    const status = useAppSelector(selectStatus);
     const dispatch = useAppDispatch();
 
     useEffect(() => {

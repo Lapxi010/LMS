@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import {PrismaClient} from '@prisma/client';
 import {v4} from 'uuid';
 import {sendMail, generateToken, saveToken, removeToken} from '../services/User.service';
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
-
 const db = new PrismaClient();
 
 export const register = async (req, res) => {
