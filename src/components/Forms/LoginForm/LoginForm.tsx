@@ -9,7 +9,7 @@ import {GoogleIcon} from '@components/Forms/LoginForm/LoginFormIcons';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {Link, Navigate} from 'react-router-dom';
 import {selectIsAuth} from '@store/slices/auth';
-import {fetchLogin} from "@store/slices/auth/AsyncThunks";
+import {fetchLogin} from '@store/slices/auth/AsyncThunks';
 
 export const LoginForm: FC = () => {
 	const {

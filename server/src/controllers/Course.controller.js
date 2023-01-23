@@ -7,13 +7,13 @@ export const createCourse = async (req, res) => {
                 id: req.userId
             }
         })
-        const {title, description, shorDesc} = req.body
+        const {title, description, shortDesc} = req.body
 
         const course = await db.course.create({
             data: {
                 title,
                 description,
-                shorDesc,
+                shortDesc,
                 titleImg: 'null',
                 userId: req.userId
             }

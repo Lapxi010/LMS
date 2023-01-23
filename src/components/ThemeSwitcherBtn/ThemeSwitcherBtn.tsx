@@ -25,16 +25,16 @@ export const ThemeSwitcherBtnAuth: FC<{className: string}> = ({className}) => {
 
 export const ThemeSwitcherBtnMain: FC = () => {
 	return (
-			<Button
-				onClick={() =>
-				{
-					document.body.classList.toggle('darkTheme');
-					localStorage.setItem('darkTheme', document.body.classList.contains('darkTheme'));
-				}}
-				className={styles.main}
-			>
-				<img src={Sun} alt="Sun" className={classNames(styles.sun, styles.sun__main)}  />
-				<img src={Moon} alt="Moon" className={classNames(styles.moon, styles.moon__main)} />
-			</Button>
+		<Button
+			onClick={() =>
+			{
+				document.body.classList.toggle('darkTheme');
+				localStorage.setItem('darkTheme', document.body.classList.contains('darkTheme'));
+			}}
+			className={styles.main}
+		>
+			<img src={Sun} alt="Sun" className={classNames(styles.sun, styles.sun__main)}  />
+			<img src={Moon} alt="Moon" className={classNames(styles.moon, styles.moon__main)} />
+		</Button>
 	);
 };

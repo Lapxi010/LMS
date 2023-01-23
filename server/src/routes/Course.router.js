@@ -40,7 +40,8 @@ router.get('/video/:id', (req, res) => {
 
 router.post('/course', authMiddleware, createCourse);
 
-//router.post('/lesson/:id', authMiddleware, cr)
+router.post('/lesson/:id', authMiddleware, )
+router.post('/lesson/:id', authMiddleware, )
 
 router.get('/course', authMiddleware, getAllCourses);
 

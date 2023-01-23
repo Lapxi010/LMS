@@ -36,7 +36,7 @@ model Course {
   id          String      @id @default(uuid())
   title       String      @unique
   description String
-  shorDesc    String
+  shortDesc    String
   titleImg    String?
   shorImgs    ShortImgs[]
   userId      String
@@ -50,9 +50,9 @@ model Lesson {
   id          String      @id @default(uuid())
   title       String      @unique
   description String
-  shorDesc    String
+  shortDesc    String
   titleImg    String
-  shorImgs    ShortImgs[]
+  shortImgs    ShortImgs[]
   userId      String
   author      User        @relation(fields: [userId], references: [id])
   courseId    String

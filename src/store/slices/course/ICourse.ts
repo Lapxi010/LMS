@@ -4,11 +4,11 @@ export interface ICourses {
 }
 
 export interface ICourse {
-    id: String,
-    title: String,
-    description: String,
-    shorDesc: String,
-    userId: String,
-    createdAt: String,
+    id: string,
+    title: string,
+    description: string,
+    shortDesc: string,
+    userId: string,
+    createdAt: string,
     message?: string
 }

@@ -7,9 +7,9 @@ import {Link,Navigate} from 'react-router-dom';
 import Female from './Female.svg';
 import Male from './Male.svg';
 import {classNames} from '@utils/classNames';
-import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
-import { selectIsAuth} from "@store/slices/auth";
-import {fetchRegister} from "@store/slices/auth/AsyncThunks";
+import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
+import { selectIsAuth} from '@store/slices/auth';
+import {fetchRegister} from '@store/slices/auth/AsyncThunks';
 
 export const RegistrationForm: FC = () => {
 	const {

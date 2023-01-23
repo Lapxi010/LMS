@@ -9,43 +9,43 @@ interface ICourseState {
 }
 
 const initialState: ICourseState = {
-    data: null,
-    statusCourses: 'idle',
-    statusCreateCourses: 'idle',
-    error: null
+	data: null,
+	statusCourses: 'idle',
+	statusCreateCourses: 'idle',
+	error: null
 };
 
 const isError = (action) => {
-    return action.type.endsWith('rejected');
-}
+	return action.type.endsWith('rejected');
+};
 
 const courseSlice = createSlice({
-    reducers: undefined,
-    name: 'course',
-    initialState,
-    extraReducers: (builder) =>{
-        builder
-            .addCase(fetchCourses.pending, (state) => {
-                state.statusCourses = 'loading';
-                state.data = null;
-            })
-            .addCase(fetchCourses.fulfilled, (state, action) => {
-                state.statusCourses = 'success';
-                state.data = action.payload;
-            })
-            .addCase(fetchCreateCourse.pending, (state) => {
-                state.statusCreateCourses = 'loading';
-            })
-            .addCase(fetchCreateCourse.fulfilled, (state, action) => {
-                state.statusCreateCourses = 'success';
-            })
-            .addCase(fetchCourses.rejected, (state, action) => {
-                state.statusCourses = 'failed';
-            })
-            .addCase(fetchCreateCourse.rejected, (state, action) => {
-                state.statusCreateCourses = 'failed';
-            })
-    }
+	reducers: undefined,
+	name: 'course',
+	initialState,
+	extraReducers: (builder) =>{
+		builder
+			.addCase(fetchCourses.pending, (state) => {
+				state.statusCourses = 'loading';
+				state.data = null;
+			})
+			.addCase(fetchCourses.fulfilled, (state, action) => {
+				state.statusCourses = 'success';
+				state.data = action.payload;
+			})
+			.addCase(fetchCreateCourse.pending, (state) => {
+				state.statusCreateCourses = 'loading';
+			})
+			.addCase(fetchCreateCourse.fulfilled, (state, action) => {
+				state.statusCreateCourses = 'success';
+			})
+			.addCase(fetchCourses.rejected, (state, action) => {
+				state.statusCourses = 'failed';
+			})
+			.addCase(fetchCreateCourse.rejected, (state, action) => {
+				state.statusCreateCourses = 'failed';
+			});
+	}
 });
 
 export const selectStatus = (state) => state.course.status;

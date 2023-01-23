@@ -1,0 +1,98 @@
+.root
+  height: 100%
+  width: 100%
+  background-color: rgba(0,0,0,0.5)
+  position: fixed
+  left: 0
+  top: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 10
+
+.wrapper
+  max-width: 420px
+  max-height: 100%
+  overscroll-behavior: contain
+  overflow: auto
+  display: flex
+  padding: 16px
+  border-radius: 12px
+  background: var(--main-bg)
+  flex-direction: column
+  width: 400px
+  gap: 20px
+  position: relative
+
+.title
+  font-weight: 600
+  font-size: 26px
+  line-height: 23px
+  color: var(--c-text)
+
+.block
+  display: flex
+  flex-direction: column
+  width: 100%
+  color: var(--c-text)
+  background: transparent
+  &__label
+    font-size: 22px
+    line-height: 24px
+    font-weight: 600
+    margin-bottom: 8px
+    color: inherit
+  &__input
+    width: 100%
+    color: inherit
+    border-radius: 2px
+    border: none
+    outline: none
+    padding: 5px 10px 5px 8px
+    font-size: 14px
+    backdrop-filter: blur(6px)
+    -webkit-backdrop-filter: blur(6px)
+    background: var(--main-left-bg)
+  &__textArea
+    width: 100%
+    color: inherit
+    height: 100px
+    border-radius: 2px
+    border: none
+    outline: none
+    padding: 5px 10px 5px 8px
+    font-size: 14px
+    resize: none
+    backdrop-filter: blur(6px)
+    -webkit-backdrop-filter: blur(6px)
+    background: var(--main-left-bg)
+    &:focus
+      border: 1px solid var(--main-left-bg)
+
+.btn
+  padding: 5px 0
+  border-radius: 2px
+  outline: none
+  background: #967FC6
+  border: none
+  &:disabled
+    opacity: 0.7
+    color: inherit
+    font-size: 16px
+    line-height: 20px
+
+
+.closeBtn
+  display: flex
+  align-items: center
+  position: absolute
+  background: transparent
+  outline: none
+  top: 20px
+  right: 16px
+  cursor: pointer
+  border: none
+
+
+.closeBtn__path
+  stroke: var(--c-text)
