@@ -1,9 +1,10 @@
 import React, {Dispatch, FC, useState} from 'react';
 import styles from './CreateCourse.module.sass';
 import {useAppDispatch} from '@hooks/HookRedux';
-import {fetchCreateCourse} from '@store/slices/course/AsyncThunks';
+import {fetchCreateCourse} from '@store/slices/courses/AsyncThunks';
 import {useForm} from 'react-hook-form';
 import {Button} from '@components/Button/Button';
+import {classNames} from '@utils/classNames';
 
 export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 	const {
@@ -38,15 +39,16 @@ export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 								message: 'Название должно быть минимум 3 символа.'
 							}
 						})}
-						className={styles.block__input}
+						className={classNames(styles.block__input, errors?.title?.message && styles.errorInput)}
 						placeholder={'Введите название курса'}
 						name="title"
 					/>
+					{errors?.title?.message && <span className={styles.errorText}>{errors?.title?.message}</span>}
 				</div>
 				<div className={styles.block}>
 					<label className={styles.block__label}>Описание</label>
 					<textarea
-						className={styles.block__textArea}
+						className={classNames(styles.block__textArea, errors?.description?.message && styles.errorInput)}
 						{...register('description', {
 							required: 'Поле обязательно для заполнения.',
 							minLength: {
@@ -57,16 +59,17 @@ export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 						name="description"
 						placeholder={'Введите описание своего курса'}
 					/>
+					{errors?.description?.message && <span className={styles.errorText}>{errors?.description?.message}</span>}
 				</div>
 				<div className={styles.block}>
 					<label className={styles.block__label}>Короткое описание</label>
 					<textarea
-						className={styles.block__textArea}
+						className={classNames(styles.block__textArea, errors?.shortDesc?.message && styles.errorInput)}
 						{...register('shortDesc', {
 							required: 'Поле обязательно для заполнения.',
 							minLength: {
 								value: 50,
-								message: 'Короткое описание должно быть минимум 100 символов.'
+								message: 'Короткое описание должно быть минимум 50 символов.'
 							},
 							maxLength: {
 								value: 100,
@@ -76,6 +79,7 @@ export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 						name="shortDesc"
 						placeholder={'Введите описание своего курса'}
 					/>
+					{errors?.shortDesc?.message && <span className={styles.errorText}>{errors?.shortDesc?.message}</span>}
 				</div>
 				<Button className={styles.btn} type={'submit'} disabled={!isValid}>Создать курс</Button>
 			</form>

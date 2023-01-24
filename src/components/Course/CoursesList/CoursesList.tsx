@@ -1,26 +1,29 @@
 import React, {FC, useEffect} from 'react';
 import styles from './CoursesList.module.sass';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import {selectCourses} from '@store/slices/course';
-import {fetchCourses} from '@store/slices/course/AsyncThunks';
-import {NavLink} from 'react-router-dom';
+import {selectCourses} from '@store/slices/courses';
+import {fetchCourses} from '@store/slices/courses/AsyncThunks';
+import {CoursesItem} from "./CoursesItem/CoursesItem";
 
 export const CoursesList: FC = () => {
-	const courses = useAppSelector(selectCourses);
-	const dispatch = useAppDispatch();
+    const courses = useAppSelector(selectCourses);
+    const dispatch = useAppDispatch();
 
-	useEffect(()=>{
-		dispatch(fetchCourses());
-	}, []);
+    useEffect(() => {
+        dispatch(fetchCourses());
+    }, []);
 
-	return (
-		<div className={styles.root}>
-			{!courses && <h2>У вас нет пока курсов</h2>}
-			{courses?.map(v => <div key={v.id}>
-				<NavLink to={`course/${v.id}`}>{v.title}</NavLink>
-				<p>{v.description}</p>
-				<p>{v.shorDesc}</p>
-			</div>)}
-		</div>
-	);
+    return (
+        <div className={styles.root}>
+            {!courses && <h2>У вас нет пока курсов</h2>}
+            {courses?.map(item =>
+                <CoursesItem
+                    key={item.id}
+                    id={item.id}
+                    title={item.title}
+                    titleImg={item.titleImg}
+                    shortDesc={item.shortDesc}
+                />)}
+        </div>
+    );
 };
