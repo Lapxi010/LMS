@@ -36,7 +36,7 @@ model Course {
   id          String      @id @default(uuid())
   title       String      @unique
   description String
-  shortDesc    String
+  shortDesc   String
   titleImg    String?
   shorImgs    ShortImgs[]
   userId      String
@@ -47,22 +47,22 @@ model Course {
 }
 
 model Lesson {
-  id          String      @id @default(uuid())
-  title       String      @unique
-  description String
-  shortDesc    String
-  titleImg    String
-  shortImgs    ShortImgs[]
-  userId      String
-  author      User        @relation(fields: [userId], references: [id])
-  courseId    String
-  course      Course      @relation(fields: [courseId], references: [id])
-  comments    Comment[]
-  srcVideo    String
-  srcDoc      Doc[]
-  rating      String
-  tags        Tag[]
-  createdAt   DateTime    @default(now())
+  id             String         @id @default(uuid())
+  title          String         @unique
+  description    String
+  titleImg       String?
+  shortImgs      ShortImgs[]
+  userId         String
+  author         User           @relation(fields: [userId], references: [id])
+  courseId       String
+  course         Course         @relation(fields: [courseId], references: [id])
+  comments       CommentsLesson @relation(fields: [commentsLessonId], references: [id])
+  commentsLessonId String
+  srcVideo       String
+  srcDoc         Doc[]
+  rating         String
+  tags           Tag[]
+  createdAt      DateTime       @default(now())
 }
 
 model Tag {
@@ -75,14 +75,21 @@ model Tag {
 }
 
 model Comment {
-  id        String   @id @default(uuid())
-  text      String
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  lessonId  String
-  lesson    Lesson   @relation(fields: [lessonId], references: [id])
-  rating    String
-  createdAt DateTime @default(now())
+  id               String         @id @default(uuid())
+  text             String
+  userId           String
+  commentsLessonId String
+  user             User           @relation(fields: [userId], references: [id])
+  commentsLesson   CommentsLesson @relation(fields: [commentsLessonId], references: [id])
+  rating           String
+  createdAt        DateTime       @default(now())
+}
+
+model CommentsLesson {
+  id       String    @id @default(uuid())
+  comments Comment[]
+  lessonId String    @unique
+  lesson   Lesson    @relation(fields: [lessonId], references: [id])
 }
 
 model ShortImgs {

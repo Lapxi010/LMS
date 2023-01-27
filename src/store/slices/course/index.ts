@@ -29,7 +29,7 @@ const courseSlice = createSlice({
             })
             .addCase(fetchCourse.fulfilled, (state, action) => {
                 state.status = 'success';
-                state.data = action.payload;
+                state.data = action.payload.course;
             })
     }
 });

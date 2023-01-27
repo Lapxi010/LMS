@@ -1,7 +1,7 @@
 import express from 'express';
 import fs from "fs";
 import authMiddleware from "../middlewares/Auth.middleware";
-import {createCourse, getAllCourses, getCourse} from "../controllers/Course.controller";
+import {createCourse, createLesson, getAllCourses, getCourse} from "../controllers/Course.controller";
 const router = express.Router();
 
 router.get('/video/:id', (req, res) => {
@@ -40,11 +40,11 @@ router.get('/video/:id', (req, res) => {
 
 router.post('/course', authMiddleware, createCourse);
 
-router.post('/lesson/:id', authMiddleware, )
-router.post('/lesson/:id', authMiddleware, )
+router.post('/lesson/:id', authMiddleware, createLesson)
 
 router.get('/course', authMiddleware, getAllCourses);
 
 router.get('/course/:id', authMiddleware, getCourse);
+
 
 export default router;
