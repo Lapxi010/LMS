@@ -56,8 +56,7 @@ model Lesson {
   author         User           @relation(fields: [userId], references: [id])
   courseId       String
   course         Course         @relation(fields: [courseId], references: [id])
-  comments       CommentsLesson @relation(fields: [commentsLessonId], references: [id])
-  commentsLessonId String
+  comments       CommentsLesson?
   srcVideo       String
   srcDoc         Doc[]
   rating         String
@@ -88,8 +87,8 @@ model Comment {
 model CommentsLesson {
   id       String    @id @default(uuid())
   comments Comment[]
-  lessonId String    @unique
-  lesson   Lesson    @relation(fields: [lessonId], references: [id])
+  lesson    Lesson  @relation(fields: [lessonId], references: [id])
+  lessonId  String  @unique
 }
 
 model ShortImgs {
