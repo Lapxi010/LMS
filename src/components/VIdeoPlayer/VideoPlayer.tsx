@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import styles from './VideoPlayer.module.sass';
-import {classNames} from '@utils/classNames';
 import { useVideo } from './useVideo';
 import { IVideoPlayer } from './Video.types';
-
 import ArrowRight from './ArrowRight.svg';
 import Full from './Fullscreen.svg';
 import Pause from './Pause.svg';
@@ -14,7 +12,7 @@ const VideoPlayer: FC<IVideoPlayer> = ({ videoSource,}) => {
 	const { actions, videoRef, video } = useVideo();
 
 	return (
-		<div>
+		<div className={styles.wrapper}>
 			<>
 				<video
 					ref={videoRef}
@@ -71,7 +69,5 @@ const VideoPlayer: FC<IVideoPlayer> = ({ videoSource,}) => {
 			</>
 		</div>
 	);
-};// If you wanna add change quality buttons
-//kmoskwiak.github.io/videojs-resolution-switcher/
-//https://stackoverflow.com/questions/38626993/change-video-quality-with-sources-pointing-to-different-quality-versions
+};
 export default VideoPlayer;

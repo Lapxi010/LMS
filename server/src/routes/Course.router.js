@@ -5,7 +5,7 @@ import {createCourse, createLesson, getAllCourses, getCourse} from "../controlle
 const router = express.Router();
 
 router.get('/video/:id', (req, res) => {
-    const path =  `${__dirname}/../source/${req.params.id}.mp4`;
+    const path =  `${__dirname}/../source/${req.params.id}`;
     const stat = fs.statSync(path);
     const fileSize = stat.size;
     const range = req.headers.range;

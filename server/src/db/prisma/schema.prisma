@@ -53,13 +53,13 @@ model Lesson {
   titleImg       String?
   shortImgs      ShortImgs[]
   userId         String
-  author         User           @relation(fields: [userId], references: [id])
+  author         User?           @relation(fields: [userId], references: [id])
   courseId       String
-  course         Course         @relation(fields: [courseId], references: [id])
+  course         Course?         @relation(fields: [courseId], references: [id])
   comments       CommentsLesson?
-  srcVideo       String
+  srcVideo       String?
   srcDoc         Doc[]
-  rating         String
+  rating         String?
   tags           Tag[]
   createdAt      DateTime       @default(now())
 }

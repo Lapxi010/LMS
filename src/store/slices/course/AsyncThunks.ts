@@ -16,3 +16,19 @@ export const fetchCourse = createAsyncThunk<any, any, any>(
             return rejectWithValue(e.message);
         }
     });
+
+export const fetchCreateLesson = createAsyncThunk<any, any, any>(
+    'fetchCreateLesson',
+    async  (data, {rejectWithValue}) => {
+        try {
+            const response = await Api.post(`courses/lesson/${data.id}`, data.data);
+
+            if (!(response.status === 200)) {
+                throw new Error(`Error: ${response.data.message}`);
+            }
+            return response.data;
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);

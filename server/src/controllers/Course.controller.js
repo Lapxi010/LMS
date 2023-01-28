@@ -90,17 +90,10 @@ export const createLesson = async (req, res) => {
                 title: title,
                 description: description,
                 courseId: id,
-                userId: null,
-                titleImg: '',
-                shortImgs: [],
-                comments: [],
-                srcVideo: '',
-                srcDoc: [],
-                rating: '',
-                tags: []
+                userId: userId,
             }
         });
-        console.log(lesson)
+
         res.status(200).json({
             lesson
         })

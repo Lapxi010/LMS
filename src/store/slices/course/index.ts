@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchCourse} from "@store/slices/course/AsyncThunks";
+import {fetchCourse, fetchCreateLesson} from "@store/slices/course/AsyncThunks";
 
 interface ICourseState {
     data: any;
@@ -31,9 +31,18 @@ const courseSlice = createSlice({
                 state.status = 'success';
                 state.data = action.payload.course;
             })
+            .addCase(fetchCreateLesson.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchCreateLesson.fulfilled, (state) => {
+                state.status = 'success';
+            })
     }
 });
 
 export const selectThisCourse = (state) => state.course.data;
-
+export const selectLesson = (state, id) => {
+    const lessons = state.course.data.lessons
+    return lessons.filter(v => v.id === id)[0]
+}
 export default courseSlice.reducer;
