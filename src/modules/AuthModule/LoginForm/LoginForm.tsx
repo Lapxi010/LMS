@@ -1,14 +1,14 @@
 import React, {FC, useState} from 'react';
 import styles from './LoginForm.module.sass';
 import {classNames} from '@utils/classNames';
-import {Button} from '@components/Button/Button';
+import {Button} from '@ui/Button/Button';
 import {useForm} from 'react-hook-form';
-import {CommonBlockLAI} from '@components/Forms/CommonBlockLAI/CommonBlockLAI';
-import {CheckIcon} from '@components/Forms/LoginForm/LoginFormIcons';
-import {GoogleIcon} from '@components/Forms/LoginForm/LoginFormIcons';
+import {CommonBlockLAI} from '../components/CommonBlockLAI/CommonBlockLAI';
+import {CheckIcon} from './LoginFormIcons';
+import {GoogleIcon} from './LoginFormIcons';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import {Link, Navigate} from 'react-router-dom';
-import {selectIsAuth} from '@store/slices/auth';
+import {Link} from 'react-router-dom';
+import {selectStatus} from '@store/slices/auth';
 import {fetchLogin} from '@store/slices/auth/AsyncThunks';
 
 export const LoginForm: FC = () => {
@@ -20,15 +20,13 @@ export const LoginForm: FC = () => {
 	} = useForm({mode: 'onChange'});
 	const [checkbox, setCheckbox] = useState(false);
 	const dispatch = useAppDispatch();
-	const isAuth = useAppSelector(selectIsAuth);
-
-	if (isAuth === 'success') {
-		return <Navigate to='/'/>;
-	}
+	const status = useAppSelector(selectStatus);
 
 	const onSubmit = async (data) => {
 		await dispatch(fetchLogin(data));
-		reset();
+		if (status === 'success') {
+			reset();
+		}
 	};
 
 	return (
@@ -74,7 +72,7 @@ export const LoginForm: FC = () => {
 					</div>
 					<Button
 						className={styles.btn}
-						disabled={!isValid || !checkbox}
+						disabled={!isValid || !checkbox || status === 'loading'}
 						type="submit"
 					>Войти</Button>
 					<Button type="button" className={classNames(styles.btn, styles.btn_google)}>Войти с помощью

@@ -20,7 +20,11 @@ const isError = (action) => {
 };
 
 const courseSlice = createSlice({
-	reducers: undefined,
+	reducers: {
+		addCourse: (state, action) => {
+			state.data = [...state.data, action.payload];
+		}
+	},
 	name: 'courses',
 	initialState,
 	extraReducers: (builder) =>{
@@ -48,6 +52,9 @@ const courseSlice = createSlice({
 	}
 });
 
-export const selectStatus = (state) => state.courses.status;
+export const selectStatus = (state) => state.courses.statusCourses;
+export const selectStatusCreateCourse = (state) => state.courses.statusCreateCourses;
 export const selectCourses = (state) => state.courses.data;
+
+export const coursesActions = courseSlice.actions;
 export default courseSlice.reducer;

@@ -1,14 +1,13 @@
 import React, {FC, useState} from 'react';
 import styles from './RegistrationForm.module.sass';
 import {useForm} from 'react-hook-form';
-import {CommonBlockLAI} from '@components/Forms/CommonBlockLAI/CommonBlockLAI';
-import {Button} from '@components/Button/Button';
-import {Link,Navigate} from 'react-router-dom';
+import {CommonBlockLAI} from '../components/CommonBlockLAI/CommonBlockLAI';
+import {Button} from '@ui/Button/Button';
+import {Link} from 'react-router-dom';
 import Female from './Female.svg';
 import Male from './Male.svg';
 import {classNames} from '@utils/classNames';
-import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import { selectIsAuth} from '@store/slices/auth';
+import {useAppDispatch} from '@hooks/HookRedux';
 import {fetchRegister} from '@store/slices/auth/AsyncThunks';
 
 export const RegistrationForm: FC = () => {
@@ -23,7 +22,6 @@ export const RegistrationForm: FC = () => {
 	const [sex, setSex] = useState<'male' | 'female'>(null);
 	const [activity, setActivity] = useState<'children' | 'teacher'>(null);
 	const dispatch = useAppDispatch();
-	const isAuth = useAppSelector(selectIsAuth);
 
 	const onSubmit = async (data) => {
 		await dispatch(fetchRegister({role: activity,sex, ...data}));
@@ -31,10 +29,6 @@ export const RegistrationForm: FC = () => {
 		setActivity(null);
 		reset();
 	};
-
-	if (isAuth === 'success') {
-		return <Navigate to='/'/>;
-	}
 
 	return (
 		<div className={styles.root}>

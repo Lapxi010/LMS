@@ -1,4 +1,5 @@
 import {PrismaClient} from '@prisma/client';
+import fs from 'fs'
 
 const db = new PrismaClient();
 export const uploadVideo = async (req, res) => {
@@ -58,6 +59,11 @@ export const uploadImage = async (req, res) => {
     });
 }
 
-export const getPdf = async (req, res) => {
-    res.status(200).sendFile(__dirname + '../static/1.pdf');
+export const getImage = async (req, res) => {
+    const {id} = req.params;
+    res.setHeader("Content-Disposition",`inline; filename="${id}"`)
+    res.setHeader("Cache-Control", `public, max-age=${360 * 24 * 60 * 60 * 1000}`)
+    fs.readFile(`${__dirname}/../static/${id}`, (err, image) => {
+        res.sendFile(image)
+    })
 }

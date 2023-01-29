@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import styles from './Header.module.sass';
-import {ThemeSwitcherBtnMain} from '@components/ThemeSwitcherBtn/ThemeSwitcherBtn';
-import {NotificationIcon, UserIcon} from '@components/Header/HeaderIcons';
+import {ThemeSwitcherBtnMain} from '@modules/ThemeSwitcherBtn/ThemeSwitcherBtn';
+import {NotificationIcon, UserIcon} from '@modules/Header/HeaderIcons';
 import {NavLink} from 'react-router-dom';
 import {classNames} from '@utils/classNames';
 export const Header: FC<{children: string}> = ({children}) => {

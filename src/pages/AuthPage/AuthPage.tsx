@@ -1,12 +1,12 @@
 import React, {FC, useEffect} from 'react';
-import styles from './AuthLayout.module.sass';
-import {ThemeSwitcherBtnAuth} from '@components/ThemeSwitcherBtn/ThemeSwitcherBtn';
+import styles from './AuthPage.module.sass';
+import {ThemeSwitcherBtnAuth} from '@modules/ThemeSwitcherBtn/ThemeSwitcherBtn';
 import {Navigate, Outlet} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectIsAuth} from '@store/slices/auth';
 import {fetchRefresh} from '@store/slices/auth/AsyncThunks';
 
-export const AuthLayout: FC = () => {
+export const AuthPage: FC = () => {
 	const isAuth = useAppSelector(selectIsAuth);
 	const dispatch = useAppDispatch();
 

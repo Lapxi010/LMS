@@ -1,19 +1,19 @@
 import React, {FC} from 'react';
 import {Route, Routes} from 'react-router-dom';
 import {MainLayout} from '@components/Layouts/MainLayout/MainLayout';
-import {LoginPage} from '@pages/LoginPage/LoginPage';
-import {RegistrationPage} from '@pages/RegistrationPage/RegistrationPage';
+import {LoginPage} from '@pages/AuthPage/LoginPage/LoginPage';
+import {RegistrationPage} from '@pages/AuthPage/RegistrationPage/RegistrationPage';
 import {UploadFile} from '@components/UploadFile';
 import {DashboardPage} from '@pages/DashboardPage/DashboardPage';
 import {ChatPage} from '@pages/ChatPage/ChatPage';
-import {CoursesPage} from '@pages/CoursesPage/CoursesPage';
+import {CoursesPage} from '@pages/CoursePages/CoursesPage';
 import {SettingsPage} from '@pages/SettingsPage/SettingsPage';
-import {CoursePage} from '@pages/CoursePage/CoursePage';
-import {AuthLayout} from '@components/Layouts/AuthLayout/AuthLayout';
+import {CoursePage} from '@pages/CoursePages/CoursePage/CoursePage';
 import {MePage} from '@pages/MePage/MePage';
-import {LessonPage} from "@pages/LessonPage/LessonPage";
+import {LessonPage} from '@pages/CoursePages/LessonPage/LessonPage';
 import './App.module.sass';
-import {CreateLessonPage} from "@pages/CreateLessonPage/CreateLessonPage";
+import {CreateLessonPage} from '@pages/CoursePages/CreateLessonPage/CreateLessonPage';
+import {AuthPage} from '@pages/AuthPage/AuthPage';
 
 export const App: FC = () => {
 	return (
@@ -29,7 +29,7 @@ export const App: FC = () => {
 					<Route path='settings' element={<SettingsPage/>}/>
 					<Route path='me' element={<MePage/>}/>
 				</Route>
-				<Route path='/auth' element={<AuthLayout/>}>
+				<Route path='/auth' element={<AuthPage/>}>
 					<Route index element={<LoginPage/>}/>
 					<Route path="register" element={<RegistrationPage/>}/>
 				</Route>

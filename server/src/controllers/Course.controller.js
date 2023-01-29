@@ -19,7 +19,7 @@ export const createCourse = async (req, res) => {
             }
         });
         res.status(200).json({
-            message: 'Ok'
+            course
         })
     } catch (e) {
         return res.status(500).json({

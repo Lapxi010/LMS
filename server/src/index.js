@@ -23,8 +23,7 @@ const cookieOptions = {
 }
 
 const app = express();
-
-
+app.use('/uploads', express.static('./src/static'));
 app.use(fileUpload({
     createParentPath: true
 }));
@@ -37,7 +36,11 @@ app.use(cookieParser(process.env.JWT_SECRET, cookieOptions));
 
 app.use('/api/v1', expressRateLimit);
 
-app.use('/api/v1', router);
+app.use('/api/v1', [(req, res, next) => {
+    setTimeout(()=> {
+        next()
+    }, 1000)
+}], router);
 
 
 app.listen(port, () => {

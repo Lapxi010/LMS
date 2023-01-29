@@ -1,6 +1,7 @@
 export interface ICourses {
     courses: ICourse[],
     message?: string
+    course?: any
 }
 
 export interface ICourse {

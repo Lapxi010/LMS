@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import Api from '@api/index';
 import {ICourse, ICourses} from './ICourse';
+import {coursesActions} from './index';
 
 export const fetchCourses = createAsyncThunk(
 	'auth/fetchCourses',
@@ -20,14 +21,14 @@ export const fetchCourses = createAsyncThunk(
 
 export const fetchCreateCourse = createAsyncThunk<any, {title: string, description: string, shorDesc: string}, any>(
 	'auth/fetchCreateCourse',
-	async (data, {rejectWithValue}) => {
+	async (data, {dispatch,rejectWithValue}) => {
 		try {
 			const response = await Api.post<ICourses>('courses/course', data);
 			if (!(response.status === 200)) {
 				throw new Error(`Error: ${response.data.message}`);
 			}
+			dispatch(coursesActions.addCourse(response.data.course));
 			return response.data.message;
-
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}

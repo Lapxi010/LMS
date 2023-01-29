@@ -1,13 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import Api from '@api/index';
-import {IAuthResponse} from '@store/slices/auth/IUser';
+import {IAuthResponse} from './IUser';
 
 export const fetchLogin = createAsyncThunk<any, any, any>(
 	'auth/fetchLogin',
 	async (data, {rejectWithValue}) => {
 		try {
 			const response = await Api.post<IAuthResponse>('users/login', data);
-
 			if (!(response.status === 200)) {
 				throw new Error(`Error: ${response.data.message}`);
 			}
@@ -40,12 +39,15 @@ export const fetchRefresh = createAsyncThunk(
 		try {
 			const response = await Api.get<IAuthResponse>('users/refresh');
 			if (!(response.status === 200)) {
-				throw new Error(`Error: ${response.data.message}`);
+				// @ts-ignore
+				throw new Error(response.status);
 			}
-
 			return response.data;
-		} catch (e) {
-			return rejectWithValue(e.message);
+		} catch (err) {
+			if (err) {
+				return rejectWithValue(err.response.message);
+			}
+			return rejectWithValue('Произошла ошибка!');
 		}
 	});
 

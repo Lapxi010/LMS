@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import styles from './SettingsPage.module.sass';
-import {Header} from '@components/Header/Header';
+import {Header} from '@modules/Header/Header';
 
 export const SettingsPage: FC = () => {
 	return (

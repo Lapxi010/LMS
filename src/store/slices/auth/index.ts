@@ -19,6 +19,7 @@ const isError = (action) => {
 	return action.type.endsWith('rejected');
 };
 
+
 const authSlice = createSlice({
 	reducers: undefined,
 	name: 'auth',
@@ -66,14 +67,13 @@ const authSlice = createSlice({
 				localStorage.removeItem('token');
 
 			})
-			.addMatcher(isError, (state, action: PayloadAction<string>) => {
+			.addMatcher(isError, (state, action:PayloadAction<string>) => {
 				state.error = action.payload;
 				state.status = 'failed';
-				state.isAuth = false;
-			});
+			}
+			);
 	}
 });
-
 export const selectStatus = (state) => state.auth.status;
 export const selectIsAuth = (state) => state.auth.isAuth;
 export const selectRole = (state) => {
@@ -82,4 +82,5 @@ export const selectRole = (state) => {
 	}
 	return 'ch';
 };
-export default authSlice.reducer;
+
+export const AuthReducer = authSlice.reducer;

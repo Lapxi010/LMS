@@ -28,6 +28,12 @@
       "@api/*": [
         "src/api/*"
       ],
+      "@ui/*": [
+        "src/ui/*"
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ]
     }
   }
 }

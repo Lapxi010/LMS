@@ -76,14 +76,14 @@ export const login = async (req, res) => {
 
         if (!user) {
             return res.status(404).json({
-                message: 'Пользователь не найден'
+                message: 'Email или пароль неправильный!'
             });
         }
 
         const candidate = await bcrypt.compare(password, user.password);
         if (!candidate) {
             return res.status(404).json({
-                message: 'Пароль не верный'
+                message: 'Email или пароль неправильный!'
             });
         }
         const id = user.id;
@@ -109,7 +109,7 @@ export const login = async (req, res) => {
         });
     } catch (e) {
         return res.status(500).json({
-            message: 'Не удалось сделать запрос'
+            message: 'Произошла ошибка!'
         });
     }
 };

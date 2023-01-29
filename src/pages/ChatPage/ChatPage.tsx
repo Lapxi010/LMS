@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import styles from './ChatPage.module.sass';
-import {Header} from '@components/Header/Header';
+import {Header} from '@modules/Header/Header';
 
 export const ChatPage: FC = () => {
 	return (

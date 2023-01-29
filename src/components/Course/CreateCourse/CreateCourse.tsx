@@ -1,10 +1,12 @@
-import React, {Dispatch, FC, useState} from 'react';
+import React, {Dispatch, FC} from 'react';
 import styles from './CreateCourse.module.sass';
-import {useAppDispatch} from '@hooks/HookRedux';
+import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {fetchCreateCourse} from '@store/slices/courses/AsyncThunks';
 import {useForm} from 'react-hook-form';
-import {Button} from '@components/Button/Button';
+import {Button} from '@ui/Button/Button';
 import {classNames} from '@utils/classNames';
+import {selectStatusCreateCourse} from '@store/slices/courses';
+import {useNavigate} from 'react-router-dom';
 
 export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 	const {
@@ -14,9 +16,12 @@ export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {
 		reset
 	} = useForm({mode: 'onChange'});
 	const dispatch = useAppDispatch();
+	const statusCreate = useAppSelector(selectStatusCreateCourse);
+	const navigate = useNavigate();
 
-	const sendData = (data) => {
-		dispatch(fetchCreateCourse(data));
+	const sendData = async (data) => {
+		setView(false);
+		await dispatch(fetchCreateCourse(data));
 	};
 
 	return (
