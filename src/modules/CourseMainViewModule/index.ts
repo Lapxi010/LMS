@@ -1,0 +1,1 @@
+export {CourseMainView} from './CourseMainView/CourseMainView';

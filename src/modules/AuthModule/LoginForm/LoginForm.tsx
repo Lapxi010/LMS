@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import styles from './LoginForm.module.sass';
 import {classNames} from '@utils/classNames';
-import {Button} from '@ui/Button/Button';
+import {Button} from '@components/Button/Button';
 import {useForm} from 'react-hook-form';
 import {CommonBlockLAI} from '../components/CommonBlockLAI/CommonBlockLAI';
 import {CheckIcon} from './LoginFormIcons';

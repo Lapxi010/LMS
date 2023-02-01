@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import styles from './LoginPage.module.sass';
-import {LoginForm} from '../../../modules/AuthModule';
+import {LoginForm} from '@modules/AuthModule';
 import {useAppSelector} from '@hooks/HookRedux';
 import {selectStatus} from '@store/slices/auth';
-import {Spinner} from '@ui/PreLoaders/Spinner/Spinner';
+import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 
 export const LoginPage: FC = () => {
 	const status = useAppSelector(selectStatus);

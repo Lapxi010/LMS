@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import styles from './RegistrationForm.module.sass';
 import {useForm} from 'react-hook-form';
 import {CommonBlockLAI} from '../components/CommonBlockLAI/CommonBlockLAI';
-import {Button} from '@ui/Button/Button';
+import {Button} from '@components/Button/Button';
 import {Link} from 'react-router-dom';
 import Female from './Female.svg';
 import Male from './Male.svg';

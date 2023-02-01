@@ -3,17 +3,17 @@ import {Route, Routes} from 'react-router-dom';
 import {MainLayout} from '@components/Layouts/MainLayout/MainLayout';
 import {LoginPage} from '@pages/AuthPage/LoginPage/LoginPage';
 import {RegistrationPage} from '@pages/AuthPage/RegistrationPage/RegistrationPage';
-import {UploadFile} from '@components/UploadFile';
+import {UploadFile} from '@components/VIdeoPlayer/UploadFile';
 import {DashboardPage} from '@pages/DashboardPage/DashboardPage';
 import {ChatPage} from '@pages/ChatPage/ChatPage';
-import {CoursesPage} from '@pages/CoursePages/CoursesPage';
+import {CoursesPage} from '@pages/CoursePages/CoursesPage/CoursesPage';
 import {SettingsPage} from '@pages/SettingsPage/SettingsPage';
 import {CoursePage} from '@pages/CoursePages/CoursePage/CoursePage';
 import {MePage} from '@pages/MePage/MePage';
 import {LessonPage} from '@pages/CoursePages/LessonPage/LessonPage';
 import './App.module.sass';
 import {CreateLessonPage} from '@pages/CoursePages/CreateLessonPage/CreateLessonPage';
-import {AuthPage} from '@pages/AuthPage/AuthPage';
+import {AuthPage} from '@pages/AuthPage/AuthPage/AuthPage';
 
 export const App: FC = () => {
 	return (

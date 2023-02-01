@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './ThemeSwitcherBtn.module.sass';
 import Sun from './Sun.svg';
 import Moon from './Moon.svg';
-import {Button} from '@ui/Button/Button';
+import {Button} from '@components/Button/Button';
 import {classNames} from '@utils/classNames';
 
 export const ThemeSwitcherBtnAuth: FC<{className: string}> = ({className}) => {

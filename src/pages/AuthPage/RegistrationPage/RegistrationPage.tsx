@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import styles from './RegistrationPage.module.sass';
-import {RegistrationForm} from '../../../modules/AuthModule';
-import {Spinner} from '@ui/PreLoaders/Spinner/Spinner';
+import {RegistrationForm} from '@modules/AuthModule';
+import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 import {useAppSelector} from '@hooks/HookRedux';
 import {selectStatus} from '@store/slices/auth';
 export const RegistrationPage: FC = () => {
