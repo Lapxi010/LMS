@@ -219,3 +219,21 @@ export const activate = async (req, res) => {
 
     return res.redirect(process.env.CLIENT_URL);
 }
+
+export const update = async (req, res) => {
+    const {fio} = req.body;
+    const id = req.userId
+
+    const user = await db.user.update({
+        where: {
+            id: id
+        },
+        data: {
+            fio: fio
+        }
+    })
+
+    return res.status(200).json({
+        message: 'ok'
+    })
+}

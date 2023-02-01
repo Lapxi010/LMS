@@ -66,3 +66,19 @@ export const fetchLogout = createAsyncThunk(
 			return rejectWithValue(e.message);
 		}
 	});
+
+export const updateUser = createAsyncThunk<any, any, any>(
+	'auth/updateUser',
+	async (data, {rejectWithValue}) => {
+		try {
+			const response = await Api.post<IAuthResponse>('users/updateUser', data);
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+
+			return data;
+
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	});

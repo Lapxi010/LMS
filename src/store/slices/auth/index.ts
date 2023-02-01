@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout} from './AsyncThunks';
+import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout, updateUser} from './AsyncThunks';
 
 interface IauthState {
     data: any;
@@ -67,11 +67,17 @@ const authSlice = createSlice({
 				localStorage.removeItem('token');
 
 			})
+			.addCase(updateUser.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(updateUser.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.data = {...state.data, fio: action.payload.fio};
+			})
 			.addMatcher(isError, (state, action:PayloadAction<string>) => {
 				state.error = action.payload;
 				state.status = 'failed';
-			}
-			);
+			});
 	}
 });
 export const selectStatus = (state) => state.auth.status;
