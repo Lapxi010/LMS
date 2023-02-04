@@ -6,7 +6,7 @@ import {CoursesList} from '@modules/CoursesListModule/CoursesList/CoursesList';
 import {useAppSelector} from '@hooks/HookRedux';
 import {selectRole} from '@store/slices/auth';
 import {Button} from '@components/Button/Button';
-import {selectStatusCreateCourse} from '@store/slices/courses';
+import {selectStatusCreateCourse} from '@store/slices/courses/selectors';
 import {CreateCourseLoading} from '@modules/CreateCourseModalModule/CreateCourse/CreateCourseLoading';
 
 export const CoursesPage: FC = () => {

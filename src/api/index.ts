@@ -4,6 +4,7 @@ import axios from 'axios';
 export const Api = axios.create({
 	withCredentials: true,
 	baseURL: 'http://localhost:6789/api/v1/',
+	validateStatus: (status) =>  status >= 200 && status < 500 ,
 });
 
 Api.interceptors.request.use((config) => {

@@ -5,56 +5,49 @@ interface ICourseState {
     data: any;
     statusCourses: 'idle' | 'loading' | 'failed' | 'success';
     statusCreateCourses: 'idle' | 'loading' | 'failed' | 'success';
-    error: string | null;
+	errorCourses: string | null;
+	errorCreateCourses: string | null;
 }
 
 const initialState: ICourseState = {
 	data: null,
 	statusCourses: 'idle',
 	statusCreateCourses: 'idle',
-	error: null
-};
-
-const isError = (action) => {
-	return action.type.endsWith('rejected');
+	errorCourses: null,
+	errorCreateCourses: null
 };
 
 const courseSlice = createSlice({
 	reducers: {
+		startLoadingFetchCourses: (state) => {
+			state.statusCourses = 'loading';
+		},
+		successFetchCourses: (state, action: PayloadAction<any>) => {
+			state.statusCourses = 'success';
+			state.data = action.payload;
+		},
+		failedFetchCourses: (state, action: PayloadAction<any>) => {
+			state.statusCourses = 'failed';
+			state.errorCourses = action.payload;
+		},
+		startLoadingCreateCourse: (state) => {
+			state.statusCreateCourses = 'loading';
+		},
+		successCreateCourse: (state) => {
+			state.statusCreateCourses = 'success';
+		},
+		failedCreateCourse: (state, action: PayloadAction<any>) => {
+			state.statusCreateCourses = 'failed';
+			state.errorCreateCourses = action.payload;
+		},
 		addCourse: (state, action) => {
 			state.data = [...state.data, action.payload];
 		}
 	},
 	name: 'courses',
-	initialState,
-	extraReducers: (builder) =>{
-		builder
-			.addCase(fetchCourses.pending, (state) => {
-				state.statusCourses = 'loading';
-				state.data = null;
-			})
-			.addCase(fetchCourses.fulfilled, (state, action) => {
-				state.statusCourses = 'success';
-				state.data = action.payload;
-			})
-			.addCase(fetchCreateCourse.pending, (state) => {
-				state.statusCreateCourses = 'loading';
-			})
-			.addCase(fetchCreateCourse.fulfilled, (state, action) => {
-				state.statusCreateCourses = 'success';
-			})
-			.addCase(fetchCourses.rejected, (state, action) => {
-				state.statusCourses = 'failed';
-			})
-			.addCase(fetchCreateCourse.rejected, (state, action) => {
-				state.statusCreateCourses = 'failed';
-			});
-	}
+	initialState
 });
 
-export const selectStatus = (state) => state.courses.statusCourses;
-export const selectStatusCreateCourse = (state) => state.courses.statusCreateCourses;
-export const selectCourses = (state) => state.courses.data;
 
 export const coursesActions = courseSlice.actions;
 export default courseSlice.reducer;

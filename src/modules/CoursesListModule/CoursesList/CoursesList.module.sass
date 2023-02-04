@@ -1,7 +1,46 @@
 .root
   display: flex
-  width: 400px
-  max-width: 500px
+  width: 100%
   flex-direction: column
-  gap: 30px
 
+.controls
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  margin-bottom: 20px
+  margin-top: 30px
+
+.btns
+  display: flex
+  flex-direction: row
+  align-items: center
+  width: 300px
+  gap: 50px
+  flex: 1
+
+.input
+  flex: 1
+  border-radius: 5px
+  border: none
+  outline: none
+  padding: 5px 20px 5px 10px
+  background: var(--course-input-bg)
+  font-size: 16px
+  color: var(--c-text)
+  margin-right: 15px
+
+.btn
+  background: #967FC6
+  border-radius: 5px
+  border: none
+  padding: 7px 10px
+  color: var(--c-text)
+  outline: none
+  font-size: 16px
+
+.wrapper
+  display: flex
+  flex-direction: column
+  width: 500px
+  gap: 20px

@@ -5,31 +5,14 @@ import {NavLink, useNavigate} from 'react-router-dom';
 import {Button} from '@components/Button/Button';
 import axios from 'axios';
 import {useAppSelector} from '@hooks/HookRedux';
-import {selectThisCourse} from '@store/slices/course';
+import {selectStatus, selectThisCourse} from '@store/slices/course';
+import {CourseInformation} from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformation";
+import {UploadImage} from "@modules/CourseMainViewModule/components/UploadImage/UploadImage";
 
 export const CourseMainView: FC = () => {
 	const navigate = useNavigate();
+	const status = useAppSelector(selectStatus);
 	const course = useAppSelector(selectThisCourse);
-	const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-	const [uploaded, setUploaded] = React.useState();
-	const handleFileInput = async () => {
-		if (!selectedFile) {
-			alert('Please select a file');
-			return;
-		}
-		const formData = new FormData();
-		formData.append('file', selectedFile);
-		const {data} = await axios.post(`http://localhost:6789/api/v1/files/uploadImage/${course.id}`, formData, {
-			onUploadProgress: (progressEvent) => {
-				console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%');
-			}
-		});
-		setUploaded(data);
-	};
-	const handleUploadFileInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		setSelectedFile(event.target.files[0]);
-	};
-
 
 	return (
 		<>
@@ -39,25 +22,17 @@ export const CourseMainView: FC = () => {
 					<Spinner className={styles.wrapper__spinner}/>
 					:
 					<>
-						{course &&
-                            <div>
-                            	<h1>{course.title}</h1>
-                            	<div>
-                            		<p>{course.description}</p>
-                            	</div>
-                            	<p>{course.createdAt}</p>
-                            </div>
+						{
+							course &&
+                            <CourseInformation title={course.title} description={course.description} dataCreate={course.createdAt}/>
 						}
-						{course && <img
+						{course && course.titleImg != null ? <img
 							width={'300px'}
 							height={'300px'}
 							src={course.titleImg ? `http://localhost:6789/uploads/${course.titleImg}` : '#'}
-							alt="titleImg"/>}
-						{
-							!course?.titleImg && <div>
-								<input type="file" onChange={handleUploadFileInput}/>
-								<button onClick={handleFileInput}>Upload now!</button>
-							</div>
+							alt="titleImg"/>
+							:
+							<UploadImage id={course.id}/>
 						}
 						{
 							course &&

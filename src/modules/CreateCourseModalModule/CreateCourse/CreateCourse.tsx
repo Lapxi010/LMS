@@ -5,7 +5,7 @@ import {fetchCreateCourse} from '@store/slices/courses/AsyncThunks';
 import {useForm} from 'react-hook-form';
 import {Button} from '@components/Button/Button';
 import {classNames} from '@utils/classNames';
-import {selectStatusCreateCourse} from '@store/slices/courses';
+import {selectStatusCreateCourse} from '@store/slices/courses/selectors';
 import {useNavigate} from 'react-router-dom';
 
 export const CreateCourse: FC<{setView: Dispatch<boolean>}> = ({setView}) => {

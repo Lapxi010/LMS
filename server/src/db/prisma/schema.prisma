@@ -23,6 +23,7 @@ model User {
   Course         Course[]
   Lesson         Lesson[]
   Comment        Comment[]
+  Member         Member[]
 }
 
 model Token {
@@ -43,25 +44,35 @@ model Course {
   author      User        @relation(fields: [userId], references: [id])
   lessons     Lesson[]
   tags        Tag[]
+  members     Member[]
   createdAt   DateTime    @default(now())
 }
 
+model Member {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id])
+  createdAt DateTime @default(now())
+}
+
 model Lesson {
-  id             String         @id @default(uuid())
-  title          String         @unique
-  description    String
-  titleImg       String?
-  shortImgs      ShortImgs[]
-  userId         String
-  author         User?           @relation(fields: [userId], references: [id])
-  courseId       String
-  course         Course?         @relation(fields: [courseId], references: [id])
-  comments       CommentsLesson?
-  srcVideo       String?
-  srcDoc         Doc[]
-  rating         String?
-  tags           Tag[]
-  createdAt      DateTime       @default(now())
+  id          String          @id @default(uuid())
+  title       String          @unique
+  description String
+  titleImg    String?
+  shortImgs   ShortImgs[]
+  userId      String
+  author      User?           @relation(fields: [userId], references: [id])
+  courseId    String
+  course      Course?         @relation(fields: [courseId], references: [id])
+  comments    CommentsLesson?
+  srcVideo    String?
+  srcDoc      Doc[]
+  rating      String?
+  tags        Tag[]
+  createdAt   DateTime        @default(now())
 }
 
 model Tag {
@@ -87,8 +98,8 @@ model Comment {
 model CommentsLesson {
   id       String    @id @default(uuid())
   comments Comment[]
-  lesson    Lesson  @relation(fields: [lessonId], references: [id])
-  lessonId  String  @unique
+  lesson   Lesson    @relation(fields: [lessonId], references: [id])
+  lessonId String    @unique
 }
 
 model ShortImgs {
