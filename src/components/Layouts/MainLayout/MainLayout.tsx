@@ -4,7 +4,7 @@ import {LeftSidebar} from '@components/LeftSidebar/LeftSidebar';
 import {Outlet, Navigate} from 'react-router-dom';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import {selectIsAuth, selectStatus} from '@store/slices/auth';
+import {selectActivatedUrl, selectIsAuth, selectStatus} from '@store/slices/auth';
 import {fetchRefresh} from '@store/slices/auth/AsyncThunks';
 
 export const MainLayout: FC = () => {
@@ -15,6 +15,7 @@ export const MainLayout: FC = () => {
 	useEffect(() => {
 		dispatch(fetchRefresh());
 	}, []);
+
 
 	return (
 		<>

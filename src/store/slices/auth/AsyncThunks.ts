@@ -82,3 +82,19 @@ export const updateUser = createAsyncThunk<any, any, any>(
 			return rejectWithValue(e.message);
 		}
 	});
+
+export const enterCourse = createAsyncThunk<any, any, any>(
+	'auth/enterCourse',
+	async (data, {rejectWithValue}) => {
+		try {
+			const response = await Api.post('users/enterCourse', data);
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+
+			return response.data;
+
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	});

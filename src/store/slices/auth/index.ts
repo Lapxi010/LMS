@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout, updateUser} from './AsyncThunks';
+import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout, updateUser, enterCourse} from './AsyncThunks';
 
 interface IauthState {
     data: any;
@@ -35,6 +35,13 @@ const authSlice = createSlice({
 				state.data = action.payload.user;
 				state.isAuth = true;
 				localStorage.setItem('token', action.payload.accessToken);
+			})
+			.addCase(enterCourse.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(enterCourse.fulfilled, (state, action) => {
+				state.status = 'success';
+				state.data = {...state.data,  member: [...state.data.member, action.payload.member]}
 			})
 			.addCase(fetchRegister.pending, (state) => {
 				state.status = 'loading';
@@ -85,11 +92,27 @@ export const selectIsAuth = (state) => state.auth.isAuth;
 
 export const selectUser = (state) => state.auth.data;
 
+export const selectActivatedUrl = (state) => state.auth?.data?.isActivated;
+
 export const selectRole = (state) => {
 	if(state.auth.data != null) {
 		return state.auth.data.role;
 	}
 	return 'ch';
 };
+
+export const selectEnterCourse = (state, id) => {
+	if(state.auth.data.hasOwnProperty('member')) {
+		let a = state.auth.data.member.map((v) => {
+			if(v.courseId === id) {
+				return v;
+			}
+		})
+        for(let i of a){
+            if(i !== undefined) return true;
+        }
+	}
+	return false
+}
 
 export const AuthReducer = authSlice.reducer;

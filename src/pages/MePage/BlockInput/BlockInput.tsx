@@ -2,14 +2,15 @@ import React, {useState} from 'react';
 import styles from './BlockInput.module.sass';
 
 export const BlockInput = ({saveChange, value, setValue}) => {
-	const [active, setActive] = useState();
+	const [active, setActive] = useState(true);
 
 	return (
 		<div className={styles.block}>
 			<input style={{display: active ? 'none' : 'block'}} type="text" value={value} onChange={(e) => {
 				setValue(e.target.value);
 			}}/>
-			<div onClick={()=>{ // @ts-ignore
+			<div onClick={()=>{
+				// @ts-ignore
 				setActive(e => !e);saveChange();}} style={{display: active ? 'none' : 'block'}}
 			className={active ? '' : styles.icon}>ok
 			</div>

@@ -34,6 +34,9 @@ export const register = async (req, res) => {
                 activationLink,
                 phone: phone,
                 password: hashPassword,
+            },
+            include: {
+                Member: true
             }
         });
 
@@ -53,7 +56,8 @@ export const register = async (req, res) => {
                 phone: user.phone,
                 sex: user.sex,
                 role: user.role,
-                isActivated: user.isActivated
+                isActivated: user.isActivated,
+                member: user.Member
             },
             accessToken,
             refreshToken
@@ -71,6 +75,9 @@ export const login = async (req, res) => {
         const user = await db.user.findUnique({
             where: {
                 email
+            },
+            include: {
+                Member: true
             }
         });
 
@@ -102,7 +109,8 @@ export const login = async (req, res) => {
                 phone: user.phone,
                 sex: user.sex,
                 role: user.role,
-                isActivated: user.isActivated
+                isActivated: user.isActivated,
+                member: user.Member
             },
             accessToken,
             refreshToken
@@ -164,6 +172,9 @@ export const refresh = async (req, res) => {
         const user = await db.user.findUnique({
             where: {
                 id: token1.userId
+            },
+            include: {
+                Member: true
             }
         })
 
@@ -184,7 +195,8 @@ export const refresh = async (req, res) => {
                 phone: user.phone,
                 sex: user.sex,
                 role: user.role,
-                isActivated: user.isActivated
+                isActivated: user.isActivated,
+                member: user.Member
             },
             accessToken,
             refreshToken
@@ -235,5 +247,21 @@ export const update = async (req, res) => {
 
     return res.status(200).json({
         message: 'ok'
+    })
+}
+
+export const enterCourse = async (req, res) => {
+    const {idCourse} = req.body;
+    const id = req.userId
+
+    const member = await db.member.create({
+        data: {
+            userId: id,
+            courseId: idCourse
+        }
+    });
+
+    return res.status(200).json({
+        member
     })
 }

@@ -49,6 +49,7 @@ export const LessonMainView: FC<{id: string}> = ({id}) => {
 			{
 				lesson.srcVideo && <video width={'600px'} height={'300px'} controls={true} src={`http://localhost:6789/api/v1/courses/video/${lesson.id}`}/>
 			}
+
 		</div>
 	);
 };

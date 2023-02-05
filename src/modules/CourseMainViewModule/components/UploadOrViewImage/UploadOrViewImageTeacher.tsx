@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import axios from "axios";
 
-export const UploadImage: FC<{id: string}> = ({id}) => {
+export const UploadOrViewImageTeacher: FC<{ id: string, src: string }> = ({id, src}) => {
     const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
     const [uploaded, setUploaded] = React.useState();
     const handleFileInput = async () => {
@@ -21,10 +21,23 @@ export const UploadImage: FC<{id: string}> = ({id}) => {
     const handleUploadFileInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
         setSelectedFile(event.target.files[0]);
     };
+
     return (
         <div>
-            <input type="file" onChange={handleUploadFileInput}/>
-            <button onClick={handleFileInput}>Upload now!</button>
+            {
+                src != 'null'
+                    ? <img
+                        width={'300px'}
+                        height={'300px'}
+                        src={`http://localhost:6789/uploads/${src}`}
+                        alt="titleImg"/>
+                    :
+                    <div>
+                        <input type="file" onChange={handleUploadFileInput}/>
+                        <button onClick={handleFileInput}>Upload now!</button>
+                    </div>
+
+            }
         </div>
     )
 }

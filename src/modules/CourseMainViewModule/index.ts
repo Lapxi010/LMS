@@ -1,1 +1,2 @@
-export {CourseMainView} from './CourseMainView/CourseMainView';
+export {CourseMainViewTeacher} from './CourseMainView/CourseMainViewTeacher';
+export {CourseMainViewChildren} from './CourseMainView/CourseMainViewChildren';
