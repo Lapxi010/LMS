@@ -1,1 +1,1 @@
-export {LessonMainView} from './LessonMainView/LessonMainView';
+export {LessonMainViewTeacher} from './LessonMainView/LessonMainViewTeacher';

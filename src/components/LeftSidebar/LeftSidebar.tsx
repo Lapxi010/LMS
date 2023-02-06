@@ -12,6 +12,7 @@ export const LeftSidebar: FC = () => {
 	const logout = async () => {
 		await dispatch(fetchLogout());
 	};
+	// @ts-ignore
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>

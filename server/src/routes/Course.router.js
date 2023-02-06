@@ -1,7 +1,14 @@
 import express from 'express';
 import fs from "fs";
 import authMiddleware from "../middlewares/Auth.middleware";
-import {createCourse, createLesson, getAllCourses, getCourse} from "../controllers/Course.controller";
+import {
+    createComment,
+    createCourse,
+    createLesson, deleteComment,
+    getAllCourses,
+    getComments,
+    getCourse,
+} from "../controllers/Course.controller";
 const router = express.Router();
 
 router.get('/video/:id', (req, res) => {
@@ -46,5 +53,9 @@ router.get('/course', authMiddleware, getAllCourses);
 
 router.get('/course/:id', authMiddleware, getCourse);
 
+router.get('/getComments/:id', authMiddleware, getComments);
 
+router.post('/comment/:id', authMiddleware, createComment);
+
+router.delete('/comment/:id', authMiddleware, deleteComment);
 export default router;

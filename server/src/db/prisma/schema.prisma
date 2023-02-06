@@ -58,21 +58,21 @@ model Member {
 }
 
 model Lesson {
-  id          String          @id @default(uuid())
-  title       String          @unique
+  id          String      @id @default(uuid())
+  title       String      @unique
   description String
   titleImg    String?
   shortImgs   ShortImgs[]
   userId      String
-  author      User?           @relation(fields: [userId], references: [id])
+  author      User?       @relation(fields: [userId], references: [id])
   courseId    String
-  course      Course?         @relation(fields: [courseId], references: [id])
-  comments    CommentsLesson?
+  course      Course?     @relation(fields: [courseId], references: [id])
+  comments    Comment[]
   srcVideo    String?
   srcDoc      Doc[]
   rating      String?
   tags        Tag[]
-  createdAt   DateTime        @default(now())
+  createdAt   DateTime    @default(now())
 }
 
 model Tag {
@@ -85,21 +85,14 @@ model Tag {
 }
 
 model Comment {
-  id               String         @id @default(uuid())
-  text             String
-  userId           String
-  commentsLessonId String
-  user             User           @relation(fields: [userId], references: [id])
-  commentsLesson   CommentsLesson @relation(fields: [commentsLessonId], references: [id])
-  rating           String
-  createdAt        DateTime       @default(now())
-}
-
-model CommentsLesson {
-  id       String    @id @default(uuid())
-  comments Comment[]
-  lesson   Lesson    @relation(fields: [lessonId], references: [id])
-  lessonId String    @unique
+  id        String   @id @default(uuid())
+  text      String
+  userId    String
+  lessonId  String
+  Lesson    Lesson   @relation(fields: [lessonId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  rating    String
+  createdAt DateTime @default(now())
 }
 
 model ShortImgs {
