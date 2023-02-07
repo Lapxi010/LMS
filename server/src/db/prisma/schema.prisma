@@ -54,6 +54,15 @@ model Member {
   user      User     @relation(fields: [userId], references: [id])
   courseId  String
   course    Course   @relation(fields: [courseId], references: [id])
+  viewed    ViewedLesson[]
+  createdAt DateTime @default(now())
+}
+
+model ViewedLesson {
+  id        String   @id @default(uuid())
+  memberId  String
+  member    Member   @relation(fields: [memberId], references: [id])
+  lessonId  String
   createdAt DateTime @default(now())
 }
 

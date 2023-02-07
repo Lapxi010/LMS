@@ -36,7 +36,11 @@ export const register = async (req, res) => {
                 password: hashPassword,
             },
             include: {
-                Member: true
+                Member:  {
+                    include: {
+                        viewed: true
+                    }
+                }
             }
         });
 
@@ -77,7 +81,11 @@ export const login = async (req, res) => {
                 email
             },
             include: {
-                Member: true
+                Member:  {
+                    include: {
+                        viewed: true
+                    }
+                }
             }
         });
 
@@ -174,7 +182,11 @@ export const refresh = async (req, res) => {
                 id: token1.userId
             },
             include: {
-                Member: true
+                Member: {
+                    include: {
+                        viewed: true
+                    }
+                }
             }
         })
 

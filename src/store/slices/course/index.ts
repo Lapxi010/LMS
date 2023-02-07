@@ -4,7 +4,7 @@ import {
     fetchCreateComment,
     fetchCreateLesson,
     fetchDeleteComment, fetchDocDownload,
-    fetchGetComments
+    fetchGetComments, fetchVisitedLesson
 } from '@store/slices/course/AsyncThunks';
 
 interface ICourseState {
@@ -12,12 +12,14 @@ interface ICourseState {
     status: 'idle' | 'loading' | 'failed' | 'success';
     error: string | null;
     comments: any;
+    statusComment: 'idle' | 'loading' | 'failed' | 'success';
 }
 
 const initialState: ICourseState = {
     data: null,
     comments: null,
     status: 'idle',
+    statusComment: 'idle',
     error: null
 };
 
@@ -46,17 +48,17 @@ const courseSlice = createSlice({
                 state.status = 'success';
             })
             .addCase(fetchCreateComment.pending, (state) => {
-                state.status = 'loading';
+                state.statusComment = 'loading';
             })
             .addCase(fetchCreateComment.fulfilled, (state, action) => {
-                state.status = 'success'
+                state.statusComment = 'success'
                 state.comments = [...state.comments, action.payload.comment];
             })
             .addCase(fetchGetComments.pending, (state) => {
-                state.status = 'loading';
+                state.statusComment = 'loading';
             })
             .addCase(fetchGetComments.fulfilled, (state, action) => {
-                state.status = 'success';
+                state.statusComment = 'success';
                 state.comments = action.payload.comments;
             })
             .addCase(fetchDeleteComment.pending, (state) => {
@@ -71,6 +73,12 @@ const courseSlice = createSlice({
             })
             .addCase(fetchDocDownload.fulfilled, (state) => {
                 state.status = 'success';
+            })
+            .addCase(fetchVisitedLesson.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchVisitedLesson.fulfilled, (state) => {
+                state.status = 'success';
             });
     }
 });
@@ -84,5 +92,25 @@ export const selectLesson = (state, id) => {
 };
 
 export const selectComments = (state) => state.course.comments;
+
+export const selectMemberForCourse = (state, id) => {
+    const members = state.auth.data.member;
+    const tmp = members.filter(v => v.courseId === id)
+    if (tmp && tmp.length > 0) {
+        return tmp[0];
+    }
+    return null;
+}
+
+export const selectViewForLesson = (state, id, id2) => {
+    const members = state.auth.data.member;
+    const tmp = members.filter(v => v.courseId === id)
+    if (tmp && tmp.length > 0) {
+        return tmp[0].viewed.filter(v => v.lessonId === id2)[0];
+    }
+    return null;
+}
+
+export const selectStatusComment = (state) => state.course.statusComment;
 
 export default courseSlice.reducer;

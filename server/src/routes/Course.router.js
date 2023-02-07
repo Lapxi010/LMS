@@ -7,7 +7,7 @@ import {
     createLesson, deleteComment,
     getAllCourses,
     getComments,
-    getCourse,
+    getCourse, visitedLesson,
 } from "../controllers/Course.controller";
 const router = express.Router();
 
@@ -58,4 +58,6 @@ router.get('/getComments/:id', authMiddleware, getComments);
 router.post('/comment/:id', authMiddleware, createComment);
 
 router.delete('/comment/:id', authMiddleware, deleteComment);
+
+router.post('/visitedLesson', authMiddleware, visitedLesson);
 export default router;

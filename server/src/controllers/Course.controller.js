@@ -67,7 +67,7 @@ export const getCourse = async (req, res) => {
             include: {
                 lessons: {
                     include: {
-                        srcDoc: true,
+                        srcDoc: true
                     }
                 }
             }
@@ -174,6 +174,28 @@ export const deleteComment = async (req, res) => {
 
         res.status(200).json({
             message: 'ok'
+        })
+
+    } catch (e) {
+        return res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
+
+export const visitedLesson = async (req, res) => {
+    try {
+        const {lessonId, memberId} = req.body
+
+        const viewed = await db.viewedLesson.create({
+            data: {
+                lessonId: lessonId,
+                memberId: memberId
+            }
+        })
+
+        res.status(200).json({
+          message: 'ok'
         })
 
     } catch (e) {
