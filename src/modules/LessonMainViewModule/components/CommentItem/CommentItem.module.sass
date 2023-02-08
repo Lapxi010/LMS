@@ -8,6 +8,11 @@
   gap: 10px
   border-radius: 12px
   margin-top: 15px
+  position: relative
+  &:hover
+    box-shadow: 3px 3px 5px 0 rgba(0,0,0,0.15)
+    .btn__delete
+      display: block
 
 .head
   display: flex
@@ -26,3 +31,16 @@
   flex-direction: row
   justify-content: flex-end
   font-size: 12px
+
+.btn__delete
+  display: none
+  outline: none
+  border: none
+  border-radius: 5px
+  background: red
+  color: var(--c-text)
+  font-size: 14px
+  padding: 5px 10px
+  position: absolute
+  top: 7px
+  right: 16px

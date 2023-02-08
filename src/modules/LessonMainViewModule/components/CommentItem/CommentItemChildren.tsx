@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import styles from './CommentItem.module.sass';
 import {RatingStars} from "@modules/LessonMainViewModule/components/RatingStars/RatingStars";
 
-export const CommentItem: FC<{ fio: string, text: string, rating: string, date: string }> = ({
+export const CommentItemChildren: FC<{ fio: string, text: string, rating: string, date: string }> = ({
                                                                                                  fio,
                                                                                                  text,
                                                                                                  rating,
