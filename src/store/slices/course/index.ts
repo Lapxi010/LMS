@@ -3,7 +3,7 @@ import {
     fetchCourse,
     fetchCreateComment,
     fetchCreateLesson,
-    fetchDeleteComment, fetchDocDownload,
+    fetchDeleteComment, fetchDeleteVideo, fetchDocDownload,
     fetchGetComments, fetchVisitedLesson
 } from '@store/slices/course/AsyncThunks';
 
@@ -28,9 +28,19 @@ const isError = (action) => {
 };
 
 const courseSlice = createSlice({
-    reducers: undefined,
     name: 'course',
     initialState,
+    reducers: {
+        addVideo: (state, action: PayloadAction<any>) => {
+            const {lessonId, srcVideo} = action.payload;
+            const course = state.data;
+            const lesson = course.lessons.filter(v => v.id === lessonId)[0];
+            state.data.lessons = [...state.data.lessons.filter(v => v.id !== lessonId), {
+                ...lesson,
+                srcVideo: srcVideo
+            }]
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCourse.pending, (state) => {
@@ -79,6 +89,19 @@ const courseSlice = createSlice({
             })
             .addCase(fetchVisitedLesson.fulfilled, (state) => {
                 state.status = 'success';
+            })
+            .addCase(fetchDeleteVideo.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchDeleteVideo.fulfilled, (state, action: PayloadAction<any>) => {
+                const {id, lessondId} = action.payload;
+                state.status = 'success';
+                const course = state.data;
+                const lesson = course.lessons.filter(v => v.id === lessondId)[0];
+                state.data.lessons = [...state.data.lessons.filter(v => v.id !== lessondId), {
+                    ...lesson,
+                    srcVideo: null
+                }]
             });
     }
 });
@@ -112,5 +135,7 @@ export const selectViewForLesson = (state, id, id2) => {
 }
 
 export const selectStatusComment = (state) => state.course.statusComment;
+
+export const {addVideo} = courseSlice.actions;
 
 export default courseSlice.reducer;

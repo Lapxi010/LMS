@@ -10,7 +10,7 @@ export const uploadVideo = async (req, res) => {
     }
     const file = req.files.file;
     if (!file) return res.json({msg: 'No file uploaded'});
-    const newFileName = `${id}`;
+    const newFileName = `${id}` + file.name;
 
     const lesson = await db.lesson.update({
         where: {
@@ -26,7 +26,7 @@ export const uploadVideo = async (req, res) => {
             console.error(err);
             return res.status(500);
         }
-        res.json({fileName: newFileName, filePath: `/source/${newFileName}.mp4`});
+        res.json({fileName: newFileName, filePath: `/source/${newFileName}.mp4`, id: lesson.srcVideo});
     });
 
 }
@@ -57,6 +57,37 @@ export const uploadImage = async (req, res) => {
         }
         res.json({fileName: newFileName, filePath: `/source/${newFileName}`});
     });
+}
+
+
+export const deleteVideo = async (req, res) => {
+    try {
+        const {id, lessondId} = req.body
+
+        const lesson = await db.lesson.update({
+            where: {
+                id: lessondId
+            },
+            data: {
+                srcVideo: null
+            }
+        })
+        await fs.unlink(`${__dirname}/../source/${id}`, (err) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Не удалось сделать запрос'
+                });
+            }
+        })
+
+        res.status(200).json({
+            message: 'Успешно удалено'
+        })
+    } catch (e) {
+        res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
 }
 
 export const uploadDoc = async (req, res) => {

@@ -1,12 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectLesson} from '@store/slices/course';
-import axios from 'axios';
 import styles from './LessonMainView.module.sass';
-import {fetchGetComments} from "@store/slices/course/AsyncThunks";
 import {CommentListTeacher} from "@modules/LessonMainViewModule/components/CommentList/CommentListTeacher";
-import {Button} from "@components/Button/Button";
 import {UploaderVideo} from "@modules/LessonMainViewModule/components/UploaderVideo/UploaderVideo";
+import {fetchDeleteVideo} from "@store/slices/course/AsyncThunks";
 
 export const LessonMainViewTeacher: FC<{ id: string }> = ({id}) => {
     const lesson = useAppSelector((state) => selectLesson(state, id));
@@ -14,6 +12,10 @@ export const LessonMainViewTeacher: FC<{ id: string }> = ({id}) => {
 
     const formatDate = lesson?.createdAt.slice(8, 10) + '-'
         + lesson?.createdAt.slice(5, 7) + '-' + lesson?.createdAt.slice(0, 4) + '   ' + lesson?.createdAt.slice(11, 13) + ':' + lesson?.createdAt.slice(14, 16)
+
+    const deleteVideo = () => {
+        dispatch(fetchDeleteVideo({id: lesson?.srcVideo, lessondId: lesson?.id}));
+    }
 
     return (
         <div className={styles.container}>
@@ -23,8 +25,11 @@ export const LessonMainViewTeacher: FC<{ id: string }> = ({id}) => {
             <div className={styles.wrapper__video}>
                 {
                     lesson.srcVideo ?
-                        <video className={styles.video} controls={true}
-                                             src={`http://localhost:6789/api/v1/courses/video/${lesson.id}`}/>
+                        <div>
+                            <video className={styles.video} controls={true}
+                                   src={`http://localhost:6789/api/v1/courses/video/${lesson?.srcVideo}`}/>
+                            <button onClick={deleteVideo}>удалить</button>
+                        </div>
                         :
                         <div className={styles.uploader}>
                             <UploaderVideo id={lesson?.id}/>

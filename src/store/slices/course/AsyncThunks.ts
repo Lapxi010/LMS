@@ -112,3 +112,19 @@ export const fetchVisitedLesson = createAsyncThunk<any, any, any>(
 		}
 	}
 );
+
+export const fetchDeleteVideo = createAsyncThunk<any, any, any>(
+	'fetchDeleteVideo',
+	async  (id, {rejectWithValue}) => {
+		try {
+			const response = await Api.post(`files/deleteVideo`, id);
+
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+			return id;
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);
