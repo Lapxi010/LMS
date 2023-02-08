@@ -39,7 +39,7 @@ app.use('/api/v1', expressRateLimit);
 app.use('/api/v1', [(req, res, next) => {
     setTimeout(()=> {
         next()
-    }, 1000)
+    }, 1)
 }], router);
 
 

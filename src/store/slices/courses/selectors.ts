@@ -1,12 +1,12 @@
-export const selectCoursesIsLoaded = state => state.courses.data !== null;
-export const selectStatus = (state) => state.courses.statusCourses;
-export const selectStatusCreateCourse = (state) => state.courses.statusCreateCourses;
+export const selectCoursesIsLoaded = state => state.courses?.data !== null;
+export const selectStatus = (state) => state.courses?.statusCourses;
+export const selectStatusCreateCourse = (state) => state.courses?.statusCreateCourses;
 export const selectCourses = (state, stateSearch) => {
     if (stateSearch === 'all') {
-        return state.courses.data;
+        return state.courses?.data;
     } else {
-        let members = state.auth.data.member
-        let courses = state.courses.data
+        let members = state.auth?.data?.member
+        let courses = state.courses?.data
         let res = []
         for (let i of members) {
             for (let j of courses) {
@@ -21,7 +21,7 @@ export const selectCourses = (state, stateSearch) => {
 
 export const selectCourseForTeacher = (state) => {
     let id = state.auth?.data?.id
-    let courses = state.courses.data
+    let courses = state.courses?.data
 
     if(id === undefined) {
         return []
