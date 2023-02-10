@@ -3,7 +3,7 @@ import styles from "./ViewedBlock.module.sass";
 import React, {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
 import {selectMemberForCourse, selectViewForLesson} from "@store/slices/course";
-import {fetchVisitedLesson} from "@store/slices/course/AsyncThunks";
+import {fetchVisitedLesson} from "@store/slices/auth/AsyncThunks";
 
 export const ViewedBlock: FC<{ lesson: any, id: string }> = ({lesson, id}) => {
     const dispatch = useAppDispatch();

@@ -1,14 +1,14 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import styles from './CourseMainView.module.sass';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Button} from '@components/Button/Button';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectStatus, selectThisCourse} from '@store/slices/course';
 import {CourseInformation} from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformation";
-import {UploadOrViewImageChildren} from "@modules/CourseMainViewModule/components/UploadOrViewImage/UploadOrViewImageChildren";
-import {selectEnterCourse, selectRole} from "@store/slices/auth";
+import {selectEnterCourse} from "@store/slices/auth";
 import {enterCourse} from "@store/slices/auth/AsyncThunks";
+import {ListLessons} from "@modules/CourseMainViewModule/components/ListLessons/ListLessons";
 
 export const CourseMainViewChildren: FC = () => {
     const navigate = useNavigate();
@@ -32,9 +32,8 @@ export const CourseMainViewChildren: FC = () => {
                         {
                             course &&
                             <>
-                                <CourseInformation title={course.title} description={course.description}
+                                <CourseInformation id={course.id} titleImg={course.titleImg} title={course.title} description={course.description}
                                                    dataCreate={course.createdAt}/>
-                                <UploadOrViewImageChildren id={course.id} src={course.titleImg}/>
                             </>
                         }
                         {
@@ -42,12 +41,7 @@ export const CourseMainViewChildren: FC = () => {
                                     <Button onClick={enterCourseA}>Вступить</Button>
                                 </div> :
                                 (
-                                    course && <div>
-                                        {course.lessons.map(v => <div key={v.id}>
-                                            <NavLink to={`../../lesson/${v.id}`}>
-                                                {v.title}
-                                            </NavLink>
-                                        </div>)}</div>
+                                    course && <ListLessons lessons={course.lessons}/>
                                 )
                         }
                     </>

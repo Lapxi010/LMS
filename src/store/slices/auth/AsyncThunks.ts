@@ -98,3 +98,19 @@ export const enterCourse = createAsyncThunk<any, any, any>(
 			return rejectWithValue(e.message);
 		}
 	});
+
+export const fetchVisitedLesson = createAsyncThunk<any, any, any>(
+	'fetchVisitedLesson',
+	async  (data, {rejectWithValue}) => {
+		try {
+			const response = await Api.post(`courses/visitedLesson`, data);
+
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+			return {memberId: data.memberId, viewed: response.data.viewed};
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);

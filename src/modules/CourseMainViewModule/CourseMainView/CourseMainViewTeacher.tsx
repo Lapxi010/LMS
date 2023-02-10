@@ -1,17 +1,14 @@
 import React, {FC, useState} from 'react';
 import styles from './CourseMainView.module.sass';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
-import {NavLink, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Button} from '@components/Button/Button';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectStatus, selectThisCourse} from '@store/slices/course';
 import {CourseInformation} from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformation";
-import {UploadOrViewImageChildren} from "@modules/CourseMainViewModule/components/UploadOrViewImage/UploadOrViewImageChildren";
 import {selectEnterCourse, selectRole} from "@store/slices/auth";
 import {enterCourse} from "@store/slices/auth/AsyncThunks";
-import {
-    UploadOrViewImageTeacher
-} from "@modules/CourseMainViewModule/components/UploadOrViewImage/UploadOrViewImageTeacher";
+import {ListLessons} from "@modules/CourseMainViewModule/components/ListLessons/ListLessons";
 
 export const CourseMainViewTeacher: FC = () => {
     const navigate = useNavigate();
@@ -33,25 +30,15 @@ export const CourseMainViewTeacher: FC = () => {
                     :
                     <>
                         {
-                            course &&
-                            <>
-                                <CourseInformation title={course.title} description={course.description}
+                            course && <CourseInformation id={course.id} titleImg={course.titleImg} title={course.title}
+                                                   description={course.description}
                                                    dataCreate={course.createdAt}/>
-                                <UploadOrViewImageTeacher id={course.id} src={course.titleImg}/>
-                            </>
                         }
                         {
-                            course &&
-                            <div>
-                                    {course.lessons.map(v => <div key={v.id}>
-                                        <NavLink to={`../../lesson/${v.id}`}>
-                                            {v.title}
-                                        </NavLink>
-                                    </div>)
-                                    }
-                            </div>
+                            course && <ListLessons lessons={course.lessons}/>
                         }
-                        <Button onClick={() => navigate(`../../createLesson/${course.id}`)}>Добавить урок</Button>
+                        <Button className={styles.btn} onClick={() => navigate(`../../createLesson/${course.id}`)}>Добавить
+                            урок</Button>
                     </>
             }
         </>

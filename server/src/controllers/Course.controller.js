@@ -195,7 +195,7 @@ export const visitedLesson = async (req, res) => {
         })
 
         res.status(200).json({
-          message: 'ok'
+          viewed
         })
 
     } catch (e) {

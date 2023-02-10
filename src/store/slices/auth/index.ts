@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {fetchRegister, fetchLogin, fetchRefresh, fetchLogout, updateUser, enterCourse} from './AsyncThunks';
+import {fetchVisitedLesson} from "./AsyncThunks";
 
 interface IauthState {
     data: any;
@@ -80,6 +81,13 @@ const authSlice = createSlice({
 			.addCase(updateUser.fulfilled, (state, action) => {
 				state.status = 'success';
 				state.data = {...state.data, fio: action.payload.fio};
+			})
+			.addCase(fetchVisitedLesson.pending, (state) => {
+				state.status = 'loading';
+			})
+			.addCase(fetchVisitedLesson.fulfilled, (state,action: PayloadAction<any>) => {
+				state.status = 'success';
+				state.data.member.filter((v) => v.id === action.payload.memberId)[0].viewed.push(action.payload.viewed);
 			})
 			.addMatcher(isError, (state, action:PayloadAction<string>) => {
 				state.error = action.payload;

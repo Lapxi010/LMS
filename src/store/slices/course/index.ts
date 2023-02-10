@@ -4,7 +4,7 @@ import {
     fetchCreateComment,
     fetchCreateLesson,
     fetchDeleteComment, fetchDeleteVideo, fetchDocDownload,
-    fetchGetComments, fetchVisitedLesson
+    fetchGetComments
 } from '@store/slices/course/AsyncThunks';
 
 interface ICourseState {
@@ -84,17 +84,11 @@ const courseSlice = createSlice({
             .addCase(fetchDocDownload.fulfilled, (state) => {
                 state.status = 'success';
             })
-            .addCase(fetchVisitedLesson.pending, (state) => {
-                state.status = 'loading';
-            })
-            .addCase(fetchVisitedLesson.fulfilled, (state) => {
-                state.status = 'success';
-            })
             .addCase(fetchDeleteVideo.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(fetchDeleteVideo.fulfilled, (state, action: PayloadAction<any>) => {
-                const {id, lessondId} = action.payload;
+                const {lessondId} = action.payload;
                 state.status = 'success';
                 const course = state.data;
                 const lesson = course.lessons.filter(v => v.id === lessondId)[0];

@@ -1,20 +1,29 @@
 import React, {FC} from 'react';
 import styles from './CourseInformation.module.sass';
+import {
+    UploadOrViewImageTeacher
+} from "@modules/CourseMainViewModule/components/UploadOrViewImage/UploadOrViewImageTeacher";
 
-export const CourseInformation: FC<{ title: string, description: string, dataCreate: string }> = ({
+export const CourseInformation: FC<{ id: string, titleImg: string, title: string, description: string, dataCreate: string }> = ({
                                                                                                       title,
                                                                                                       description,
-                                                                                                      dataCreate
+                                                                                                      dataCreate,
+    id, titleImg
                                                                                                   }) => {
     const date = dataCreate.slice(8, 10) + '-' + dataCreate.slice(5, 7) + '-' + dataCreate.slice(0, 4)
 
     return (
         <div className={styles.root}>
-            <h1 className={styles.title}>{title}</h1>
-            <div className={styles.wrapper__text}>
-                <p>{description}</p>
+            <div className={styles.left}>
+                <h1 className={styles.title}>{title}</h1>
+                <div className={styles.wrapper__text}>
+                    <p>{description}</p>
+                </div>
+                <p className={styles.date}>{date}</p>
             </div>
-            <p className={styles.date}>{date}</p>
+            <div className={styles.right}>
+                <UploadOrViewImageTeacher id={id} src={titleImg}/>
+            </div>
         </div>
     )
 }
