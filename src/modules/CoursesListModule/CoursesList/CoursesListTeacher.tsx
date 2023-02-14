@@ -3,7 +3,7 @@ import styles from './CoursesList.module.sass';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectCourseForTeacher, selectCourses, selectStatus} from '@store/slices/courses/selectors';
 import {fetchCourses} from '@store/slices/courses/AsyncThunks';
-import {CoursesItem} from '@modules/CoursesListModule/components/CoursesItem/CoursesItem';
+import {CoursesItemTeacher} from '@modules/CoursesListModule/components/CoursesItem/CoursesItemTeacher';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 export const CoursesListTeacher: FC = () => {
     const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ export const CoursesListTeacher: FC = () => {
                     <div className={styles.wrapper}>
                         {courses?.length === 0 ? <div className={styles.wrapper__empty}>Ничего не найдено</div> :
                             courses?.map(item =>
-                                <CoursesItem
+                                <CoursesItemTeacher
                                     key={item.id}
                                     id={item.id}
                                     title={item.title}

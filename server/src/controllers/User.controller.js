@@ -270,6 +270,9 @@ export const enterCourse = async (req, res) => {
         data: {
             userId: id,
             courseId: idCourse
+        },
+        include: {
+            viewed: true
         }
     });
 

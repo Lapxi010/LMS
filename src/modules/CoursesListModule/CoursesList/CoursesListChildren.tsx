@@ -3,9 +3,10 @@ import styles from './CoursesList.module.sass';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectCourses, selectStatus} from '@store/slices/courses/selectors';
 import {fetchCourses} from '@store/slices/courses/AsyncThunks';
-import {CoursesItem} from '@modules/CoursesListModule/components/CoursesItem/CoursesItem';
+import {CoursesItemTeacher} from '@modules/CoursesListModule/components/CoursesItem/CoursesItemTeacher';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 import {Button} from "@components/Button/Button";
+import {CoursesItemChildren} from "@modules/CoursesListModule/components/CoursesItem/CoursesItemChildren";
 
 export const CoursesListChildren: FC = () => {
     const dispatch = useAppDispatch();
@@ -46,12 +47,14 @@ export const CoursesListChildren: FC = () => {
                     <div className={styles.wrapper}>
                         {coursesList?.length === 0 ? <div className={styles.wrapper__empty}>Ничего не найдено</div> :
                             coursesList?.map(item =>
-                                <CoursesItem
+                                <CoursesItemChildren
                                     key={item.id}
                                     id={item.id}
                                     title={item.title}
                                     titleImg={item.titleImg}
                                     shortDesc={item.shortDesc}
+                                    fioTeacher={item.author.fio}
+                                    date={item.createdAt}
                                 />)}
                     </div>
                 </div>

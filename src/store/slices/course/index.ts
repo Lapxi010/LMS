@@ -3,7 +3,7 @@ import {
     fetchCourse,
     fetchCreateComment,
     fetchCreateLesson,
-    fetchDeleteComment, fetchDeleteVideo, fetchDocDownload,
+    fetchDeleteComment, fetchDeleteImage, fetchDeleteVideo, fetchDocDownload,
     fetchGetComments
 } from '@store/slices/course/AsyncThunks';
 
@@ -39,6 +39,10 @@ const courseSlice = createSlice({
                 ...lesson,
                 srcVideo: srcVideo
             }]
+        },
+        addImage: (state, action: PayloadAction<any>) => {
+            const {srcImage} = action.payload;
+            state.data = {...state.data, titleImg: srcImage};
         }
     },
     extraReducers: (builder) => {
@@ -96,6 +100,13 @@ const courseSlice = createSlice({
                     ...lesson,
                     srcVideo: null
                 }]
+            })
+            .addCase(fetchDeleteImage.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchDeleteImage.fulfilled, (state, action: PayloadAction<any>) => {
+                state.status = 'success';
+                state.data = {...state.data, titleImg: null};
             });
     }
 });
@@ -130,6 +141,6 @@ export const selectViewForLesson = (state, id, id2) => {
 
 export const selectStatusComment = (state) => state.course.statusComment;
 
-export const {addVideo} = courseSlice.actions;
+export const {addVideo, addImage} = courseSlice.actions;
 
 export default courseSlice.reducer;

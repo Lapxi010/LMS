@@ -35,7 +35,7 @@ export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
                 lesson.srcVideo &&
                 <div className={styles.wrapper__video}>
                     <video className={styles.video} controls={true}
-                           src={`http://localhost:6789/api/v1/courses/video/${lesson.id}`}/>
+                           src={`http://localhost:6789/api/v1/courses/video/${lesson?.srcVideo}`}/>
                 </div>
             }
             <div className={styles.description}>

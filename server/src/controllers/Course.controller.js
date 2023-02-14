@@ -1,4 +1,5 @@
 import {PrismaClient} from '@prisma/client';
+
 const db = new PrismaClient();
 export const createCourse = async (req, res) => {
     try {
@@ -39,12 +40,16 @@ export const getAllCourses = async (req, res) => {
         let courses;
         if (user.role === 'teacher') {
             courses = await db.course.findMany({
-                where:{
+                where: {
                     userId: req.userId
                 }
             })
-        }else {
-            courses = await db.course.findMany()
+        } else {
+            courses = await db.course.findMany({
+                include: {
+                    author: true
+                }
+            })
         }
         res.status(200).json({
             courses
@@ -195,7 +200,7 @@ export const visitedLesson = async (req, res) => {
         })
 
         res.status(200).json({
-          viewed
+            viewed
         })
 
     } catch (e) {

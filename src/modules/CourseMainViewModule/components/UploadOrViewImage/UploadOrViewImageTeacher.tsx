@@ -1,42 +1,33 @@
 import React, {FC} from "react";
-import axios from "axios";
+import {UploaderImage} from "@modules/CourseMainViewModule/components/UploaderImage/UploaderImage";
+import {fetchDeleteImage} from "@store/slices/course/AsyncThunks";
+import {useAppDispatch} from "@hooks/HookRedux";
+import styles from "./UploadOrViewImage.module.sass";
+import {Button} from "@components/Button/Button";
 
 export const UploadOrViewImageTeacher: FC<{ id: string, src: string }> = ({id, src}) => {
-    const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-    const [uploaded, setUploaded] = React.useState();
-    const handleFileInput = async () => {
-        if (!selectedFile) {
-            alert('Please select a file');
-            return;
-        }
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        const {data} = await axios.post(`http://localhost:6789/api/v1/files/uploadImage/${id}`, formData, {
-            onUploadProgress: (progressEvent) => {
-                console.log('Upload Progress: ' + Math.round(progressEvent.loaded / progressEvent.total * 100) + '%');
-            }
-        });
-        setUploaded(data);
-    };
-    const handleUploadFileInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedFile(event.target.files[0]);
-    };
+    const dispatch = useAppDispatch();
+    const deleteVideo = () => {
+        dispatch(fetchDeleteImage({id: id, titleImg: src}));
+    }
 
     return (
         <div>
-            {
-                src != 'null'
-                    ? <img
-                        width={'300px'}
-                        height={'300px'}
-                        src={`http://localhost:6789/uploads/${src}`}
-                        alt="titleImg"/>
-                    :
-                    <div>
-                        <input type="file" onChange={handleUploadFileInput}/>
-                        <button onClick={handleFileInput}>Upload now!</button>
-                    </div>
 
+            {
+                src != null
+                    ? <div>
+                        <div className={styles.wrapper__btn}>
+                            <Button onClick={deleteVideo} className={styles.btn}>Удалить</Button>
+                        </div>
+                        <img
+                            width={'300px'}
+                            height={'300px'}
+                            src={`http://localhost:6789/uploads/${src}`}
+                            alt="titleImg"/>
+                    </div>
+                    :
+                    <UploaderImage id={id}/>
             }
         </div>
     )

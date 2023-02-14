@@ -5,10 +5,12 @@ import {useNavigate} from 'react-router-dom';
 import {Button} from '@components/Button/Button';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectStatus, selectThisCourse} from '@store/slices/course';
-import {CourseInformation} from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformation";
 import {selectEnterCourse} from "@store/slices/auth";
 import {enterCourse} from "@store/slices/auth/AsyncThunks";
 import {ListLessons} from "@modules/CourseMainViewModule/components/ListLessons/ListLessons";
+import {
+    CourseInformationChildren
+} from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformationChildren";
 
 export const CourseMainViewChildren: FC = () => {
     const navigate = useNavigate();
@@ -32,8 +34,8 @@ export const CourseMainViewChildren: FC = () => {
                         {
                             course &&
                             <>
-                                <CourseInformation id={course.id} titleImg={course.titleImg} title={course.title} description={course.description}
-                                                   dataCreate={course.createdAt}/>
+                                <CourseInformationChildren id={course.id} titleImg={course.titleImg} title={course.title} description={course.description}
+                                                          dataCreate={course.createdAt}/>
                             </>
                         }
                         {

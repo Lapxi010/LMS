@@ -114,3 +114,19 @@ export const fetchDeleteVideo = createAsyncThunk<any, any, any>(
 		}
 	}
 );
+
+export const fetchDeleteImage = createAsyncThunk<any, any, any>(
+	'fetchDeleteImage',
+	async  (id, {rejectWithValue}) => {
+		try {
+			const response = await Api.post(`files/deleteImage`, id);
+
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+			return id;
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);

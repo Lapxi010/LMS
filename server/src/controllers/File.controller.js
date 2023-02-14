@@ -10,7 +10,20 @@ export const uploadVideo = async (req, res) => {
     }
     const file = req.files.file;
     if (!file) return res.json({msg: 'No file uploaded'});
-    const newFileName = `${id}` + file.name;
+
+    let one = file.name.split('')
+    let two = one.reverse()
+    let three = ''
+    for(let i = 0; i < two.length; i++){
+        if(two[i] === '.'){
+            three = two.splice(0, i)
+            break
+        }
+    }
+    three = three.reverse()
+    three = three.join('')
+
+    const newFileName = `${id}.` + three;
 
     const lesson = await db.lesson.update({
         where: {
@@ -39,7 +52,18 @@ export const uploadImage = async (req, res) => {
     }
     const file = req.files.file;
     if (!file) return res.json({msg: 'No file uploaded'});
-    const newFileName = `TitleCourse${id}` + file.name;
+    let one = file.name.split('')
+    let two = one.reverse()
+    let three = ''
+    for(let i = 0; i < two.length; i++){
+        if(two[i] === '.'){
+            three = two.splice(0, i)
+            break
+        }
+    }
+    three = three.reverse()
+    three = three.join('')
+    const newFileName = `TitleCourse${id}.` + three;
 
     const course = await db.course.update({
         where: {
@@ -72,7 +96,41 @@ export const deleteVideo = async (req, res) => {
                 srcVideo: null
             }
         })
+
+
         await fs.unlink(`${__dirname}/../source/${id}`, (err) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Не удалось сделать запрос'
+                });
+            }
+        })
+
+        res.status(200).json({
+            message: 'Успешно удалено'
+        })
+    } catch (e) {
+        res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
+
+export const deleteImage = async (req, res) => {
+    try {
+        const {id, titleImg} = req.body
+
+        const course = await db.course.update({
+            where: {
+                id: id
+            },
+            data: {
+                titleImg: null
+            }
+        })
+
+
+        await fs.unlink(`${__dirname}/../static/${titleImg}`, (err) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Не удалось сделать запрос'
