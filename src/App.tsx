@@ -14,6 +14,7 @@ import {LessonPage} from '@pages/CoursePages/LessonPage/LessonPage';
 import './App.module.sass';
 import {CreateLessonPage} from '@pages/CoursePages/CreateLessonPage/CreateLessonPage';
 import {AuthPage} from '@pages/AuthPage/AuthPage/AuthPage';
+import {CreateTestPage} from "@pages/CoursePages";
 
 export const App: FC = () => {
 	return (
@@ -24,6 +25,7 @@ export const App: FC = () => {
 					<Route path='courses' element={<CoursesPage/>}/>
 					<Route path='course/:id' element={<CoursePage/>}/>
 					<Route path='createLesson/:id' element={<CreateLessonPage/>}/>
+					<Route path='createTest/:id' element={<CreateTestPage/>}/>
 					<Route path='lesson/:id' element={<LessonPage/>}/>
 					<Route path='chat' element={<ChatPage/>}/>
 					<Route path='settings' element={<SettingsPage/>}/>

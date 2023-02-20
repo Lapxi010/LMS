@@ -5,6 +5,21 @@ import {v4} from 'uuid';
 import {sendMail, generateToken, saveToken, removeToken} from '../services/User.service';
 const db = new PrismaClient();
 
+
+export const getUser = async (req, res) => {
+    try {
+        const result = await db.user.findUnique({
+            where: {
+                id: req.params.userId
+            }
+        })
+        res.status(200).json(result)
+    } catch (e) {
+        return res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
 export const register = async (req, res) => {
     try {
         const {fio, email, password, sex, role, phone} = req.body;

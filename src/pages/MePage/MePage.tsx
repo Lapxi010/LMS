@@ -4,6 +4,7 @@ import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectActivatedUrl, selectUser} from '@store/slices/auth';
 import {updateUser} from '@store/slices/auth/AsyncThunks';
 import {BlockInput} from '@pages/MePage/BlockInput/BlockInput';
+import {Header} from "@modules/Header/Header";
 
 export const MePage: FC = () => {
 	const user = useAppSelector(selectUser);
@@ -21,6 +22,7 @@ export const MePage: FC = () => {
 
 	return (
 		<div className={styles.root}>
+			<Header>Профиль</Header>
 			<div>
 				<BlockInput value={fio} setValue={setFio} saveChange={saveChange}/>
 				<h3>{user?.role}</h3>

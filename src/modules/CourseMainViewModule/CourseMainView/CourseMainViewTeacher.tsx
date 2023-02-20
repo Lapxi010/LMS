@@ -39,6 +39,7 @@ export const CourseMainViewTeacher: FC = () => {
                         }
                         <Button className={styles.btn} onClick={() => navigate(`../../createLesson/${course.id}`)}>Добавить
                             урок</Button>
+                        <Button className={styles.btn} onClick={() => navigate(`../../createTest/${course.id}`)}>Добавить тест</Button>
                     </>
             }
         </>

@@ -8,23 +8,48 @@ generator client {
 }
 
 model User {
-  id             String    @id @default(uuid())
-  email          String    @unique
-  isActivated    Boolean   @default(false)
-  activationLink String?   @unique
-  fio            String    @unique
+  id             String       @id @default(uuid())
+  email          String       @unique
+  isActivated    Boolean      @default(false)
+  activationLink String?      @unique
+  fio            String       @unique
   password       String
-  phone          String    @unique
+  phone          String       @unique
   role           String
   sex            String
   TitleImg       String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
   Token          Token[]
   Course         Course[]
   Lesson         Lesson[]
   Comment        Comment[]
   Member         Member[]
+  MemberChat     MemberChat[]
+}
+
+model MemberChat {
+  id     String  @id @default(uuid())
+  userId String
+  user   User    @relation(fields: [userId], references: [id])
+  Chat   Chat?   @relation(fields: [chatId], references: [id])
+  chatId String?
+}
+
+model Chat {
+  id        String       @id @default(uuid())
+  users     MemberChat[]
+  createdAt DateTime     @default(now())
+  Message   Message[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  senderId  String
+  text      String
+  createdAt DateTime @default(now())
 }
 
 model Token {
