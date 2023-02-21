@@ -20,6 +20,27 @@ export const getUser = async (req, res) => {
         });
     }
 }
+
+export const getUsers = async (req, res) => {
+    try {
+        const {users} = req.body
+        const result = []
+        for (let user of users) {
+            let tmp = await db.user.findUnique({
+                where: {
+                    id: user.userId
+                }
+            })
+            result.push(tmp)
+        }
+        res.status(200).json(result)
+    } catch (e) {
+        return res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
+
 export const register = async (req, res) => {
     try {
         const {fio, email, password, sex, role, phone} = req.body;

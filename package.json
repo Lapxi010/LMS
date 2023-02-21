@@ -50,6 +50,7 @@
     "eslint-plugin-react": "^7.31.11",
     "html-webpack-plugin": "^5.5.0",
     "husky": "^8.0.2",
+    "javascript-time-ago": "^2.5.9",
     "react-hook-form": "^7.41.3",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",

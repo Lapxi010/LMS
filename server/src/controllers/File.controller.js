@@ -83,6 +83,44 @@ export const uploadImage = async (req, res) => {
     });
 }
 
+export const uploadImageUser = async (req, res) => {
+    const {id} = req.params
+
+    if (req.files === null) {
+        return res.status(400).json({msg: 'No file uploaded'});
+    }
+    const file = req.files.file;
+    if (!file) return res.json({msg: 'No file uploaded'});
+    let one = file.name.split('')
+    let two = one.reverse()
+    let three = ''
+    for(let i = 0; i < two.length; i++){
+        if(two[i] === '.'){
+            three = two.splice(0, i)
+            break
+        }
+    }
+    three = three.reverse()
+    three = three.join('')
+    const newFileName = `TitleImg${id}.` + three;
+
+    const course = await db.user.update({
+        where: {
+            id
+        },
+        data: {
+            TitleImg: newFileName
+        }
+    })
+
+    file.mv(`${__dirname}/../static/${newFileName}`, err => {
+        if (err) {
+            console.error(err);
+            return res.status(500);
+        }
+        res.json({fileName: newFileName, filePath: `/source/${newFileName}`});
+    });
+}
 
 export const deleteVideo = async (req, res) => {
     try {

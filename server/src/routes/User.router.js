@@ -1,6 +1,16 @@
 import express from 'express';
 const router = express.Router();
-import {register, login, activate, logout, refresh, update, enterCourse, getUser} from '../controllers/User.controller.js';
+import {
+    register,
+    login,
+    activate,
+    logout,
+    refresh,
+    update,
+    enterCourse,
+    getUser,
+    getUsers
+} from '../controllers/User.controller.js';
 import authMiddleware from '../middlewares/Auth.middleware.js';
 
 router.post('/register', register);
@@ -9,6 +19,7 @@ router.post('/logout', logout);
 router.get('/activate/:link', activate);
 router.get('/refresh', refresh);
 router.get('/user/:userId', getUser)
+router.post('/getUsers', getUsers)
 router.post('/updateUser', authMiddleware, update)
 router.post('/enterCourse', authMiddleware, enterCourse)
 export default router;

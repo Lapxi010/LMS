@@ -1,10 +1,20 @@
 import express from 'express';
 const router = express.Router();
-import {getImage, uploadVideo, uploadImage, uploadDoc, docDownload, deleteVideo, deleteImage} from '../controllers/File.controller'
+import {
+    getImage,
+    uploadVideo,
+    uploadImage,
+    uploadDoc,
+    docDownload,
+    deleteVideo,
+    deleteImage,
+    uploadImageUser
+} from '../controllers/File.controller'
 
 router.get('/getImage/:id', getImage);
 
 router.post('/uploadVideo/:id', uploadVideo);
+router.post('/uploadImageUser/:id', uploadImageUser)
 router.post('/deleteVideo', deleteVideo);
 router.post('/uploadImage/:id', uploadImage);
 router.post('/deleteImage', deleteImage);

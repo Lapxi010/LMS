@@ -1,0 +1,120 @@
+.root
+  max-height: 85vh
+  width: 95%
+  background: var(--main-left-bg)
+  border-radius: 1rem
+  display: flex
+  flex-direction: column
+
+.header
+  padding: 1rem 1rem 10px 1rem
+  display: flex
+  flex-direction: column
+  &__wrapper
+    display: flex
+    flex-direction: row
+    border-bottom: 0.1px solid #ececec
+    gap: 10px
+  &__text
+    font-size: 24px
+    color: var(--c-text)
+
+.img
+  height: 50px
+  width: 50px
+  border-radius: 100%
+  background: red
+  border: none
+  margin-bottom: 5px
+
+.body
+  display: flex
+  flex-direction: column
+  gap: 0.5rem
+  padding: 1.5rem
+  overflow: scroll
+  height: 100vh
+
+.message
+  background: black
+  color: white
+  padding: 0.7rem
+  border-radius: 1rem 1rem 1rem 0
+  max-width: 50%
+  width: fit-content
+  word-wrap: break-word
+  display: flex
+  flex-direction: column
+  gap: 0.5rem
+
+.message>span:nth-child(2)
+  font-size: 0.7rem
+  color: white
+  align-self: end
+
+.own
+  align-self: flex-end
+  border-radius: 1rem 1rem 0 1rem
+  background: linear-gradient(98.63deg, #24e4f0 0%, #358ff9 100%)
+
+.sender
+  display: flex
+  flex-direction: row
+  width: 100%
+  padding: 10px 15px
+  gap: 10px
+
+.input
+  height: 100%
+  flex: 1
+  outline: none
+  border: none
+  border-radius: 12px
+  padding: 5px 12px 5px 15px
+  font-size: 16px
+
+.btn
+  padding: 7px 10px
+  border-radius: 12px
+  outline: none
+  border: none
+  color: var(--c-text)
+  background: linear-gradient(98.63deg, #24e4f0 0%, #358ff9 100%)
+  font-size: 16px
+  cursor: pointer
+
+.wrapperEmpty
+  width: 100%
+  display: flex
+  justify-content: center
+  &__text
+    font-size: 24px
+    color: var(--c-text)
+
+.status
+  display: flex
+  flex-direction: row
+  font-size: 12px
+  align-items: center
+
+.online
+  width: 10px
+  height: 10px
+  border-radius: 100%
+  border: none
+  background: green
+  margin-right: 5px
+
+.offline
+  width: 10px
+  height: 10px
+  border-radius: 100%
+  border: none
+  background: grey
+  margin-right: 5px
+
+.description
+  display: flex
+  flex-direction: column
+  gap: 5px
+  color: var(--c-text)
