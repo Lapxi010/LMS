@@ -5,6 +5,7 @@
   border-radius: 1rem
   display: flex
   flex-direction: column
+  margin-right: 10px
 
 .header
   padding: 1rem 1rem 10px 1rem
@@ -118,3 +119,21 @@
   flex-direction: column
   gap: 5px
   color: var(--c-text)
+
+.icon
+  width: 30px
+  height: 30px
+
+.btnEmoji
+  outline: none
+  border: none
+  background: transparent
+  cursor: pointer
+
+.container
+  position: relative
+  &__emoji
+    position: absolute
+    bottom: 30px
+    right: -110px
+    transform: translateY(-30px)
