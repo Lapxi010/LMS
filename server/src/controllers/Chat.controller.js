@@ -20,8 +20,15 @@ export const createChat = async (req, res) => {
             }
         })
 
-
-        res.status(200).json(chat)
+        const chatRes = await db.chat.findUnique({
+            where: {
+                id: chat.id
+            },
+            include: {
+                users: true
+            }
+        })
+        res.status(200).json(chatRes)
     }catch (e) {
 
         return res.status(500).json({

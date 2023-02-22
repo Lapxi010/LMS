@@ -9,7 +9,7 @@ import {
     update,
     enterCourse,
     getUser,
-    getUsers
+    getUsers, getAllUsers
 } from '../controllers/User.controller.js';
 import authMiddleware from '../middlewares/Auth.middleware.js';
 
@@ -19,6 +19,7 @@ router.post('/logout', logout);
 router.get('/activate/:link', activate);
 router.get('/refresh', refresh);
 router.get('/user/:userId', getUser)
+router.get('/getAllUsers', getAllUsers)
 router.post('/getUsers', getUsers)
 router.post('/updateUser', authMiddleware, update)
 router.post('/enterCourse', authMiddleware, enterCourse)

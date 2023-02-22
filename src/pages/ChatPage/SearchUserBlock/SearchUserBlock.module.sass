@@ -1,0 +1,89 @@
+.root
+  position: relative
+
+.wrapper_input
+  width: 99%
+  height: 3rem
+  border-radius: 1rem
+  margin-top: 10px
+  position: relative
+
+.searchIcon
+  position: absolute
+  width: 20px
+  height: 3rem
+  display: flex
+  justify-content: center
+  align-items: center
+  margin-left: 15px
+
+.input
+  width: 100%
+  padding: 15px 20px 15px 45px
+  height: 100%
+  border-radius: 1rem
+  color: var(--c-text)
+  font-size: 1rem
+  background: var(--main-left-bg)
+  outline: none
+  border: none
+
+.container
+  position: absolute
+  z-index: 1
+  top: 3.8em
+  left: 1em
+  flex-direction: column
+  flex-wrap: wrap
+  justify-content: flex-start
+  width: calc(100% - 2em)
+  gap: 1em
+  padding: 2em 1em
+  border-radius: 1em
+  background: rgba(255, 255, 255, 0.2)
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+  backdrop-filter: blur(8px)
+  -webkit-backdrop-filter: blur(8px)
+  border: 1px solid rgba(255, 255, 255, 0.29)
+  display: none
+  max-height: 500px
+  overflow: scroll
+  &_empty
+    position: absolute
+    z-index: 1
+    top: 3.8em
+    left: 1em
+    align-items: center
+    flex-direction: column
+    flex-wrap: wrap
+    justify-content: center
+    color: var(--c-text)
+    width: calc(100% - 2em)
+    gap: 1em
+    padding: 2em 1em
+    border-radius: 1em
+    background: rgba(255, 255, 255, 0.2)
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+    backdrop-filter: blur(8px)
+    -webkit-backdrop-filter: blur(8px)
+    border: 1px solid rgba(255, 255, 255, 0.29)
+    display: none
+    max-height: 500px
+    overflow: scroll
+
+.container_visible
+  display: flex
+  animation: appear 500ms ease
+
+.item
+  cursor: pointer
+  font-size: 16px
+
+@keyframes appear
+  0%
+    transform: translateY(20%)
+    opacity: 0
+  100%
+    transform: translateY(0)
+    opacity: 1
+

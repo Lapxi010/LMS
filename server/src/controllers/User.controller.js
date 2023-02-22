@@ -21,6 +21,18 @@ export const getUser = async (req, res) => {
     }
 }
 
+export const getAllUsers = async (req, res) => {
+    try {
+        const result = await db.user.findMany()
+        res.status(200).json(result)
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
+
 export const getUsers = async (req, res) => {
     try {
         const {users} = req.body
@@ -97,7 +109,8 @@ export const register = async (req, res) => {
                 sex: user.sex,
                 role: user.role,
                 isActivated: user.isActivated,
-                member: user.Member
+                member: user.Member,
+                TitleImg: user.TitleImg
             },
             accessToken,
             refreshToken
@@ -154,7 +167,8 @@ export const login = async (req, res) => {
                 sex: user.sex,
                 role: user.role,
                 isActivated: user.isActivated,
-                member: user.Member
+                member: user.Member,
+                TitleImg: user.TitleImg
             },
             accessToken,
             refreshToken
@@ -244,7 +258,8 @@ export const refresh = async (req, res) => {
                 sex: user.sex,
                 role: user.role,
                 isActivated: user.isActivated,
-                member: user.Member
+                member: user.Member,
+                TitleImg: user.TitleImg
             },
             accessToken,
             refreshToken

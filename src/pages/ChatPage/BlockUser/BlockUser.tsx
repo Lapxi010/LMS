@@ -21,7 +21,13 @@ export const BlockUser: FC<{currentUser: any, online: any, data: any, cb: any}> 
 
     return (
         <div className={styles.root} onClick={cb}>
-            <div className={styles.img}></div>
+            {
+                userData?.TitleImg != null
+                    ?
+                <img className={styles.logo} src={`http://localhost:6789/uploads/${userData?.TitleImg}`} alt="title"/>
+                    :
+                <div className={styles.img}></div>
+            }
             <div className={styles.description}>
                 <span className={styles.name}>{userData?.fio}</span>
                 <span className={styles.status}>

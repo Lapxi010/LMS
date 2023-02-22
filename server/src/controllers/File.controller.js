@@ -186,6 +186,38 @@ export const deleteImage = async (req, res) => {
     }
 }
 
+export const deleteTitleImage = async (req, res) => {
+    try {
+        const {id, titleImg} = req.body
+
+        const course = await db.user.update({
+            where: {
+                id: id
+            },
+            data: {
+                TitleImg: null
+            }
+        })
+
+
+        await fs.unlink(`${__dirname}/../static/${titleImg}`, (err) => {
+            if (err) {
+                return res.status(500).json({
+                    message: 'Не удалось сделать запрос'
+                });
+            }
+        })
+
+        res.status(200).json({
+            message: 'Успешно удалено'
+        })
+    } catch (e) {
+        res.status(500).json({
+            message: 'Не удалось сделать запрос'
+        });
+    }
+}
+
 export const uploadDoc = async (req, res) => {
     const {id} = req.params
 

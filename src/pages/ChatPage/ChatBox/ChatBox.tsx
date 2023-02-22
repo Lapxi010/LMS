@@ -10,7 +10,10 @@ TimeAgo.addDefaultLocale(ru)
 
 const smileIcon = () => {
     return (
-        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48"><path fill={'var(--c-text)'} d="M626 523q22.5 0 38.25-15.75T680 469q0-22.5-15.75-38.25T626 415q-22.5 0-38.25 15.75T572 469q0 22.5 15.75 38.25T626 523Zm-292 0q22.5 0 38.25-15.75T388 469q0-22.5-15.75-38.25T334 415q-22.5 0-38.25 15.75T280 469q0 22.5 15.75 38.25T334 523Zm146 272q66 0 121.5-35.5T682 663H278q26 61 81 96.5T480 795Zm0 181q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Zm0-400Zm0 340q142.375 0 241.188-98.812Q820 718.375 820 576t-98.812-241.188Q622.375 236 480 236t-241.188 98.812Q140 433.625 140 576t98.812 241.188Q337.625 916 480 916Z"/></svg>
+        <svg className={styles.icon} xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 96 960 960" width="48">
+            <path fill={'var(--c-text)'}
+                  d="M626 523q22.5 0 38.25-15.75T680 469q0-22.5-15.75-38.25T626 415q-22.5 0-38.25 15.75T572 469q0 22.5 15.75 38.25T626 523Zm-292 0q22.5 0 38.25-15.75T388 469q0-22.5-15.75-38.25T334 415q-22.5 0-38.25 15.75T280 469q0 22.5 15.75 38.25T334 523Zm146 272q66 0 121.5-35.5T682 663H278q26 61 81 96.5T480 795Zm0 181q-83 0-156-31.5T197 859q-54-54-85.5-127T80 576q0-83 31.5-156T197 293q54-54 127-85.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 83-31.5 156T763 859q-54 54-127 85.5T480 976Zm0-400Zm0 340q142.375 0 241.188-98.812Q820 718.375 820 576t-98.812-241.188Q622.375 236 480 236t-241.188 98.812Q140 433.625 140 576t98.812 241.188Q337.625 916 480 916Z"/>
+        </svg>
     )
 }
 
@@ -38,7 +41,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
     // Получение пользователь из чата
 
     useEffect(() => {
-        const userId = chat?.users?.find((id) => id !== currentUser);
+        const userId = chat?.users?.find((id) => id.userId !== currentUser);
         const getUserData = async () => {
             try {
                 const {data} = await axios.get(`http://localhost:6789/api/v1/users/user/${userId.userId}`);
@@ -113,7 +116,13 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
                 <div className={styles.root}>
                     <div className={styles.header}>
                         <div className={styles.header__wrapper}>
-                            <div className={styles.img}></div>
+                            {
+                                userData?.TitleImg != null
+                                    ?
+                                    <img className={styles.logo} src={`http://localhost:6789/uploads/${userData?.TitleImg}`} alt="title"/>
+                                    :
+                                    <div className={styles.img}></div>
+                            }
                             <div className={styles.description}>
                                 <p className={styles.header__text}>{userData?.fio}</p>
                                 <span className={styles.status}>
@@ -122,19 +131,31 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
                             </div>
                         </div>
                     </div>
-                    <div className={styles.body}>
-                        {messages.map((message) => (
-                            <div key={message.id} ref={scroll}
-                                 className={
-                                     message.senderId === currentUser
-                                         ? classNames(styles.message, styles.own)
-                                         : styles.message
-                                 }>
-                                <span>{message.text}</span>
-                                <span>{timeAgo.format(Date.parse(message.createdAt))}</span>
-                            </div>
-                        ))}
-                    </div>
+                    {
+                        messages.length === 0
+                            ?
+                            (
+                                <div className={styles.body_empty}>
+                                    <p>Пока сообщений нет!</p>
+                                </div>
+                            )
+                            :
+                            (
+                                <div className={styles.body}>
+                                    {messages.map((message) => (
+                                        <div key={message.id} ref={scroll}
+                                             className={
+                                                 message.senderId === currentUser
+                                                     ? classNames(styles.message, styles.own)
+                                                     : styles.message
+                                             }>
+                                            <span>{message.text}</span>
+                                            <span>{timeAgo.format(Date.parse(message.createdAt))}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            )
+                    }
                     <div className={styles.sender}>
                         <input
                             ref={inputRef}

@@ -7,6 +7,7 @@ import {selectUser} from "@store/slices/auth";
 import axios from "axios";
 import {ChatBox} from "@pages/ChatPage/ChatBox/ChatBox";
 import {BlockUser} from "@pages/ChatPage/BlockUser/BlockUser";
+import {SearchUserBlock} from "@pages/ChatPage/SearchUserBlock/SearchUserBlock";
 
 export const ChatPage: FC = () => {
     const socket: any = useRef();
@@ -61,29 +62,43 @@ export const ChatPage: FC = () => {
     }, []);
 
     const checkOnlineStatus = (chat) => {
-        const chatMember = chat.users.find((member) => member.userId !== user.id);
-        const online = onlineUsers.find((user) => user.id === chatMember.userId);
+        const chatMember = chat?.users?.find((member) => member.userId !== user.id);
+        const online = onlineUsers?.find((user) => user.id === chatMember?.userId);
         return online ? true : false;
     };
 
     return (
         <div className={styles.root}>
             <Header>Чат</Header>
+            <SearchUserBlock chats={chats} userId={user.id} setCurrentChat={setCurrentChat} setChats={setChats}/>
             <div className={styles.chat}>
-                <div className={styles.leftSide}>
-                    {
-                        chats && chats?.map((chat) =>
-                            <BlockUser key={chat.id} cb={() => {
-                                setCurrentChat(chat)
-                            }}
-                                       currentUser={user.id}
-                                       online={checkOnlineStatus(chat)}
-                                       data={chat}/>
+                {
+                    chats.length === 0
+                        ?
+                        (
+                            <div className={styles.leftSide_empty}>
+                                <span>У вас нет чатов</span>
+                            </div>
                         )
-                    }
-                </div>
+                        :
+                        (
+                            <div className={styles.leftSide}>
+                                {
+                                    chats && chats?.map((chat) =>
+                                        <BlockUser key={chat.id} cb={() => {
+                                            setCurrentChat(chat)
+                                        }}
+                                                   currentUser={user.id}
+                                                   online={checkOnlineStatus(chat)}
+                                                   data={chat}/>
+                                    )
+                                }
+                            </div>
+                        )
+                }
                 <div className={styles.rightSide}>
-                    <ChatBox online={checkOnlineStatus} chat={currentChat} currentUser={user.id} setSendMessage={setSendMessage}
+                    <ChatBox online={checkOnlineStatus} chat={currentChat} currentUser={user.id}
+                             setSendMessage={setSendMessage}
                              receivedMessage={receivedMessage}/>
                 </div>
             </div>

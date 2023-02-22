@@ -114,3 +114,19 @@ export const fetchVisitedLesson = createAsyncThunk<any, any, any>(
 		}
 	}
 );
+
+export const fetchDeleteTitleImage = createAsyncThunk<any, any, any>(
+	'fetchDeleteImage',
+	async  (id, {rejectWithValue}) => {
+		try {
+			const response = await Api.post(`files/deleteTitleImage`, id);
+
+			if (!(response.status === 200)) {
+				throw new Error(`Error: ${response.data.message}`);
+			}
+			return id;
+		} catch (e) {
+			return rejectWithValue(e.message);
+		}
+	}
+);
