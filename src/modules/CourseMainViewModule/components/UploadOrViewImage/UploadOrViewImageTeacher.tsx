@@ -4,7 +4,7 @@ import {fetchDeleteImage} from "@store/slices/course/AsyncThunks";
 import {useAppDispatch} from "@hooks/HookRedux";
 import styles from "./UploadOrViewImage.module.sass";
 import {Button} from "@components/Button/Button";
-
+import Api from '@api/index';
 export const UploadOrViewImageTeacher: FC<{ id: string, src: string }> = ({id, src}) => {
     const dispatch = useAppDispatch();
     const deleteVideo = () => {
@@ -23,7 +23,7 @@ export const UploadOrViewImageTeacher: FC<{ id: string, src: string }> = ({id, s
                         <img
                             width={'300px'}
                             height={'300px'}
-                            src={`http://localhost:6789/uploads/${src}`}
+                            src={`${Api.defaults.baseURL}uploads/${src}`}
                             alt="titleImg"/>
                     </div>
                     :

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from "react";
 import styles from './ChatBox.module.sass';
-import axios from "axios";
+import Api from '@api/index';
 import {classNames} from '@utils/classNames.js'
 import TimeAgo from 'javascript-time-ago'
 import ru from 'javascript-time-ago/locale/ru'
@@ -44,7 +44,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
         const userId = chat?.users?.find((id) => id.userId !== currentUser);
         const getUserData = async () => {
             try {
-                const {data} = await axios.get(`http://localhost:6789/api/v1/users/user/${userId.userId}`);
+                const {data} = await Api.get(`users/user/${userId.userId}`);
                 setUserData(data);
             } catch (error) {
                 console.log(error);
@@ -59,7 +59,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const {data} = await axios.get(`http://localhost:6789/api/v1/messages/${chat.id}`);
+                const {data} = await Api.get(`messages/${chat.id}`);
                 setMessages(data);
             } catch (error) {
                 console.log(error);
@@ -89,7 +89,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
         }
         const receiverId: any = chat.users.find((id) => id.userId !== currentUser);
         try {
-            const {data} = await axios.post(`http://localhost:6789/api/v1/messages`, message);
+            const {data} = await Api.post(`messages`, message);
             setSendMessage({...data, receiverId: receiverId.userId})
             setMessages([...messages, data]);
             setNewMessage("");
@@ -122,7 +122,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
                             {
                                 userData?.TitleImg != null
                                     ?
-                                    <img className={styles.logo} src={`http://localhost:6789/uploads/${userData?.TitleImg}`} alt="title"/>
+                                    <img className={styles.logo} src={`${Api.defaults.baseURL}uploads/${userData?.TitleImg}`} alt="title"/>
                                     :
                                     <div className={styles.img}></div>
                             }

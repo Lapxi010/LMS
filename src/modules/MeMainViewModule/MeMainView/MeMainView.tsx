@@ -5,6 +5,7 @@ import {UploaderImage} from "../components/UploaderImage/UploaderImage";
 import {useAppDispatch, useAppSelector} from "@hooks/HookRedux";
 import {selectActivatedUrl, selectUser} from "@store/slices/auth";
 import {fetchDeleteTitleImage} from "@store/slices/auth/AsyncThunks";
+import Api from '@api/index'
 
 export const MeMainView: FC = () => {
     const user = useAppSelector(selectUser);
@@ -34,7 +35,7 @@ export const MeMainView: FC = () => {
                             </div>
                             <img
                                 className={styles.img}
-                                src={`http://localhost:6789/uploads/${user?.TitleImg}`}
+                                src={`${Api.defaults.baseURL}uploads/${user?.TitleImg}`}
                                 alt="titleImg"/>
                         </div>
                         :

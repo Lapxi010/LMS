@@ -3,6 +3,7 @@ import styles from "./VideoBlock.module.sass";
 import {Button} from "@components/Button/Button";
 import {fetchDeleteVideo} from "@store/slices/course/AsyncThunks";
 import {useAppDispatch} from "@hooks/HookRedux";
+import Api from '@api/index';
 
 export const VideoBlock: FC<{ srcVideo: string, id: string }> = ({srcVideo, id}) => {
     const dispatch = useAppDispatch();
@@ -16,7 +17,7 @@ export const VideoBlock: FC<{ srcVideo: string, id: string }> = ({srcVideo, id})
                 <Button onClick={deleteVideo} className={styles.btn}>Удалить</Button>
             </div>
             <video className={styles.video} controls={true}
-                   src={`http://localhost:6789/api/v1/courses/video/${srcVideo}`}/>
+                   src={`${Api.defaults.baseURL}courses/video/${srcVideo}`}/>
         </div>
     )
 }

@@ -11,7 +11,7 @@ import {
 import {CommentInputForm} from "@modules/LessonMainViewModule/components/CommentInputForm/CommentInputForm";
 import {CommentListChildren} from "@modules/LessonMainViewModule/components/CommentList/CommentListChildren";
 import {ViewedBlock} from "@modules/LessonMainViewModule/components/ViewedBlock/ViewedBlock";
-
+import Api from '@api/index'
 
 export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
     const lesson = useAppSelector((state) => selectLesson(state, id));
@@ -35,7 +35,7 @@ export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
                 lesson.srcVideo &&
                 <div className={styles.wrapper__video}>
                     <video className={styles.video} controls={true}
-                           src={`http://localhost:6789/api/v1/courses/video/${lesson?.srcVideo}`}/>
+                           src={`${Api.defaults.baseURL}courses/video/${lesson?.srcVideo}`}/>
                 </div>
             }
             <div className={styles.description}>

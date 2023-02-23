@@ -25,13 +25,13 @@ const cookieOptions = {
 }
 
 const app = express();
-app.use('/uploads', express.static('./src/static'));
+app.use('/api/v1/uploads', express.static('./src/static'));
 app.use(fileUpload({
     createParentPath: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({credentials: true, origin: 'http://localhost:3333'}));
+app.use(cors({credentials: true, origin: process.env.CLIENT_URL}));
 app.use(helmet());
 app.use(cookieParser(process.env.JWT_SECRET, cookieOptions));
 
@@ -47,7 +47,7 @@ app.use('/api/v1', [(req, res, next) => {
 const server = createServer(app)
 
 const io = new Server(server, {
-    cors: "http://localhost:3333",
+    cors: process.env.CLIENT_URL,
     serveClient: false
 })
 

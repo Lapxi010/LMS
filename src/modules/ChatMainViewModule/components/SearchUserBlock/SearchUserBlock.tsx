@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import styles from './SearchUserBlock.module.sass';
 import {classNames} from "@utils/classNames";
-import axios from "axios";
+import Api from '@api/index';
 
 const SearchIcon = () => {
     return <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ export const SearchUserBlock: FC<{userId: string, setCurrentChat: any, setChats:
     useEffect(() => {
         window.addEventListener("click", () => setFocused(false));
         const getAllUsers = async () => {
-            const {data} = await axios.get('http://localhost:6789/api/v1/users/getAllUsers');
+            const {data} = await Api.get('users/getAllUsers');
             setUsers(data)
         }
         getAllUsers()
@@ -45,7 +45,7 @@ export const SearchUserBlock: FC<{userId: string, setCurrentChat: any, setChats:
     const chooseUser = (id) => {
         setFocused(false)
         const createChat = async () => {
-            const {data} = await axios.post('http://localhost:6789/api/v1/chat/', {senderId: userId, receiveId: id})
+            const {data} = await Api.post('chat/', {senderId: userId, receiveId: id})
             setChats((e) => [...e, data])
             setCurrentChat(data)
         }
@@ -83,7 +83,7 @@ export const SearchUserBlock: FC<{userId: string, setCurrentChat: any, setChats:
                                     {
                                         v?.TitleImg != null
                                             ?
-                                            <img className={styles.logo} src={`http://localhost:6789/uploads/${v?.TitleImg}`} alt="title"/>
+                                            <img className={styles.logo} src={`${Api.defaults.baseURL}uploads/${v?.TitleImg}`} alt="title"/>
                                             :
                                             <div className={styles.img}></div>
                                     }

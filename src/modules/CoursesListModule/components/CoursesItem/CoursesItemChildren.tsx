@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import styles from './CoursesItem.module.sass';
 import {useNavigate} from 'react-router-dom';
 import Stub from './Stub.png';
+import Api from "@api/index";
 
 interface ICoursesItem {
     id: string,
@@ -23,14 +24,14 @@ export const CoursesItemChildren: FC<ICoursesItem> = ({id, title, titleImg, shor
         <div className={styles.wrapper} onClick={()=>{navigate(`../course/${id}`);}}>
             <div className={styles.course}>
                 <h2 className={styles.course__title}>{title}</h2>
-                <img className={styles.course__img} src={titleImg ? `http://localhost:6789/uploads/${titleImg}` : Stub} alt="logo_img"/>
+                <img className={styles.course__img} src={titleImg ? `${Api.defaults.baseURL}uploads/${titleImg}` : Stub} alt="logo_img"/>
                 <h3 className={styles.course__title_short}>Короткое описание</h3>
                 <p className={styles.course__description}>{shortDesc}</p>
                 <div className={styles.course__teacher}>
                     {
                         TitleImg != null
                             ?
-                            <img className={styles.logo} src={`http://localhost:6789/uploads/${TitleImg}`} alt="title"/>
+                            <img className={styles.logo} src={`${Api.defaults.baseURL}uploads/${TitleImg}`} alt="title"/>
                             :
                             <div className={styles.img}></div>
                     }

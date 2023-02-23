@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import styles from './UploaderImage.module.sass';
-import axios from "axios";
+import Api from "@api/index";
 import {Button} from "@components/Button/Button";
 import {classNames} from "@utils/classNames";
 import {useAppDispatch} from "@hooks/HookRedux";
@@ -19,13 +19,14 @@ export const UploaderImage: FC<{ id: string }> = ({id}) => {
     const loadVideo = async () => {
         const formData = new FormData();
         formData.append('file', selectedFile);
-        const {data} = await axios.post(`http://localhost:6789/api/v1/files/uploadImage/${id}`, formData, {
+        const {data} = await Api.post(`files/uploadImage/${id}`, formData, {
             onUploadProgress: (progressEvent) => {
                 setProgress(Math.round(progressEvent.loaded / progressEvent.total * 100))
                 if (Math.round(progressEvent.loaded / progressEvent.total * 100) == 100 ){
                     setProgress(0)
                 }
-            }
+            },
+            withCredentials: false,
         });
         setUploaded(data);
         dispatch(addImage({srcImage: data.fileName}));

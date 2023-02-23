@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import Stub from './Stub.png';
-
+import Api from '@api/index';
 export const UploadOrViewImageChildren: FC<{ id: string, src: string }> = ({id, src}) => {
     return (
         <div>
@@ -9,7 +9,7 @@ export const UploadOrViewImageChildren: FC<{ id: string, src: string }> = ({id, 
                     ? <img
                         width={'300px'}
                         height={'300px'}
-                        src={`http://localhost:6789/uploads/${src}`}
+                        src={`${Api.defaults.baseURL}uploads/${src}`}
                         alt="titleImg"/> :
                     <img width={'300px'}
                          height={'300px'}

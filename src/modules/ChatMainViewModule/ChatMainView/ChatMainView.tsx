@@ -2,7 +2,7 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import styles from "./ChatMainView.module.sass";
 import {useAppSelector} from "@hooks/HookRedux";
 import {selectUser} from "@store/slices/auth";
-import axios from "axios";
+import Api from "@api/index";
 import {io} from "socket.io-client";
 import {SearchUserBlock} from "@modules/ChatMainViewModule/components/SearchUserBlock/SearchUserBlock";
 import {ChatBox} from "@modules/ChatMainViewModule/components/ChatBox/ChatBox";
@@ -21,7 +21,7 @@ export const ChatMainView = () => {
     useEffect(() => {
         const getChats = async () => {
             try {
-                const {data} = await axios.get(`http://localhost:6789/api/v1/chat/${user?.id}`);
+                const {data} = await Api.get(`chat/${user?.id}`);
                 setChats(data);
             } catch (error) {
                 console.log(error);
@@ -37,7 +37,7 @@ export const ChatMainView = () => {
         socket.current.on("get-users", (users) => {
             const getOnlineUsers = async () => {
                 try {
-                    let {data} = await axios.post(`http://localhost:6789/api/v1/users/getUsers`, {users: users})
+                    let {data} = await Api.post(`users/getUsers`, {users: users})
                     setOnlineUsers(data)
                 } catch (e) {
                     console.log(e)
