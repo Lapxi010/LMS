@@ -7,7 +7,7 @@ const mode = process.env.NODE_ENV
 module.exports = () => {
     const config: any = {
         entry: {
-            index: "./src/index.tsx",
+            index: "./src/index.ts",
         },
         output: {
             path: path.resolve(__dirname, "dist"),

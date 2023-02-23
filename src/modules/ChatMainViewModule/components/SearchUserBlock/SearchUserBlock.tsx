@@ -79,7 +79,19 @@ export const SearchUserBlock: FC<{userId: string, setCurrentChat: any, setChats:
                     (
                         <div className={classNames(styles.container, focused && styles.container_visible)}>
                             {
-                                usersRes?.map((v) => <span onClick={()=>{chooseUser(v.id)}} className={styles.item} key={v.id}>{v.fio}</span>)
+                                usersRes?.map((v) => <div onClick={()=>{chooseUser(v.id)}} className={styles.item} key={v.id}>
+                                    {
+                                        v?.TitleImg != null
+                                            ?
+                                            <img className={styles.logo} src={`http://localhost:6789/uploads/${v?.TitleImg}`} alt="title"/>
+                                            :
+                                            <div className={styles.img}></div>
+                                    }
+                                    <div className={styles.description}>
+                                        <span className={styles.name}>{v?.fio}</span>
+                                        <span className={styles.role}>{v?.role === 'teacher' ? 'учитель' : 'ученик'}</span>
+                                    </div>
+                                </div>)
                             }
                         </div>
                     )

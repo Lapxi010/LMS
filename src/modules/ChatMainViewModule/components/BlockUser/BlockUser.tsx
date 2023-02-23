@@ -30,6 +30,7 @@ export const BlockUser: FC<{currentUser: any, online: any, data: any, cb: any}> 
             }
             <div className={styles.description}>
                 <span className={styles.name}>{userData?.fio}</span>
+                <span className={styles.role}>{userData?.role === 'teacher' ? 'учитель' : 'ученик'}</span>
                 <span className={styles.status}>
                     <div className={online ? styles.online : styles.offline}></div>
                     {online ? 'В сети' : 'Не в сети'}</span>

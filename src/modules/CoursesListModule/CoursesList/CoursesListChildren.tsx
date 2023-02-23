@@ -54,6 +54,7 @@ export const CoursesListChildren: FC = () => {
                                     titleImg={item.titleImg}
                                     shortDesc={item.shortDesc}
                                     fioTeacher={item.author.fio}
+                                    TitleImg={item.author.TitleImg}
                                     date={item.createdAt}
                                 />)}
                     </div>

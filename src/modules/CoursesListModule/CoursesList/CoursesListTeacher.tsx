@@ -1,14 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import styles from './CoursesList.module.sass';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import {selectCourseForTeacher, selectCourses, selectStatus} from '@store/slices/courses/selectors';
+import {selectCourseForTeacher, selectStatus} from '@store/slices/courses/selectors';
 import {fetchCourses} from '@store/slices/courses/AsyncThunks';
 import {CoursesItemTeacher} from '@modules/CoursesListModule/components/CoursesItem/CoursesItemTeacher';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 export const CoursesListTeacher: FC = () => {
     const dispatch = useAppDispatch();
     const status = useAppSelector(selectStatus);
-    const [input, setInput] = useState<string>('');
     const courses = useAppSelector(selectCourseForTeacher);
 
     useEffect(() => {

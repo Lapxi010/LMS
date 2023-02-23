@@ -79,6 +79,9 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
 
     const handleSend = async (e) => {
         e.preventDefault()
+        if (newMessage.length == 0) {
+            return false
+        }
         const message = {
             senderId: currentUser,
             text: newMessage,
@@ -125,6 +128,7 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
                             }
                             <div className={styles.description}>
                                 <p className={styles.header__text}>{userData?.fio}</p>
+                                <span className={styles.role}>{userData?.role === 'teacher' ? 'учитель' : 'ученик'}</span>
                                 <span className={styles.status}>
                                 <div className={online(chat) ? styles.online : styles.offline}></div>
                                     {online(chat) ? 'В сети' : 'Не в сети'}</span>

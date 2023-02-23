@@ -9,10 +9,11 @@ interface ICoursesItem {
     titleImg: string,
     shortDesc: string,
     fioTeacher: string,
-    date: string
+    date: string,
+    TitleImg: string
 }
 
-export const CoursesItemChildren: FC<ICoursesItem> = ({id, title, titleImg, shortDesc,fioTeacher,date}) => {
+export const CoursesItemChildren: FC<ICoursesItem> = ({id, title, titleImg, shortDesc,fioTeacher,date, TitleImg}) => {
     const navigate = useNavigate();
 
     const dateRefactor = date.slice(8, 10) + '-'
@@ -26,6 +27,13 @@ export const CoursesItemChildren: FC<ICoursesItem> = ({id, title, titleImg, shor
                 <h3 className={styles.course__title_short}>Короткое описание</h3>
                 <p className={styles.course__description}>{shortDesc}</p>
                 <div className={styles.course__teacher}>
+                    {
+                        TitleImg != null
+                            ?
+                            <img className={styles.logo} src={`http://localhost:6789/uploads/${TitleImg}`} alt="title"/>
+                            :
+                            <div className={styles.img}></div>
+                    }
                     <h3 className={styles.course__title_short}>{fioTeacher}</h3>
                     <span>{dateRefactor}</span>
                 </div>

@@ -23,7 +23,8 @@ export const selectCourseForTeacher = (state) => {
     let id = state.auth?.data?.id
     let courses = state.courses?.data
 
-    if(id === undefined) {
+
+    if(id === undefined || courses === null) {
         return []
     }
 
