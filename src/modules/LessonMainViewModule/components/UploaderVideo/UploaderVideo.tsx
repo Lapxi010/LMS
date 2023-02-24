@@ -26,7 +26,6 @@ export const UploaderVideo: FC<{ id: string }> = ({id}) => {
                     setProgress(0)
                 }
             },
-            withCredentials: false,
         });
         setUploaded(data);
         dispatch(addVideo({srcVideo: data.id, lessonId: id}));

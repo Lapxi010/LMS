@@ -1,6 +1,6 @@
 import express from 'express';
 import fs from "fs";
-import authMiddleware from "../middlewares/Auth.middleware";
+import authMiddleware from "../middlewares/Auth.middleware.js";
 import {
     createComment,
     createCourse,
@@ -8,7 +8,7 @@ import {
     getAllCourses,
     getComments,
     getCourse, visitedLesson,
-} from "../controllers/Course.controller";
+} from "../controllers/Course.controller.js";
 const router = express.Router();
 
 router.get('/video/:id', (req, res) => {

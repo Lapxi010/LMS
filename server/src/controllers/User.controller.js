@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {PrismaClient} from '@prisma/client';
 import {v4} from 'uuid';
-import {sendMail, generateToken, saveToken, removeToken} from '../services/User.service';
+import {sendMail, generateToken, saveToken, removeToken} from '../services/User.service.js';
 const db = new PrismaClient();
 
 

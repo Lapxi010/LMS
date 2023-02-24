@@ -9,7 +9,7 @@ import {
     deleteVideo,
     deleteImage,
     uploadImageUser, deleteTitleImage
-} from '../controllers/File.controller'
+} from '../controllers/File.controller.js'
 
 router.get('/getImage/:id', getImage);
 

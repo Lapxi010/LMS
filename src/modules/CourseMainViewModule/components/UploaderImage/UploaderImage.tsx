@@ -26,7 +26,6 @@ export const UploaderImage: FC<{ id: string }> = ({id}) => {
                     setProgress(0)
                 }
             },
-            withCredentials: false,
         });
         setUploaded(data);
         dispatch(addImage({srcImage: data.fileName}));

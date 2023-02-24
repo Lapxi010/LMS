@@ -15,7 +15,7 @@ export const createCourse = async (req, res) => {
                 title,
                 description,
                 shortDesc,
-                titleImg: 'null',
+                titleImg: null,
                 userId: req.userId
             }
         });

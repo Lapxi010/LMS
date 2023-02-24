@@ -24,7 +24,7 @@ export const CoursesItemChildren: FC<ICoursesItem> = ({id, title, titleImg, shor
         <div className={styles.wrapper} onClick={()=>{navigate(`../course/${id}`);}}>
             <div className={styles.course}>
                 <h2 className={styles.course__title}>{title}</h2>
-                <img className={styles.course__img} src={titleImg ? `${Api.defaults.baseURL}uploads/${titleImg}` : Stub} alt="logo_img"/>
+                <img className={styles.course__img} src={titleImg != null ? `${Api.defaults.baseURL}uploads/${titleImg}` : Stub} alt="logo_img"/>
                 <h3 className={styles.course__title_short}>Короткое описание</h3>
                 <p className={styles.course__description}>{shortDesc}</p>
                 <div className={styles.course__teacher}>
