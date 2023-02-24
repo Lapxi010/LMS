@@ -42,9 +42,9 @@ export const UploaderImage: FC<{ id: string }> = ({id}) => {
     }
 
     return (
-        <div className={styles.root}>
+        <>
             {
-                selectedFile ? <div className={styles.information}>
+                selectedFile ? <div><div className={styles.information}>
                         <div className={styles.description}>
                             <h3>{selectedFile.name}</h3>
                             <span>{selectedFile.type}</span>
@@ -57,8 +57,8 @@ export const UploaderImage: FC<{ id: string }> = ({id}) => {
                         {(progress != 0 && progress != 100) && <div className={styles.progress}>
                             <div style={{width: progress + '%'}} className={styles.progress__line}></div>
                         </div>}
-                    </div>
-                    : <>
+                    </div></div>
+                    : <div className={styles.root}>
                         {
                             drag ? <div className={styles.drag}
                                         onDragStart={(e) => {
@@ -93,8 +93,8 @@ export const UploaderImage: FC<{ id: string }> = ({id}) => {
                                 ><input type='file' className={styles.input} onChange={handlerInput}/><h3
                                     className={styles.title}>Перетащите файл, чтобы загрузить</h3></div>
                         }
-                    </>
+                    </div>
             }
-        </div>
+        </>
     )
 }

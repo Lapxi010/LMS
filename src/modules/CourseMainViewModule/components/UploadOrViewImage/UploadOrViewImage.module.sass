@@ -1,10 +1,20 @@
+.wrapper
+  position: relative
+
 .wrapper__btn
   display: flex
   width: 100%
-  justify-content: flex-end
   margin-right: 5%
+  position: absolute
+  height: 100%
+  justify-content: center
+  align-items: center
+  &:hover
+    .btn
+      display: block
 
 .btn
+  display: none
   outline: none
   border: none
   background: red

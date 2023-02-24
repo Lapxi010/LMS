@@ -18,8 +18,8 @@ export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
     const status = useAppSelector(selectStatus);
     const dispatch = useAppDispatch();
 
-    const formatDate = lesson?.createdAt.slice(8, 10) + '-'
-        + lesson?.createdAt.slice(5, 7) + '-' + lesson?.createdAt.slice(0, 4) + '   ' + lesson?.createdAt.slice(11, 13) + ':' + lesson?.createdAt.slice(14, 16)
+    const formatDate = lesson?.createdAt != undefined ? lesson?.createdAt.slice(8, 10) + '-'
+        + lesson?.createdAt.slice(5, 7) + '-' + lesson?.createdAt.slice(0, 4) + '   ' + lesson?.createdAt.slice(11, 13) + ':' + lesson?.createdAt.slice(14, 16) : ''
 
     const docDownload = async () => {
         dispatch(fetchDocDownload(lesson?.srcDoc[0].id))
@@ -28,7 +28,7 @@ export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h2 className={styles.title}>{lesson.title}</h2>
+                <h2 className={styles.title}>{lesson?.title}</h2>
                 <ViewedBlock id={id} lesson={lesson}/>
             </div>
             {
@@ -39,7 +39,7 @@ export const LessonMainViewChildren: FC<{ id: string }> = ({id}) => {
                 </div>
             }
             <div className={styles.description}>
-                <p>{lesson.description}</p>
+                <p>{lesson?.description}</p>
                 <div className={styles.description__wrapper}>
                     <span>{formatDate}</span>
                 </div>

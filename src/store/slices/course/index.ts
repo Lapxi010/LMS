@@ -111,35 +111,42 @@ const courseSlice = createSlice({
     }
 });
 
-export const selectStatus = (state) => state.course.status;
+export const selectStatus = (state) => state.course?.status;
 
-export const selectThisCourse = (state) => state.course.data;
+export const selectThisCourse = (state) => state.course?.data;
 export const selectLesson = (state, id) => {
-    const lessons = state.course.data.lessons;
-    return lessons.filter(v => v.id === id)[0];
+    if (state.course?.data) {
+        const lessons = state.course?.data?.lessons;
+        return lessons.filter(v => v.id === id)[0];
+    }
+    return {}
 };
 
-export const selectComments = (state) => state.course.comments;
+export const selectComments = (state) => state.course?.comments;
 
 export const selectMemberForCourse = (state, id) => {
-    const members = state.auth.data.member;
-    const tmp = members.filter(v => v.courseId === id)
-    if (tmp && tmp.length > 0) {
-        return tmp[0];
+    if (state.auth?.data){
+        const members = state.auth?.data?.member;
+        const tmp = members.filter(v => v.courseId === id)
+        if (tmp && tmp.length > 0) {
+            return tmp[0];
+        }
     }
     return null;
 }
 
 export const selectViewForLesson = (state, id, id2) => {
-    const members = state.auth.data.member;
-    const tmp = members.filter(v => v.courseId === id)
-    if (tmp && tmp.length > 0) {
-        return tmp[0].viewed.filter(v => v.lessonId === id2)[0];
+    if(state.auth?.data){
+        const members = state.auth?.data?.member;
+        const tmp = members.filter(v => v.courseId === id)
+        if (tmp && tmp.length > 0) {
+            return tmp[0].viewed.filter(v => v.lessonId === id2)[0];
+        }
     }
     return null;
 }
 
-export const selectStatusComment = (state) => state.course.statusComment;
+export const selectStatusComment = (state) => state.course?.statusComment;
 
 export const {addVideo, addImage} = courseSlice.actions;
 

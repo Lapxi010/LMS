@@ -161,33 +161,35 @@ export const ChatBox: FC<{ chat: any, online: any, currentUser: any, setSendMess
                             )
                     }
                     <div className={styles.sender}>
-                        <input
-                            ref={inputRef}
-                            type={'text'}
-                            value={newMessage}
-                            onChange={handleChange}
-                            placeholder={'Наберите сообщение'}
-                            className={styles.input}
-                        />
-                        <div className={styles.container}>
-                            <button
-                                className={styles.btnEmoji}
-                                type='button'
-                                onClick={() => setShowEmoji(!showEmoji)}
-                            >
-                                {smileIcon()}
-                            </button>
-                            {showEmoji && (
-                                <div className={styles.container__emoji}>
-                                    <Picker
-                                        onEmojiSelect={onSelect}
-                                        emojiSize={20}
-                                        showPreview={false}
-                                        perLine={6}
-                                        locale={'ru'}
-                                    />
-                                </div>
-                            )}
+                        <div className={styles.senderWrapper}>
+                            <input
+                                ref={inputRef}
+                                type={'text'}
+                                value={newMessage}
+                                onChange={handleChange}
+                                placeholder={'Наберите сообщение'}
+                                className={styles.input}
+                            />
+                            <div className={styles.container}>
+                                <button
+                                    className={styles.btnEmoji}
+                                    type='button'
+                                    onClick={() => setShowEmoji(!showEmoji)}
+                                >
+                                    {smileIcon()}
+                                </button>
+                                {showEmoji && (
+                                    <div className={styles.container__emoji}>
+                                        <Picker
+                                            onEmojiSelect={onSelect}
+                                            emojiSize={20}
+                                            showPreview={false}
+                                            perLine={6}
+                                            locale={'ru'}
+                                        />
+                                    </div>
+                                )}
+                            </div>
                         </div>
                         <button className={styles.btn} onClick={handleSend}>Отправить</button>
                     </div>

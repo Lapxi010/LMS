@@ -5,15 +5,45 @@
   align-items: center
   justify-content: center
 
+.wrapper
+  height: 100vh
+  width: 95%
+  margin-top: 10px
+  position: relative
+
 .blur
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
   display: flex
   align-items: center
   justify-content: center
-  background: rgba(255, 255, 255, 0.2)
-  backdrop-filter: blur(8px)
-  height: 100vh
   width: 100%
+  height: 100%
+  border-radius: 12px
   z-index: 100
+  background: rgba(255, 255, 255, 0.2)
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7)
+  backdrop-filter: blur(8px)
+  -webkit-backdrop-filter: blur(8px)
+  border: 1px solid rgba(255, 255, 255, 0.29)
+  &__btn
+    outline: none
+    padding: 8px 20px
+    cursor: pointer
+    background: #53CDF3
+    border: none
+    border-radius: 15px
+    text-align: center
+    font-family: 'Lato', sans-serif
+    font-style: normal
+    font-weight: 400
+    font-size: 16px
+    line-height: 19px
+    color: var(--c-text)
+    box-shadow: 0 5px 4px rgba(0, 0, 0, 0.25)
 
 .btn
   padding: 10px 20px

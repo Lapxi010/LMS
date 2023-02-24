@@ -42,8 +42,24 @@
 .wrapper
   display: flex
   flex-direction: column
-  width: 500px
+  max-width: 500px
   gap: 20px
 
 .wrapper__empty
   color: var(--c-text)
+
+@media screen and (max-width: 768px)
+  .controls
+    flex-direction: column
+
+  .btns
+    order: 2
+    width: 100%
+    gap: 0
+    justify-content: space-between
+    margin-top: 20px
+
+  .input
+    order: 1
+    width: 100%
+    margin-right: 0

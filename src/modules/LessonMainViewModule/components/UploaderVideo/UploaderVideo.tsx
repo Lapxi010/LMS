@@ -28,7 +28,7 @@ export const UploaderVideo: FC<{ id: string }> = ({id}) => {
             },
         });
         setUploaded(data);
-        dispatch(addVideo({srcVideo: data.id, lessonId: id}));
+        dispatch(addVideo({srcVideo: data?.id, lessonId: id}));
     };
 
     const dropFile = (e: React.DragEvent<HTMLDivElement>) => {

@@ -4,11 +4,10 @@ import {LeftSidebar} from '@components/LeftSidebar/LeftSidebar';
 import {Outlet, Navigate} from 'react-router-dom';
 import {Spinner} from '@components/PreLoaders/Spinner/Spinner';
 import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
-import {selectActivatedUrl, selectIsAuth, selectStatus} from '@store/slices/auth';
+import {selectStatus} from '@store/slices/auth';
 import {fetchRefresh} from '@store/slices/auth/AsyncThunks';
 
 export const MainLayout: FC = () => {
-	const isAuth = useAppSelector(selectIsAuth);
 	const status = useAppSelector(selectStatus);
 	const dispatch = useAppDispatch();
 
@@ -16,15 +15,14 @@ export const MainLayout: FC = () => {
 		dispatch(fetchRefresh());
 	}, []);
 
-
 	return (
 		<>
-			{!isAuth && <Navigate to='/auth'/>}
 			<div className={styles.root}>
 				<LeftSidebar/>
 				<main className={styles.main}>
 					{status !== 'loading' && <Outlet/>}
 					{status === 'loading' && <Spinner className={styles.spinner}/>}
+					{status === 'failed' && <Navigate to='/auth'/>}
 				</main>
 			</div>
 		</>

@@ -16,7 +16,7 @@ export const UploadOrViewImageTeacher: FC<{ id: string, src: string }> = ({id, s
 
             {
                 src != null
-                    ? <div>
+                    ? <div className={styles.wrapper}>
                         <div className={styles.wrapper__btn}>
                             <Button onClick={deleteVideo} className={styles.btn}>Удалить</Button>
                         </div>

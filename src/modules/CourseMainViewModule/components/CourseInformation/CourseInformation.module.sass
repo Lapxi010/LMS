@@ -2,6 +2,7 @@
   width: 100%
   display: flex
   flex-direction: row
+  margin-top: 20px
 
 .left
   display: flex
@@ -26,3 +27,14 @@
 
 .date
   color: var(--c-text)
+
+@media screen and (max-width: 768px)
+  .root
+    flex-direction: column
+
+  .right
+    order: 1
+
+  .left
+    order: 2
+    margin-top: 20px

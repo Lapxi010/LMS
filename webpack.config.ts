@@ -74,7 +74,6 @@ module.exports = () => {
             new CleanWebpackPlugin(),
         ],
     }
-
     if (mode === "development") {
         config.mode = "development"
         config.devtool = "source-map"

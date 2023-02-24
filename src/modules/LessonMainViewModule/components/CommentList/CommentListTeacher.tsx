@@ -26,10 +26,10 @@ export const CommentListTeacher: FC<{ id: string }> = ({id}) => {
                 <div className={styles.root}>
                     {
                         comments?.map((comment) => {
-                            return <CommentItemTeacher key={comment.id} fio={comment.user.fio} date={comment.createdAt}
-                                                        rating={comment.rating}
-                                                        text={comment.text}
-                                                        cb={() => {deleteComment(comment.id)}}
+                            return <CommentItemTeacher key={comment?.id} fio={comment?.user?.fio} date={comment?.createdAt}
+                                                        rating={comment?.rating}
+                                                        text={comment?.text}
+                                                        cb={() => {deleteComment(comment?.id)}}
                             />
                         })
                     }

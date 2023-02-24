@@ -7,10 +7,10 @@ import {useAppDispatch, useAppSelector} from '@hooks/HookRedux';
 import {selectStatus, selectThisCourse} from '@store/slices/course';
 import {selectEnterCourse} from "@store/slices/auth";
 import {enterCourse} from "@store/slices/auth/AsyncThunks";
-import {ListLessons} from "@modules/CourseMainViewModule/components/ListLessons/ListLessons";
 import {
     CourseInformationChildren
 } from "@modules/CourseMainViewModule/components/CourseInformation/CourseInformationChildren";
+import {ListLessons} from "@modules/CourseMainViewModule/components/ListLessons/ListLessons";
 
 export const CourseMainViewChildren: FC = () => {
     const navigate = useNavigate();
@@ -39,9 +39,14 @@ export const CourseMainViewChildren: FC = () => {
                             </>
                         }
                         {
-                            !courseEnter ? <div className={styles.blur}>
-                                    <Button onClick={enterCourseA}>Вступить</Button>
-                                </div> :
+                            !courseEnter ?
+                                <div className={styles.wrapper}>
+                                    <div className={styles.blur}>
+                                        <Button className={styles.blur__btn} onClick={enterCourseA}>Вступить</Button>
+                                    </div>
+                                    {course && <ListLessons lessons={course.lessons}/>}
+                                </div>
+                                :
                                 (
                                     course && <ListLessons lessons={course.lessons}/>
                                 )

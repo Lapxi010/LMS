@@ -28,12 +28,14 @@ export const ChatMainView = () => {
             }
         };
         getChats();
-    }, [user.id]);
+    }, [user?.id]);
 
 
     useEffect(() => {
         socket.current = io("ws://localhost:6789");
-        socket.current.emit("new-user-add", user.id);
+        if(user?.id != null) {
+            socket.current.emit("new-user-add", user?.id);
+        }
         socket.current.on("get-users", (users) => {
             const getOnlineUsers = async () => {
                 try {
@@ -62,14 +64,14 @@ export const ChatMainView = () => {
     }, []);
 
     const checkOnlineStatus = (chat) => {
-        const chatMember = chat?.users?.find((member) => member.userId !== user.id);
-        const online = onlineUsers?.find((user) => user.id === chatMember?.userId);
+        const chatMember = chat?.users?.find((member) => member?.userId !== user?.id);
+        const online = onlineUsers?.find((user) => user?.id === chatMember?.userId);
         return online ? true : false;
     };
 
     return (
         <div>
-            <SearchUserBlock chats={chats} userId={user.id} setCurrentChat={setCurrentChat} setChats={setChats}/>
+            <SearchUserBlock chats={chats} userId={user?.id} setCurrentChat={setCurrentChat} setChats={setChats}/>
             <div className={styles.chat}>
                 {
                     chats.length === 0
@@ -84,10 +86,10 @@ export const ChatMainView = () => {
                             <div className={styles.leftSide}>
                                 {
                                     chats && chats?.map((chat) =>
-                                        <BlockUser key={chat.id} cb={() => {
+                                        <BlockUser key={chat?.id} cb={() => {
                                             setCurrentChat(chat)
                                         }}
-                                                   currentUser={user.id}
+                                                   currentUser={user?.id}
                                                    online={checkOnlineStatus(chat)}
                                                    data={chat}/>
                                     )
@@ -96,7 +98,7 @@ export const ChatMainView = () => {
                         )
                 }
                 <div className={styles.rightSide}>
-                    <ChatBox online={checkOnlineStatus} chat={currentChat} currentUser={user.id}
+                    <ChatBox online={checkOnlineStatus} chat={currentChat} currentUser={user?.id}
                              setSendMessage={setSendMessage}
                              receivedMessage={receivedMessage}/>
                 </div>

@@ -53,9 +53,18 @@
   border-radius: 1em
   padding: 10px
   flex: 1
+  height: fit-content
 
 .rightSide
   display: flex
   justify-content: flex-end
   flex: 1
   margin-right: 20px
+
+@media screen and (max-width: 768px)
+  .root
+    flex-direction: column
+
+  .rightSide
+    justify-content: center
+    margin-top: 20px

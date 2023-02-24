@@ -83,7 +83,7 @@ const authSlice = createSlice({
                 state.data = null;
             })
             .addCase(fetchLogout.fulfilled, (state, action) => {
-                state.status = 'success';
+                state.status = 'failed';
                 state.data = null;
                 state.isAuth = false;
                 localStorage.removeItem('token');
@@ -131,14 +131,16 @@ export const selectRole = (state) => {
 };
 
 export const selectEnterCourse = (state, id) => {
-    if (state.auth.data.hasOwnProperty('member')) {
-        let a = state.auth.data.member.map((v) => {
-            if (v.courseId === id) {
-                return v;
+    if (state.auth?.data) {
+        if (state.auth?.data?.hasOwnProperty('member')) {
+            let a = state.auth.data.member.map((v) => {
+                if (v.courseId === id) {
+                    return v;
+                }
+            })
+            for (let i of a) {
+                if (i !== undefined) return true;
             }
-        })
-        for (let i of a) {
-            if (i !== undefined) return true;
         }
     }
     return false

@@ -9,17 +9,17 @@ import {VideoBlock} from "@modules/LessonMainViewModule/components/VideoBlock/Vi
 export const LessonMainViewTeacher: FC<{ id: string }> = ({id}) => {
     const lesson = useAppSelector((state) => selectLesson(state, id));
 
-    const formatDate = lesson?.createdAt.slice(8, 10) + '-'
-        + lesson?.createdAt.slice(5, 7) + '-' + lesson?.createdAt.slice(0, 4) + '   ' + lesson?.createdAt.slice(11, 13) + ':' + lesson?.createdAt.slice(14, 16)
+    const formatDate = lesson?.createdAt != undefined ? lesson?.createdAt.slice(8, 10) + '-'
+        + lesson?.createdAt.slice(5, 7) + '-' + lesson?.createdAt.slice(0, 4) + '   ' + lesson?.createdAt.slice(11, 13) + ':' + lesson?.createdAt.slice(14, 16) : ''
 
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h2 className={styles.title}>{lesson.title}</h2>
+                <h2 className={styles.title}>{lesson?.title}</h2>
             </div>
             <div className={styles.wrapper__video}>
                 {
-                    lesson.srcVideo ?
+                    lesson?.srcVideo ?
                         <VideoBlock srcVideo={lesson?.srcVideo} id={lesson?.id} />
                         :
                         <div className={styles.uploader}>
@@ -28,7 +28,7 @@ export const LessonMainViewTeacher: FC<{ id: string }> = ({id}) => {
                 }
             </div>
             <div className={styles.description}>
-                <p>{lesson.description}</p>
+                <p>{lesson?.description}</p>
                 <div className={styles.description__wrapper}>
                     <span>{formatDate}</span>
                 </div>
