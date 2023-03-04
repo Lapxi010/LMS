@@ -9,6 +9,8 @@ import dotenv from 'dotenv';
 import fileUpload from 'express-fileupload';
 import { createServer } from 'http';
 import {Server} from "socket.io";
+import fs from "fs";
+
 
 dotenv.config();
 
@@ -19,29 +21,64 @@ const expressRateLimit = expressLimit({
     standardHeaders: false,
     legacyHeaders: false,
 });
+
 const cookieOptions = {
-    maxAge: 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24,
     httpOnly: true
 }
 
 const app = express();
-app.use('/api/v1/uploads', express.static('./src/static'));
+
+app.get('/api/v1/courses/video/:id', (req, res) => {
+    const path =  `./source/${req.params.id}`;
+    console.log(path)
+    const stat = fs.statSync(path);
+    const fileSize = stat.size;
+    const range = req.headers.range;
+    if (range) {
+        const parts = range.replace(/bytes=/, "").split("-");
+        const start = parseInt(parts[0], 10);
+        const end = parts[1]
+            ? parseInt(parts[1], 10)
+            : fileSize - 1;
+        const chunksize = (end - start) + 1;
+        const file = fs.createReadStream(path, { start, end });
+        const head = {
+            'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+            'Accept-Ranges': 'bytes',
+            'Content-Length': chunksize,
+            'Content-Type': 'video/mp4',
+        }
+
+        res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+        res.writeHead(206, head);
+        file.pipe(res);
+    } else {
+        const head = {
+            'Content-Length': fileSize,
+            'Content-Type': 'video/mp4',
+        }
+        res.set('Cross-Origin-Resource-Policy', 'cross-origin');
+        res.writeHead(200, head);
+        fs.createReadStream(path).pipe(res);
+    }
+});
+app.use('/api/v1/uploads', express.static('./static'));
 app.use(fileUpload({
     createParentPath: true
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors({credentials: true, origin: process.env.CLIENT_URL}));
-app.use(helmet());
+app.use(helmet())
 app.use(cookieParser(process.env.JWT_SECRET, cookieOptions));
 
-
+app.use(cors({credentials: true, origin: process.env.CLIENT_URL, crossOriginResourcePolicy: 'cross-origin'}));
 app.use('/api/v1', expressRateLimit);
 
 app.use('/api/v1', [(req, res, next) => {
     setTimeout(()=> {
         next()
-    }, 1)
+    }, 1000)
 }], router);
 
 const server = createServer(app)
