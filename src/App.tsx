@@ -35,7 +35,6 @@ export const App: FC = () => {
 					<Route index element={<LoginPage/>}/>
 					<Route path="register" element={<RegistrationPage/>}/>
 				</Route>
-				<Route path="/upload" element={<UploadFile/>}/>
 			</Routes>
 		</>
 	);
